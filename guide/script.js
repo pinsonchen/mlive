@@ -1237,24 +1237,6 @@ function generateOBSConfiguration() {
                 <div class="guide-step">
                     <div class="guide-step-number">5</div>
                     <div class="guide-step-content">
-                        <h4>设置直播场景</h4>
-                        <ol>
-                            <li>在 OBS 主界面添加【来源】：</li>
-                            <ul>
-                                <li>显示采集：捕获屏幕或窗口</li>
-                                <li>游戏采集：捕获游戏画面（如需要）</li>
-                                <li>摄像头：添加主播摄像头</li>
-                                <li>麦克风：添加音频输入</li>
-                            </ul>
-                            <li>调整布局和位置</li>
-                            <li>测试画面和声音效果</li>
-                        </ol>
-                    </div>
-                </div>
-
-                <div class="guide-step">
-                    <div class="guide-step-number">6</div>
-                    <div class="guide-step-content">
                         <h4>开始测试推流</h4>
                         <ol>
                             <li>确保各平台直播间已创建并等待推流</li>
