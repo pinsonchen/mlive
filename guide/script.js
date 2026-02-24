@@ -681,27 +681,14 @@ function updateSolutionRecommendations() {
         return;
     }
 
-    // 检查平台RTMP支持情况和手机直播支持
+    // 检查平台RTMP支持情况
     const allSupportRTMP = selectedPlatforms.every(p => platforms[p].rtmpSupport);
     const hasLimitedPlatform = selectedPlatforms.some(p => !platforms[p].rtmpSupport);
     const rtmpSupportedPlatforms = selectedPlatforms.filter(p => platforms[p].rtmpSupport);
     const rtmpLimitedPlatforms = selectedPlatforms.filter(p => !platforms[p].rtmpSupport);
-    const allSupportMobile = selectedPlatforms.every(p => platforms[p].supportTypes.includes('mobile'));
 
-    // 方案选择逻辑
-    if (allSupportMobile && selectedPlatforms.length > 0) {
-        // 情况0：所有平台都支持手机直播 → 推荐方案四（全手机直播）
-        selectedSolution = 4;
-        solution4.classList.add('selected');
-        solution4.querySelector('.solution-badge').textContent = '✨ 最简单';
-        solution4.querySelector('.solution-badge').className = 'solution-badge recommended';
-
-        // 添加推荐说明
-        addRecommendationReason(
-            '📱 系统推荐：方案四（全手机直播）',
-            `您选择的 ${selectedPlatforms.map(p => platforms[p].name).join('、')} 都支持手机直播，且手机直播通常无粉丝门槛！使用手机APP直接开播最简单快捷，无需任何技术配置。`
-        );
-    } else if (allSupportRTMP && selectedPlatforms.length > 0) {
+    // 方案选择逻辑（方案四不作为默认推荐）
+    if (allSupportRTMP && selectedPlatforms.length > 0) {
         // 情况1：所有平台都支持RTMP → 推荐方案一
         selectedSolution = 1;
         solution1.classList.add('selected');
