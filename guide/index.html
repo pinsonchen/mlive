@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多平台同步开播操作指南</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <header class="header">
+            <h1>🎬 多平台同步开播操作指南</h1>
+            <p class="subtitle">选择您要同步开播的平台，获取详细的操作步骤</p>
+        </header>
+
+        <!-- 步骤指示器 -->
+        <div class="steps-indicator">
+            <div class="step-item active" data-step="1">
+                <div class="step-number">1</div>
+                <div class="step-label">选择平台</div>
+            </div>
+            <div class="step-item" data-step="2">
+                <div class="step-number">2</div>
+                <div class="step-label">选择方案</div>
+            </div>
+            <div class="step-item" data-step="3">
+                <div class="step-number">3</div>
+                <div class="step-label">获取推流地址</div>
+            </div>
+            <div class="step-item" data-step="4">
+                <div class="step-number">4</div>
+                <div class="step-label">配置OBS</div>
+            </div>
+            <div class="step-item" data-step="5">
+                <div class="step-number">5</div>
+                <div class="step-label">开始直播</div>
+            </div>
+        </div>
+
+        <!-- 步骤1: 平台选择 -->
+        <section class="step-section" id="step1">
+            <h2>第一步：选择要同步开播的平台</h2>
+            <p class="step-desc">请勾选您需要同步开播的平台（可多选）：</p>
+
+            <div class="platform-grid">
+                <label class="platform-card">
+                    <input type="checkbox" name="platform" value="taobao" data-requirement="deposit">
+                    <div class="platform-icon taobao">🛒</div>
+                    <div class="platform-info">
+                        <h3>淘宝直播</h3>
+                        <p class="platform-tag">需保证金2000-3000元</p>
+                    </div>
+                    <div class="platform-status">
+                        <span class="status-badge official">✅ 支持RTMP</span>
+                    </div>
+                </label>
+
+                <label class="platform-card">
+                    <input type="checkbox" name="platform" value="douyin" data-requirement="fans">
+                    <div class="platform-icon douyin">🎵</div>
+                    <div class="platform-info">
+                        <h3>抖音直播</h3>
+                        <p class="platform-tag">需1000粉丝或企业认证</p>
+                    </div>
+                    <div class="platform-status">
+                        <span class="status-badge limited">⚠️ RTMP受限</span>
+                    </div>
+                </label>
+
+                <label class="platform-card">
+                    <input type="checkbox" name="platform" value="xiaohongshu" data-requirement="fans">
+                    <div class="platform-icon xiaohongshu">📕</div>
+                    <div class="platform-info">
+                        <h3>小红书直播</h3>
+                        <p class="platform-tag">需1000粉丝以上</p>
+                    </div>
+                    <div class="platform-status">
+                        <span class="status-badge official">✅ 支持RTMP</span>
+                    </div>
+                </label>
+
+                <label class="platform-card">
+                    <input type="checkbox" name="platform" value="shipinhao">
+                    <div class="platform-icon shipinhao">💬</div>
+                    <div class="platform-info">
+                        <h3>视频号直播</h3>
+                        <p class="platform-tag">需实名认证</p>
+                    </div>
+                    <div class="platform-status">
+                        <span class="status-badge official">✅ 支持RTMP</span>
+                    </div>
+                </label>
+            </div>
+
+            <!-- 选中平台提示 -->
+            <div id="selectedPlatforms" class="selected-platforms" style="display: none;">
+                <p>已选择：<span id="selectedList"></span></p>
+            </div>
+
+            <!-- 警告提示 -->
+            <div id="warnings" class="warnings"></div>
+
+            <button class="btn btn-primary" onclick="goToStep(2)">下一步：选择方案 →</button>
+        </section>
+
+        <!-- 步骤2: 方案选择 -->
+        <section class="step-section" id="step2" style="display: none;">
+            <h2>第二步：系统为您推荐的开播方案</h2>
+            <p class="step-desc">根据您选择的平台，系统已自动为您推荐最适合的开播方案。您也可以手动选择其他方案。</p>
+
+            <div class="solution-cards">
+                <div class="solution-card" id="solution1">
+                    <div class="solution-header">
+                        <span class="solution-badge alternative">推荐</span>
+                        <h3>方案一：OBS + Multi RTMP 插件</h3>
+                    </div>
+                    <div class="solution-body">
+                        <p class="solution-desc">适合所有平台都支持RTMP推流的情况，画质最佳，资源占用最少</p>
+                        <div class="recommendation-tags">
+                            <span class="tag">🎯 最佳画质</span>
+                            <span class="tag">⚡ 最低延迟</span>
+                            <span class="tag">💻 低资源占用</span>
+                        </div>
+                        <div class="solution-features">
+                            <ul>
+                                <li>✅ 一次推流，多平台同步</li>
+                                <li>✅ 画质无损，最佳效果</li>
+                                <li>✅ CPU和内存占用低</li>
+                                <li>✅ 完全免费开源</li>
+                            </ul>
+                        </div>
+                        <div class="solution-requirements">
+                            <p><strong>适用条件：</strong></p>
+                            <ul>
+                                <li>所有选中平台都已开通RTMP推流权限</li>
+                                <li>淘宝已缴纳保证金</li>
+                                <li>抖音/小红书粉丝达到1000+</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="solution-card" id="solution2">
+                    <div class="solution-header">
+                        <span class="solution-badge alternative">备选</span>
+                        <h3>方案二：混合方案（Multi RTMP + 虚拟摄像头）</h3>
+                    </div>
+                    <div class="solution-body">
+                        <p class="solution-desc">适合部分平台无法获取RTMP推流地址的情况，兼顾兼容性和画质</p>
+                        <div class="recommendation-tags">
+                            <span class="tag">🔄 灵活组合</span>
+                            <span class="tag">✨ 兼容性强</span>
+                            <span class="tag">🔒 安全可靠</span>
+                        </div>
+                        <div class="solution-features">
+                            <ul>
+                                <li>✅ 兼顾画质和兼容性</li>
+                                <li>✅ 避免非官方工具风险</li>
+                                <li>✅ 灵活应对不同平台限制</li>
+                                <li>⚠️ 需要同时运行多个软件</li>
+                            </ul>
+                        </div>
+                        <div class="solution-requirements">
+                            <p><strong>适用条件：</strong></p>
+                            <ul>
+                                <li>部分平台支持RTMP推流</li>
+                                <li>部分平台需要使用虚拟摄像头</li>
+                                <li>电脑配置较好（8GB+内存）</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="solution-card" id="solution3">
+                    <div class="solution-header">
+                        <span class="solution-badge alternative">备选</span>
+                        <h3>方案三：虚拟摄像头方案</h3>
+                    </div>
+                    <div class="solution-body">
+                        <p class="solution-desc">使用OBS虚拟摄像头输出给各平台官方直播伴侣，最安全可靠</p>
+                        <div class="recommendation-tags">
+                            <span class="tag">🛡️ 最安全</span>
+                            <span class="tag">✅ 官方软件</span>
+                            <span class="tag">📱 操作简单</span>
+                        </div>
+                        <div class="solution-features">
+                            <ul>
+                                <li>✅ 完全使用官方软件，无封号风险</li>
+                                <li>✅ 不依赖平台推流权限</li>
+                                <li>✅ 操作简单直观</li>
+                                <li>❌ CPU和内存占用较高</li>
+                                <li>❌ 需要同时运行多个直播伴侣</li>
+                            </ul>
+                        </div>
+                        <div class="solution-requirements">
+                            <p><strong>适用条件：</strong></p>
+                            <ul>
+                                <li>任何情况都可以使用</li>
+                                <li>电脑配置较好（16GB+内存推荐）</li>
+                                <li>追求操作简单和安全性</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-secondary" onclick="goToStep(1)">← 上一步</button>
+                <button class="btn btn-primary" onclick="confirmSolution()">使用推荐方案继续 →</button>
+            </div>
+        </section>
+
+        <!-- 步骤3: 获取推流地址 -->
+        <section class="step-section" id="step3" style="display: none;">
+            <h2>第三步：获取各平台推流地址</h2>
+            <p class="step-desc">按照以下步骤获取您选中平台的推流地址：</p>
+
+            <div id="platformGuides"></div>
+
+            <div class="action-buttons">
+                <button class="btn btn-secondary" onclick="goToStep(2)">← 上一步</button>
+                <button class="btn btn-primary" onclick="goToStep(4)">已获取所有推流地址 →</button>
+            </div>
+        </section>
+
+        <!-- 步骤4: 配置OBS -->
+        <section class="step-section" id="step4" style="display: none;">
+            <h2>第四步：配置OBS</h2>
+
+            <div id="obsConfiguration">
+                <!-- 动态生成内容 -->
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-secondary" onclick="goToStep(3)">← 上一步</button>
+                <button class="btn btn-primary" onclick="goToStep(5)">已完成配置 →</button>
+            </div>
+        </section>
+
+        <!-- 步骤5: 开始直播 -->
+        <section class="step-section" id="step5" style="display: none;">
+            <h2>第五步：开始直播</h2>
+
+            <div id="finalSteps">
+                <!-- 动态生成内容 -->
+            </div>
+
+            <div class="completion-checklist">
+                <h3>🎉 直播前最后检查</h3>
+                <label><input type="checkbox"> 已测试网络连接（上行带宽充足）</label>
+                <label><input type="checkbox"> 已测试摄像头和麦克风正常</label>
+                <label><input type="checkbox"> 已获取所有平台推流地址</label>
+                <label><input type="checkbox"> 已在OBS中设置好直播场景</label>
+                <label><input type="checkbox"> 各平台直播间已创建并等待推流</label>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-secondary" onclick="goToStep(4)">← 上一步</button>
+                <button class="btn btn-success" onclick="startStreaming()">🚀 开始直播</button>
+            </div>
+        </section>
+
+        <!-- 插件安装模态框 -->
+        <div id="pluginModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>📦 安装 OBS Multi RTMP 插件（最新版）</h2>
+                    <button class="close-btn" onclick="closeModal()">×</button>
+                </div>
+                <div class="modal-body">
+                    <!-- 版本兼容性表格 -->
+                    <div class="version-info">
+                        <h4>📌 最新版本信息</h4>
+                        <p style="margin-bottom: 15px; color: var(--text-secondary);">请根据您的OBS版本选择对应的插件版本：</p>
+                        <div class="version-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>插件版本</th>
+                                        <th>兼容OBS版本</th>
+                                        <th>发布状态</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="recommended">
+                                        <td><strong>v0.7.3.1</strong> ✨</td>
+                                        <td>OBS Studio 32.x</td>
+                                        <td><span class="badge success">最新稳定版</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>v0.6.0.1</td>
+                                        <td>OBS Studio 31.x</td>
+                                        <td><span class="badge info">稳定版</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>v0.5.x</td>
+                                        <td>OBS Studio 30.x</td>
+                                        <td><span class="badge warning">旧版本</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="plugin-steps">
+                        <div class="plugin-step">
+                            <div class="step-num">1</div>
+                            <div class="step-content">
+                                <h4>下载插件</h4>
+                                <p>访问官方仓库下载最新版本：</p>
+                                <a href="https://github.com/sorayuki/obs-multi-rtmp/releases" target="_blank" class="download-link">
+                                    📥 GitHub官方下载（国际）
+                                </a>
+                                <a href="https://www.obsproject.com.cn/OBSPlugin/345.html" target="_blank" class="download-link" style="background: linear-gradient(135deg, #07c160 0%, #06a043 100%); margin-left: 10px;">
+                                    🇨🇳 OBS中文站下载（国内快）
+                                </a>
+                                <div class="tip-box" style="margin-top: 15px;">
+                                    <p><strong>推荐下载文件：</strong></p>
+                                    <ul style="margin-left: 20px; margin-top: 10px;">
+                                        <li><strong>Windows用户</strong>：下载 <code>obs-multi-rtmp-0.7.3.1-windows-x64-Installer.exe</code>（安装程序）</li>
+                                        <li><strong>macOS用户</strong>：下载 <code>obs-multi-rtmp-0.7.3.1-macos-x86_64.pkg</code></li>
+                                        <li><strong>Linux用户</strong>：下载对应发行版的压缩包</li>
+                                    </ul>
+                                </div>
+                                <div class="warning-box" style="margin-top: 10px;">
+                                    <span class="warning-icon">⚠️</span>
+                                    <strong>重要提示：</strong>
+                                    <ul style="margin-left: 20px; margin-top: 5px;">
+                                        <li>此插件完全<strong>免费开源</strong>，任何收费版本都是盗版</li>
+                                        <li>请从官方渠道下载，避免安全风险</li>
+                                        <li>确保您的OBS版本与插件版本兼容</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="plugin-step">
+                            <div class="step-num">2</div>
+                            <div class="step-content">
+                                <h4>安装插件（方法一：使用安装程序 - 推荐）</h4>
+                                <p><strong>Windows系统（.exe安装程序）：</strong></p>
+                                <ol>
+                                    <li>关闭OBS Studio（如果正在运行）</li>
+                                    <li>双击运行下载的 <code>obs-multi-rtmp-0.7.3.1-windows-x64-Installer.exe</code></li>
+                                    <li>安装程序会自动检测OBS安装目录</li>
+                                    <li>点击"Install"开始安装</li>
+                                    <li>等待安装完成，点击"Finish"</li>
+                                </ol>
+
+                                <p><strong>macOS系统（.pkg安装程序）：</strong></p>
+                                <ol>
+                                    <li>关闭OBS Studio（如果正在运行）</li>
+                                    <li>双击运行下载的 <code>.pkg</code> 文件</li>
+                                    <li>按照安装向导提示完成安装</li>
+                                    <li>输入管理员密码（如果需要）</li>
+                                </ol>
+
+                                <div class="success-box">
+                                    ✅ 使用安装程序最简单，自动安装到正确位置，强烈推荐！
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="plugin-step">
+                            <div class="step-num">3</div>
+                            <div class="step-content">
+                                <h4>安装插件（方法二：手动安装）</h4>
+                                <p>如果安装程序无法使用，可以手动安装：</p>
+                                <p><strong>Windows系统：</strong></p>
+                                <ol>
+                                    <li>下载 <code>obs-multi-rtmp-0.7.3.1-windows-x64.zip</code></li>
+                                    <li>解压压缩包到任意位置</li>
+                                    <li>复制解压后的文件夹到：<code>C:\Program Files\obs-studio\plugins\</code></li>
+                                    <li>或复制到：<code>%PROGRAMDATA%\obs-studio\plugins\</code></li>
+                                </ol>
+
+                                <p><strong>macOS系统：</strong></p>
+                                <ol>
+                                    <li>下载并解压压缩包</li>
+                                    <li>打开Finder，按 <code>Cmd+Shift+G</code></li>
+                                    <li>输入路径：<code>~/Library/Application Support/obs-studio/plugins</code></li>
+                                    <li>将解压的文件夹复制到该位置</li>
+                                </ol>
+
+                                <p><strong>Linux系统：</strong></p>
+                                <ol>
+                                    <li>解压压缩包：<code>unzip obs-multi-rtmp-*.zip</code></li>
+                                    <li>复制到插件目录：<code>cp -r obs-multi-rtmp ~/.config/obs-studio/plugins/</code></li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <div class="plugin-step">
+                            <div class="step-num">4</div>
+                            <div class="step-content">
+                                <h4>验证安装</h4>
+                                <ol>
+                                    <li>重新启动OBS Studio</li>
+                                    <li>在菜单栏查看是否出现新选项：
+                                        <ul>
+                                            <li><strong>Windows/Linux</strong>：菜单栏【工具】→ 【Multi RTMP设置】</li>
+                                            <li><strong>macOS</strong>：菜单栏【OBS Studio】→ 【Settings】→ 【Multi RTMP】</li>
+                                        </ul>
+                                    </li>
+                                    <li>或者在【设置】→ 【插件】选项卡中查看是否有 <strong>obs-multi-rtmp</strong> 条目</li>
+                                </ol>
+                                <div class="success-box">
+                                    ✅ 如果看到"Multi RTMP"相关选项，说明安装成功！
+                                </div>
+                                <div class="info-box">
+                                    <span class="info-icon">💡</span>
+                                    <strong>插件位置：</strong>
+                                    <ul style="margin-left: 20px; margin-top: 5px;">
+                                        <li><strong>Windows</strong>：<code>C:\Program Files\obs-studio\plugins\obs-multi-rtmp</code></li>
+                                        <li><strong>macOS</strong>：<code>~/Library/Application Support/obs-studio/plugins/obs-multi-rtmp</code></li>
+                                        <li><strong>Linux</strong>：<code>~/.config/obs-studio/plugins/obs-multi-rtmp</code></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="troubleshooting">
+                        <h4>❓ 常见问题与解决方法</h4>
+                        <details>
+                            <summary>找不到obs-plugins或plugins文件夹？</summary>
+                            <p><strong>解决方法：</strong></p>
+                            <ol>
+                                <li>确保已安装OBS Studio（不是OBS Classic旧版本）</li>
+                                <li>检查OBS安装目录：
+                                    <ul>
+                                        <li>Windows: <code>C:\Program Files\obs-studio\</code></li>
+                                        <li>macOS: <code>/Applications/OBS.app</code></li>
+                                    </ul>
+                                </li>
+                                <li>如果还是找不到，使用安装程序版本会自动安装</li>
+                            </ol>
+                        </details>
+                        <details>
+                            <summary>安装后找不到"Multi RTMP"选项？</summary>
+                            <p><strong>可能原因和解决方法：</strong></p>
+                            <ol>
+                                <li><strong>OBS版本不兼容</strong>：检查插件版本是否支持您的OBS版本</li>
+                                <li><strong>安装位置错误</strong>：确保安装到了正确的plugins目录</li>
+                                <li><strong>未重启OBS</strong>：安装后必须完全关闭并重新启动OBS</li>
+                                <li><strong>权限问题</strong>：Windows用户尝试以管理员权限运行OBS</li>
+                                <li><strong>文件缺失</strong>：检查插件文件夹是否包含.dll（Windows）或.dylib（macOS）文件</li>
+                            </ol>
+                        </details>
+                        <details>
+                            <summary>安装程序提示找不到OBS目录？</summary>
+                            <p><strong>解决方法：</strong></p>
+                            <ol>
+                                <li>先安装OBS Studio，再安装插件</li>
+                                <li>如果OBS安装到自定义位置，使用手动安装方法</li>
+                                <li>Windows用户：从OBS菜单 → 帮助 → 日志文件，查看OBS安装路径</li>
+                            </ol>
+                        </details>
+                        <details>
+                            <summary>插件导致OBS崩溃或无法启动？</summary>
+                            <p><strong>紧急解决方法：</strong></p>
+                            <ol>
+                                <li>进入插件安装目录删除obs-multi-rtmp文件夹</li>
+                                <li>重新启动OBS</li>
+                                <li>下载与您OBS版本匹配的插件版本</li>
+                                <li>更新OBS到最新版本</li>
+                            </ol>
+                        </details>
+                        <details>
+                            <summary>如何查看当前OBS版本？</summary>
+                            <p><strong>查看方法：</strong></p>
+                            <ol>
+                                <li>打开OBS Studio</li>
+                                <li>点击菜单【帮助】→ 【关于OBS】</li>
+                                <li>查看版本号（如：32.0.1）</li>
+                            </ol>
+                        </details>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" onclick="closeModal()">✅ 已完成安装</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
