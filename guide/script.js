@@ -542,7 +542,7 @@ const platforms = {
                                 <li>页面会显示推流信息：
                                     <div class="code-box" style="margin-top: 10px;">
                                         <strong>推流服务器（RTMP）：</strong><br>
-                                        rtmp://live-push.tencent.com/stream/<br><br>
+                                        rtmp://wxalivepush.weixin.qq.com/live/<br><br>
                                         <strong>串流密钥（Stream Key）：</strong><br>
                                         [您的专属密钥，通常为32位字符]
                                     </div>
@@ -579,12 +579,21 @@ const platforms = {
                                 <li>在【服务】中选择【自定义...】或【Custom】</li>
                                 <li>填写推流信息：
                                     <ul>
-                                        <li><strong>服务器</strong>：粘贴刚才复制的RTMP地址（如：rtmp://live-push.tencent.com/stream/）</li>
-                                        <li><strong>串流密钥</strong>：粘贴刚才复制的密钥</li>
+                                        <li><strong>服务器</strong>：直接粘贴视频号助手显示的完整RTMP地址（通常格式为：rtmp://wxalivepush.weixin.qq.com/live/）</li>
+                                        <li><strong>串流密钥</strong>：粘贴刚才复制的密钥（包含room_id和认证参数）</li>
                                     </ul>
                                 </li>
                                 <li>点击【确定】保存</li>
                             </ol>
+                            <div class="warning-box">
+                                <span class="warning-icon">⚠️</span>
+                                <strong>重要提醒：</strong>
+                                <ul>
+                                    <li>请<strong>直接从视频号助手复制粘贴</strong>，不要手动输入</li>
+                                    <li>推流地址每次开播都会变化，不要使用旧的地址</li>
+                                    <li>串流密钥中包含认证参数，复制时务必完整</li>
+                                </ul>
+                            </div>
                             <div class="tip-box">
                                 <span class="tip-icon">💡</span>
                                 <strong>视频号推流参数建议：</strong>
