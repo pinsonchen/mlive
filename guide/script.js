@@ -455,70 +455,247 @@ const platforms = {
                 <div class="platform-guide-header">
                     <div class="platform-guide-icon">💬</div>
                     <div class="platform-guide-title">
-                        <h3>视频号直播操作指南（2026最新）</h3>
-                        <p>支持三种直播方式，请根据您的需求选择</p>
+                        <h3>视频号直播OBS推流地址获取（2026最新）</h3>
+                        <p>从视频号助手获取动态推流地址，每次开播都需要重新获取</p>
                     </div>
                 </div>
+                <div class="guide-steps">
+                    <div class="guide-step">
+                        <div class="guide-step-number">1</div>
+                        <div class="guide-step-content">
+                            <h4>准备工作</h4>
+                            <p><strong>确保满足以下条件：</strong></p>
+                            <ul>
+                                <li>✅ 年满18周岁</li>
+                                <li>✅ 完成微信实名认证（个人需绑定银行卡）</li>
+                                <li>✅ 视频号粉丝数达到<strong>1000人以上</strong></li>
+                                <li>✅ 视频号已完成实名认证或企业认证</li>
+                            </ul>
+                            <div class="warning-box">
+                                <span class="warning-icon">⚠️</span>
+                                <strong>重要：</strong>首次使用OBS推流时，需要先用手机摄像头开播几分钟进行人脸识别验证，验证成功后才能正常使用OBS推流功能！
+                            </div>
+                        </div>
+                    </div>
 
-                <!-- 三种直播方式对比 -->
-                <div class="comparison-table" style="background: #f0fdf4; border: 2px solid var(--success-color); border-radius: 12px; padding: 20px; margin-bottom: 25px;">
-                    <h4 style="margin-bottom: 15px; color: #065f46;">💬 视频号三种直播方式对比</h4>
-                    <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
-                        <thead>
-                            <tr style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: white;">
-                                <th style="padding: 12px; text-align: left;">对比维度</th>
-                                <th style="padding: 12px;">📱 手机直播</th>
-                                <th style="padding: 12px;">💻 电脑直播</th>
-                                <th style="padding: 12px;">🎬 推流直播(OBS)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr style="border-bottom: 1px solid var(--border-color);">
-                                <td style="padding: 12px; font-weight: 600;">设备要求</td>
-                                <td style="padding: 12px;">仅需手机</td>
-                                <td style="padding: 12px;">电脑+Windows微信</td>
-                                <td style="padding: 12px;">电脑+OBS等软件</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid var(--border-color);">
-                                <td style="padding: 12px; font-weight: 600;">画质表现</td>
-                                <td style="padding: 12px;">⭐⭐ 一般</td>
-                                <td style="padding: 12px;">⭐⭐⭐ 中等</td>
-                                <td style="padding: 12px;">⭐⭐⭐⭐⭐ 高清可调</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid var(--border-color);">
-                                <td style="padding: 12px; font-weight: 600;">操作难度</td>
-                                <td style="padding: 12px;">⭐ 简单</td>
-                                <td style="padding: 12px;">⭐⭐ 较简单</td>
-                                <td style="padding: 12px;">⭐⭐⭐⭐ 较复杂</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid var(--border-color);">
-                                <td style="padding: 12px; font-weight: 600;">功能丰富度</td>
-                                <td style="padding: 12px;">基础功能</td>
-                                <td style="padding: 12px;">多画面源</td>
-                                <td style="padding: 12px;">专业级功能</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid var(--border-color);">
-                                <td style="padding: 12px; font-weight: 600;">适合场景</td>
-                                <td style="padding: 12px;">户外/Vlog</td>
-                                <td style="padding: 12px;">教学/会议</td>
-                                <td style="padding: 12px;">专业制作/多平台</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 12px; font-weight: 600;">是否需要推流地址</td>
-                                <td style="padding: 12px;">❌ 不需要</td>
-                                <td style="padding: 12px;">❌ 不需要</td>
-                                <td style="padding: 12px;">✅ 需要（从助手获取）</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="tip-box" style="margin-top: 15px;">
-                        <span class="tip-icon">💡</span>
-                        <strong>选择建议：</strong>
-                        <ul style="margin-left: 20px; margin-top: 8px;">
-                            <li><strong>新手入门</strong>：选择手机直播，最简单</li>
-                            <li><strong>电脑直播</strong>：选择Windows微信直播，操作较简单</li>
-                            <li><strong>专业需求</strong>：选择OBS推流直播，功能最强大</li>
-                        </ul>
+                    <div class="guide-step">
+                        <div class="guide-step-number">2</div>
+                        <div class="guide-step-content">
+                            <h4>访问视频号助手网页版</h4>
+                            <p><strong>方法一：从微信进入（推荐）</strong></p>
+                            <ol>
+                                <li>打开【微信APP】</li>
+                                <li>进入【发现】→ 【视频号】</li>
+                                <li>点击右上角【...】→ 【发起直播】</li>
+                                <li>选择【从电脑开播】</li>
+                                <li>系统会提示用电脑浏览器访问视频号助手</li>
+                            </ol>
+                            <p><strong>方法二：直接访问网页</strong></p>
+                            <ol>
+                                <li>在电脑浏览器中打开视频号助手：
+                                    <div class="code-box" style="margin-top: 10px;">
+                                        <a href="https://channels.weixin.qq.com/" target="_blank" style="color: #10b981;">https://channels.weixin.qq.com/</a>
+                                    </div>
+                                </li>
+                                <li>使用微信扫码登录</li>
+                            </ol>
+                            <div class="tip-box">
+                                <span class="tip-icon">💡</span>
+                                <strong>提示：</strong>建议使用Chrome、Edge等现代浏览器，避免使用IE浏览器。
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="guide-step">
+                        <div class="guide-step-number">3</div>
+                        <div class="guide-step-content">
+                            <h4>创建直播间</h4>
+                            <ol>
+                                <li>登录后进入视频号助手主页</li>
+                                <li>点击左侧菜单【直播】或【管理直播】</li>
+                                <li>点击【创建直播】或【发起直播】按钮</li>
+                                <li>填写直播间信息：
+                                    <ul>
+                                        <li><strong>直播主题</strong>：输入直播标题（必填）</li>
+                                        <li><strong>直播封面</strong>：上传封面图片（建议尺寸：1080×1260像素）</li>
+                                        <li><strong>直播分类</strong>：选择直播类型（如：生活、游戏、教学等）</li>
+                                        <li><strong>开播时间</strong>：选择立即开播或预约时间</li>
+                                    </ul>
+                                </li>
+                                <li>点击【创建】或【下一步】</li>
+                            </ol>
+                            <div class="warning-box">
+                                <span class="warning-icon">⚠️</span>
+                                <strong>注意：</strong>直播间创建后，推流地址会立即生成，但<strong>仅在此场直播有效</strong>，下次开播需要重新获取！
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="guide-step">
+                        <div class="guide-step-number">4</div>
+                        <div class="guide-step-content">
+                            <h4>获取推流地址（关键步骤）❗</h4>
+                            <p><strong>创建直播间后会自动进入推流设置页面：</strong></p>
+                            <ol>
+                                <li>在直播设置页面找到【推流】或【直播推流】选项卡</li>
+                                <li>选择【推流直播】模式（不是摄像头直播）</li>
+                                <li>页面会显示推流信息：
+                                    <div class="code-box" style="margin-top: 10px;">
+                                        <strong>推流服务器（RTMP）：</strong><br>
+                                        rtmp://live-push.tencent.com/stream/<br><br>
+                                        <strong>串流密钥（Stream Key）：</strong><br>
+                                        [您的专属密钥，通常为32位字符]
+                                    </div>
+                                </li>
+                                <li><strong>复制推流地址和密钥</strong>：
+                                    <ul>
+                                        <li>点击推流服务器右侧的【复制】按钮</li>
+                                        <li>点击串流密钥右侧的【复制】按钮或【显示】按钮</li>
+                                        <li>将这两个信息保存到OBS中</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                            <div class="warning-box" style="background: #fef3c7; border-left-color: #f59e0b;">
+                                <span class="warning-icon">⚠️</span>
+                                <strong>重要提醒：</strong>
+                                <ul>
+                                    <li>推流地址和密钥<strong>每次创建直播间都会变化</strong>！</li>
+                                    <li>旧的推流信息无法重复使用</li>
+                                    <li>请勿泄露推流密钥，避免被盗用</li>
+                                    <li>推流密钥仅在当前直播场次有效</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="guide-step">
+                        <div class="guide-step-number">5</div>
+                        <div class="guide-step-content">
+                            <h4>配置OBS Studio</h4>
+                            <p><strong>将推流信息填入OBS：</strong></p>
+                            <ol>
+                                <li>打开OBS Studio</li>
+                                <li>点击菜单【设置】→ 【推流】</li>
+                                <li>在【服务】中选择【自定义...】或【Custom】</li>
+                                <li>填写推流信息：
+                                    <ul>
+                                        <li><strong>服务器</strong>：粘贴刚才复制的RTMP地址（如：rtmp://live-push.tencent.com/stream/）</li>
+                                        <li><strong>串流密钥</strong>：粘贴刚才复制的密钥</li>
+                                    </ul>
+                                </li>
+                                <li>点击【确定】保存</li>
+                            </ol>
+                            <div class="tip-box">
+                                <span class="tip-icon">💡</span>
+                                <strong>视频号推流参数建议：</strong>
+                                <ul style="margin-left: 20px; margin-top: 8px;">
+                                    <li><strong>视频码率</strong>：2000-3000 kbps</li>
+                                    <li><strong>分辨率</strong>：1920×1080 (1080P)</li>
+                                    <li><strong>帧率</strong>：30 fps</li>
+                                    <li><strong>关键帧间隔</strong>：2秒</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="guide-step">
+                        <div class="guide-step-number">6</div>
+                        <div class="guide-step-content">
+                            <h4>开始推流直播</h4>
+                            <p><strong>正确的开播顺序（很重要！）：</strong></p>
+                            <ol>
+                                <li>在OBS中点击【开始推流】</li>
+                                <li>观察OBS右下角状态，确认推流正常（显示绿色指示灯和上传速度）</li>
+                                <li><strong>返回视频号助手网页</strong></li>
+                                <li>点击【开始直播】按钮</li>
+                                <li>系统会进行短暂检测，确认有画面后正式开播</li>
+                            </ol>
+                            <p><strong>⚠️ 重要：开播顺序不能错！</strong></p>
+                            <ul>
+                                <li>✅ <strong>正确顺序</strong>：先OBS推流 → 再视频号点击开播</li>
+                                <li>❌ <strong>错误顺序</strong>：先视频号开播 → 再OBS推流（会导致无法开播）</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="guide-step">
+                        <div class="guide-step-number">7</div>
+                        <div class="guide-step-content">
+                            <h4>常见问题处理</h4>
+                            <details>
+                                <summary style="cursor: pointer; padding: 10px; background: var(--bg-primary); border-radius: 8px; font-weight: 600;">
+                                    Q：首次开播提示需要人脸识别验证？
+                                </summary>
+                                <div style="padding: 15px; margin-top: 10px; background: var(--bg-secondary); border-radius: 8px;">
+                                    <p><strong>A：</strong>这是视频号的安全机制，首次使用OBS推流时：</p>
+                                    <ol>
+                                        <li>先用手机微信进入该视频号</li>
+                                        <li>选择【手机直播】开播几分钟</li>
+                                        <li>按照提示完成人脸识别验证</li>
+                                        <li>验证成功后，以后就可以正常使用OBS推流了</li>
+                                    </ol>
+                                </div>
+                            </details>
+                            <details style="margin-top: 10px;">
+                                <summary style="cursor: pointer; padding: 10px; background: var(--bg-primary); border-radius: 8px; font-weight: 600;">
+                                    Q：OBS显示推流正常，但视频号助手提示"未检测到画面"？
+                                </summary>
+                                <div style="padding: 15px; margin-top: 10px; background: var(--bg-secondary); border-radius: 8px;">
+                                    <p><strong>A：</strong>可能的原因和解决方法：</p>
+                                    <ul>
+                                        <li><strong>检查OBS场景</strong>：确保场景中已添加来源（游戏捕获、窗口采集等）</li>
+                                        <li><strong>检查编码器</strong>：使用x264或NVENC硬件编码</li>
+                                        <li><strong>检查码率</strong>：确保码率设置为2000-3000 kbps</li>
+                                        <li><strong>重启OBS</strong>：完全关闭OBS后重新启动</li>
+                                        <li><strong>更换浏览器</strong>：使用Chrome或Edge浏览器</li>
+                                    </ul>
+                                </div>
+                            </details>
+                            <details style="margin-top: 10px;">
+                                <summary style="cursor: pointer; padding: 10px; background: var(--bg-primary); border-radius: 8px; font-weight: 600;">
+                                    Q：提示"推流地址已过期"或"推流地址无效"？
+                                </summary>
+                                <div style="padding: 15px; margin-top: 10px; background: var(--bg-secondary); border-radius: 8px;">
+                                    <p><strong>A：</strong>这是因为使用了旧的推流地址：</p>
+                                    <ul>
+                                        <li>每次创建新直播间，推流地址和密钥都会重新生成</li>
+                                        <li>旧的推流信息无法重复使用</li>
+                                        <li>请回到视频号助手，创建新的直播间，获取新的推流地址</li>
+                                        <li>然后在OBS中更新推流信息</li>
+                                    </ul>
+                                </div>
+                            </details>
+                            <details style="margin-top: 10px;">
+                                <summary style="cursor: pointer; padding: 10px; background: var(--bg-primary); border-radius: 8px; font-weight: 600;">
+                                    Q：粉丝不足1000无法获取推流地址怎么办？
+                                </summary>
+                                <div style="padding: 15px; margin-top: 10px; background: var(--bg-secondary); border-radius: 8px;">
+                                    <p><strong>A：</strong>有以下几种方案：</p>
+                                    <ul>
+                                        <li><strong>方案一</strong>：使用Windows微信电脑直播，只需200粉丝或注册满7天</li>
+                                        <li><strong>方案二</strong>：先用手机直播积累粉丝到1000</li>
+                                        <li><strong>方案三</strong>：完成企业认证（需营业执照）</li>
+                                        <li><strong>方案四</strong>：使用OBS虚拟摄像头 + Windows微信直播</li>
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="guide-step">
+                        <div class="guide-step-number">8</div>
+                        <div class="guide-step-content">
+                            <h4>结束直播</h4>
+                            <p><strong>正确的结束顺序：</strong></p>
+                            <ol>
+                                <li>先在视频号助手点击【结束直播】</li>
+                                <li>然后在OBS中点击【停止推流】</li>
+                            </ol>
+                            <div class="tip-box">
+                                <span class="tip-icon">💡</span>
+                                <strong>提示：</strong>结束后可以在视频号助手中查看直播数据统计，包括观看人数、互动情况等。
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
