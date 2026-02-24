@@ -542,9 +542,10 @@ const platforms = {
                                 <li>页面会显示推流信息：
                                     <div class="code-box" style="margin-top: 10px;">
                                         <strong>推流服务器（RTMP）：</strong><br>
-                                        rtmp://wxalivepush.weixin.qq.com/live/<br><br>
+                                        rtmp://[节点ID].livepush.myqcloud.com/[应用ID]/<br>
+                                        <span style="font-size: 0.85rem; color: #6b7280;">（实际示例：rtmp://111583.livepush.myqcloud.com/trtc_1400439699/）</span><br><br>
                                         <strong>串流密钥（Stream Key）：</strong><br>
-                                        [您的专属密钥，通常为32位字符]
+                                        [您的专属密钥，通常包含房间ID和认证参数]
                                     </div>
                                 </li>
                                 <li><strong>复制推流地址和密钥</strong>：
@@ -555,6 +556,19 @@ const platforms = {
                                     </ul>
                                 </li>
                             </ol>
+                            <div class="warning-box" style="background: #fef3c7; border-left-color: #f59e0b;">
+                                <span class="warning-icon">⚠️</span>
+                                <strong>重要：推流地址格式说明</strong>
+                                <p>视频号使用腾讯云CDN动态节点，推流地址格式为：</p>
+                                <code style="display: block; background: white; padding: 10px; margin-top: 8px; border-radius: 6px;">
+                                    rtmp://[动态节点ID].livepush.myqcloud.com/[应用ID]/
+                                </code>
+                                <ul style="margin-top: 10px;">
+                                    <li>✅ 每次创建直播间，节点ID和应用ID都会<strong>动态变化</strong></li>
+                                    <li>✅ 必须<strong>直接从视频号助手复制</strong>，不要手动输入</li>
+                                    <li>✅ 示例地址仅供参考，实际地址以助手显示为准</li>
+                                </ul>
+                            </div>
                             <div class="warning-box" style="background: #fef3c7; border-left-color: #f59e0b;">
                                 <span class="warning-icon">⚠️</span>
                                 <strong>重要提醒：</strong>
@@ -579,8 +593,10 @@ const platforms = {
                                 <li>在【服务】中选择【自定义...】或【Custom】</li>
                                 <li>填写推流信息：
                                     <ul>
-                                        <li><strong>服务器</strong>：直接粘贴视频号助手显示的完整RTMP地址（通常格式为：rtmp://wxalivepush.weixin.qq.com/live/）</li>
-                                        <li><strong>串流密钥</strong>：粘贴刚才复制的密钥（包含room_id和认证参数）</li>
+                                        <li><strong>服务器</strong>：直接粘贴视频号助手显示的完整RTMP地址<br>
+                                            <span style="font-size: 0.85rem; color: #6b7280;">（实际格式：rtmp://[节点ID].livepush.myqcloud.com/[应用ID]/）</span>
+                                        </li>
+                                        <li><strong>串流密钥</strong>：粘贴刚才复制的密钥（包含房间ID和认证参数）</li>
                                     </ul>
                                 </li>
                                 <li>点击【确定】保存</li>
@@ -590,8 +606,9 @@ const platforms = {
                                 <strong>重要提醒：</strong>
                                 <ul>
                                     <li>请<strong>直接从视频号助手复制粘贴</strong>，不要手动输入</li>
-                                    <li>推流地址每次开播都会变化，不要使用旧的地址</li>
-                                    <li>串流密钥中包含认证参数，复制时务必完整</li>
+                                    <li>推流地址每次开播都会变化（节点ID和应用ID动态生成）</li>
+                                    <li>串流密钥中包含认证参数（txSecret和txTime），复制时务必完整</li>
+                                    <li>⚠️ <strong>不要使用示例地址或旧的推流地址</strong></li>
                                 </ul>
                             </div>
                             <div class="tip-box">
