@@ -10,28 +10,23 @@ const platforms = {
         icon: '🛒',
         color: '#ff5000',
         rtmpSupport: true,
-        supportTypes: ['push', 'pc_wechat', 'mobile'],  // 支持多种直播方式
+        supportTypes: ['push', 'mobile'],  // 支持OBS推流和手机直播
         requirements: {
             deposit: true,
-            fans: 200,  // 2026年2月更新：需要200粉丝才能使用OBS推流
-            mobile: 0,   // 手机直播：无粉丝要求
-            pc_wechat: 0  // Windows微信直播：暂不支持
+            fans: 1000,  // 2026年2月更新：需要1000+粉丝才能使用OBS推流（达人）
+            mobile: 10000,   // 手机直播：需要1万淘宝粉丝或5万外站粉丝
+            push: 1000  // OBS推流：1000+粉丝或优质内容分≥20
         },
         liveMethods: {
             mobile: {
                 name: '手机直播',
-                fansRequired: 0,
-                description: '通过手机淘宝主播APP直接直播'
+                fansRequired: 10000,
+                description: '需要1万淘宝粉丝或5万外站粉丝（7天内发文）'
             },
             push: {
                 name: 'OBS推流直播',
-                fansRequired: 200,
-                description: '需要200粉丝以上才能使用OBS推流'
-            },
-            pc_wechat: {
-                name: 'Windows微信直播',
-                fansRequired: null,
-                description: '暂不支持'
+                fansRequired: 1000,
+                description: '需要1000+粉丝或发布5条优质内容（质量分≥20）'
             }
         },
         guide: `
@@ -195,30 +190,24 @@ const platforms = {
         name: '抖音直播',
         icon: '🎵',
         color: '#000000',
-        rtmpSupport: false,
+        rtmpSupport: false,  // 2023年起已取消OBS推流功能
         supportTypes: ['mobile', 'pc_assistant'],  // 仅支持手机和直播伴侣
         requirements: {
-            deposit: false,
-            fans: 1000,  // 1000粉丝以上或企业认证
-            mobile: 0,   // 手机直播：无粉丝要求
-            push: 1000,  // OBS推流：需要1000粉丝或企业认证
-            pc_wechat: null  // Windows微信直播：不支持
+            deposit: true,  // 需要缴纳500元保证金
+            fans: 200,  // 2025年12月新规：200有效粉丝
+            mobile: 200,   // 手机直播：200有效粉丝
+            pc_assistant: 0  // 直播伴侣：无粉丝门槛（配合虚拟摄像头使用）
         },
         liveMethods: {
             mobile: {
                 name: '手机直播',
-                fansRequired: 0,
-                description: '通过抖音APP直接直播，无粉丝要求'
-            },
-            push: {
-                name: 'OBS推流直播',
-                fansRequired: 1000,
-                description: '需要1000粉丝以上或企业认证，或使用虚拟摄像头'
+                fansRequired: 200,
+                description: '需要200有效粉丝（2025年12月新规，非互关）'
             },
             pc_assistant: {
-                name: '抖音直播伴侣',
+                name: '抖音直播伴侣+虚拟摄像头',
                 fansRequired: 0,
-                description: '使用直播伴侣软件，支持虚拟摄像头'
+                description: '推荐方案：OBS虚拟摄像头→抖音直播伴侣'
             }
         },
         guide: `
@@ -226,71 +215,74 @@ const platforms = {
                 <div class="platform-guide-header">
                     <div class="platform-guide-icon">🎵</div>
                     <div class="platform-guide-title">
-                        <h3>抖音直播推流方案</h3>
-                        <p>使用虚拟摄像头方案（推荐）或获取RTMP地址</p>
+                        <h3>抖音直播方案说明（2026最新）</h3>
+                        <p>推荐使用虚拟摄像头方案，安全可靠</p>
                     </div>
                 </div>
                 <div class="guide-steps">
                     <div class="guide-step">
                         <div class="guide-step-number">⚠️</div>
                         <div class="guide-step-content">
-                            <h4>重要说明</h4>
-                            <p><strong>抖音对普通用户的RTMP推流权限有限制：</strong></p>
+                            <h4>重要说明：OBS推流已取消</h4>
+                            <p><strong>抖音于2023年起取消了OBS直接推流功能！</strong></p>
                             <ul>
-                                <li>❌ 普通账号通常无法直接获取RTMP推流地址</li>
-                                <li>✅ 需要1000粉丝以上才能申请电脑直播权限</li>
-                                <li>✅ 或通过企业认证（需营业执照，600元/年）</li>
+                                <li>❌ <strong>已取消</strong>：不再支持OBS直接RTMP推流</li>
+                                <li>⚠️ <strong>违规使用</strong>：强制使用OBS推流将面临账号封禁</li>
+                                <li>✅ <strong>官方方案</strong>：使用抖音直播伴侣 + 虚拟摄像头</li>
                             </ul>
-                            <div class="tip-box" style="background: #fef3c7; border-color: #f59e0b;">
-                                <span class="tip-icon">💡</span>
-                                <strong>推荐方案：</strong>使用OBS虚拟摄像头 + 抖音官方直播伴侣，完全安全可靠！
+                            <div class="warning-box">
+                                <span class="warning-icon">⚠️</span>
+                                <strong>重要提醒：</strong>
+                                <p>抖音官方严格执行"一律封号处理，绝不姑息"的政策。请勿尝试使用第三方OBS推流工具！</p>
                             </div>
                         </div>
                     </div>
                     <div class="guide-step">
                         <div class="guide-step-number">1</div>
                         <div class="guide-step-content">
-                            <h4>推荐方案：虚拟摄像头</h4>
+                            <h4>推荐方案：虚拟摄像头 + 抖音直播伴侣</h4>
+                            <p><strong>这是唯一安全可靠的官方方案！</strong></p>
                             <ol>
                                 <li>在OBS中制作好您的直播画面</li>
                                 <li>点击菜单【工具】→【虚拟摄像头】→【启动】</li>
-                                <li>下载并安装【抖音直播伴侣】</li>
+                                <li>下载并安装【抖音直播伴侣】官方软件</li>
                                 <li>在直播伴侣的摄像头设置中选择【OBS Virtual Camera】</li>
                                 <li>点击【开始直播】</li>
                             </ol>
-                            <div class="tip-box">
-                                <span class="tip-icon">✅</span>
-                                <strong>优势：</strong>使用官方软件，安全可靠，无需特殊权限
+                            <div class="success-box">
+                                <span class="success-icon">✅</span>
+                                <strong>优势：</strong>
+                                <ul>
+                                    <li>完全使用官方软件，安全可靠</li>
+                                    <li>无需特殊权限和粉丝门槛</li>
+                                    <li>画质清晰，功能完整</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                     <div class="guide-step">
                         <div class="guide-step-number">2</div>
                         <div class="guide-step-content">
-                            <h4>备选方案：获取RTMP推流地址（需满足条件）</h4>
-                            <p><strong>如果您满足以下条件之一：</strong></p>
+                            <h4>手机直播条件（2025年12月新规）</h4>
+                            <p><strong>直播带货权限要求：</strong></p>
                             <ul>
-                                <li>✅ 粉丝数量达到1000+</li>
-                                <li>✅ 已完成企业认证</li>
+                                <li>✅ <strong>有效粉丝数≥200</strong>（2025年12月30日起实施）</li>
+                                <li>✅ 实名认证（含人脸识别）</li>
+                                <li>✅ 原创视频≥10条</li>
+                                <li>✅ 缴纳500元保证金</li>
                             </ul>
-                            <p><strong>获取步骤：</strong></p>
-                            <ol>
-                                <li>下载并安装【抖音直播伴侣】</li>
-                                <li>登录抖音账号</li>
-                                <li>点击【开始直播】→【推流设置】</li>
-                                <li>查看并复制RTMP地址和串流密钥</li>
-                            </ol>
-                            <div class="code-box">
-                                RTMP服务器：rtmp://push.douyin.com/live/<br>
-                                串流密钥：[32位字符串]
+                            <div class="warning-box">
+                                <span class="warning-icon">⚠️</span>
+                                <strong>注意：</strong>
+                                <p>"有效粉丝"不是简单的粉丝总数，需要真实互动（点赞、评论、转发）。互相关注等"刷粉"行为不计入有效粉丝！</p>
                             </div>
                         </div>
                     </div>
                     <div class="guide-step">
                         <div class="guide-step-number">3</div>
                         <div class="guide-step-content">
-                            <h4>粉丝不足1000怎么办？</h4>
-                            <p><strong>方案一：快速积累粉丝</strong></p>
+                            <h4>粉丝不足200怎么办？</h4>
+                            <p><strong>方案一：快速积累有效粉丝</strong></p>
                             <ul>
                                 <li>发布优质短视频内容</li>
                                 <li>参与热门话题和挑战</li>
@@ -317,26 +309,20 @@ const platforms = {
         supportTypes: ['push', 'mobile'],  // 支持推流和手机直播
         requirements: {
             deposit: false,
-            fans: 1000,  // 个人账号：1000粉丝以上
-            mobile: 0,   // 手机直播：无粉丝要求（但需要直播权限）
-            push: 1000,  // OBS推流：需要1000粉丝以上
-            pc_wechat: null  // Windows微信直播：不支持
+            fans: 1000,  // OBS推流：1000粉丝（部分资料500粉丝，以App内显示为准）
+            mobile: 0,   // 手机直播：无硬性粉丝门槛，但需满足其他条件
+            push: 1000  // OBS推流：需要1000粉丝以上（部分情况500粉丝）
         },
         liveMethods: {
             mobile: {
                 name: '手机直播',
                 fansRequired: 0,
-                description: '通过小红书APP直接直播，需要先开通直播权限'
+                description: '需要注册满6个月+实名认证，建议以App内显示为准'
             },
             push: {
                 name: 'OBS推流直播',
                 fansRequired: 1000,
-                description: '需要1000粉丝以上才能获取OBS推流权限'
-            },
-            pc_wechat: {
-                name: 'Windows微信直播',
-                fansRequired: null,
-                description: '不支持'
+                description: '需要1000粉丝（部分账号500粉丝），需近半年原创笔记≥10篇'
             }
         },
         guide: `
@@ -442,21 +428,21 @@ const platforms = {
         supportTypes: ['push', 'pc_wechat', 'mobile'],  // 支持三种直播方式
         requirements: {
             deposit: false,
-            fans: 100,  // 2026年更新：个人账号需100粉丝或完成新手任务
+            fans: 1000,  // OBS推流：需要1000粉丝
             mobile: 0,   // 手机直播：无粉丝要求
-            push: 100,  // OBS推流：需要100粉丝
-            pc_wechat: 100  // Windows微信直播：需要100粉丝
+            push: 1000,  // OBS推流：需要1000粉丝
+            pc_wechat: 200  // Windows微信直播：200粉丝或注册满7天（二选一）
         },
         liveMethods: {
             mobile: {
                 name: '手机直播',
                 fansRequired: 0,
-                description: '通过微信视频号APP直接直播，无粉丝要求'
+                description: '通过微信视频号APP直接直播，只需实名认证，无粉丝要求'
             },
             push: {
                 name: 'OBS推流直播',
-                fansRequired: 100,
-                description: '需要100粉丝或完成新手任务，从视频号助手获取推流地址'
+                fansRequired: 1000,
+                description: '需要1000粉丝且完成认证，每次开播需人脸识别验证'
             },
             pc_wechat: {
                 name: 'Windows微信电脑直播',
