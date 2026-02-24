@@ -962,11 +962,40 @@ function generateOBSConfiguration() {
                                     <li>音频码率：160 Kbps</li>
                                     <li>编码器：硬件编码 (NVENC H.264) 或 x264</li>
                                     <li>码率控制：CBR</li>
-                                    <li>码率：4500 Kbps</li>
+                                    <li>码率：4500 Kbps（⚠️ 淘宝限制2500kbps）</li>
                                     <li>关键帧间隔：2秒</li>
                                 </ul>
                             </li>
                         </ol>
+                    </div>
+                </div>
+
+                <div class="guide-step">
+                    <div class="guide-step-number">2.5</div>
+                    <div class="guide-step-content">
+                        <h4>⚠️ 设置主推流地址（重要）</h4>
+                        <p><strong>OBS Multi RTMP 插件需要与OBS主推流同步工作！</strong></p>
+                        <p>首先需要在OBS主界面设置一个默认的推流地址（主推流）：</p>
+                        <ol>
+                            <li>打开 OBS → 【设置】→ 【推流】</li>
+                            <li>在【服务】中选择一个平台（建议选择最重要的平台，如视频号或淘宝）</li>
+                            <li>填写该平台的【服务器】和【串流密钥】</li>
+                            <li>点击【确定】保存</li>
+                        </ol>
+                        <div class="warning-box">
+                            <span class="warning-icon">⚠️</span>
+                            <strong>重要提示：</strong>
+                            <p>这个主推流地址是必需的！Multi RTMP插件会监听OBS主推流的状态：</p>
+                            <ul>
+                                <li>✅ 当主推流开始时，所有多平台推流自动开始</li>
+                                <li>✅ 当主推流停止时，所有多平台推流自动停止</li>
+                            </ul>
+                            <p>如果不设置主推流，Multi RTMP插件将无法正常工作！</p>
+                        </div>
+                        <div class="tip-box">
+                            <span class="tip-icon">💡</span>
+                            <strong>建议：</strong>选择网络最稳定或最重要的平台作为主推流目标。
+                        </div>
                     </div>
                 </div>
 
@@ -1003,15 +1032,44 @@ function generateOBSConfiguration() {
                 <div class="guide-step">
                     <div class="guide-step-number">5</div>
                     <div class="guide-step-content">
+                        <h4>设置直播场景</h4>
+                        <ol>
+                            <li>在 OBS 主界面添加【来源】：</li>
+                            <ul>
+                                <li>显示采集：捕获屏幕或窗口</li>
+                                <li>游戏采集：捕获游戏画面（如需要）</li>
+                                <li>摄像头：添加主播摄像头</li>
+                                <li>麦克风：添加音频输入</li>
+                            </ul>
+                            <li>调整布局和位置</li>
+                            <li>测试画面和声音效果</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="guide-step">
+                    <div class="guide-step-number">6</div>
+                    <div class="guide-step-content">
                         <h4>开始测试推流</h4>
                         <ol>
                             <li>确保各平台直播间已创建并等待推流</li>
-                            <li>点击 OBS 的【多路推流】→ 【开始所有推流】</li>
+                            <li>在 Multi RTMP 设置中，勾选 <strong>"同步开始"</strong> 和 <strong>"同步停止"</strong></li>
+                            <li>点击 OBS 主界面的【开始推流】按钮</li>
+                            <li>Multi RTMP 会自动开始所有平台推流</li>
                             <li>观察各推流目标状态，确保都显示【活动】</li>
                             <li>在各平台确认直播画面正常</li>
                         </ol>
                         <div class="success-box">
                             ✅ 如果所有平台都显示正常画面，说明配置成功！
+                        </div>
+                        <div class="tip-box">
+                            <span class="tip-icon">💡</span>
+                            <strong>工作原理：</strong>
+                            <ul>
+                                <li>OBS主推流开始 → Multi RTMP自动开始所有平台</li>
+                                <li>OBS主推流停止 → Multi RTMP自动停止所有平台</li>
+                                <li>只需控制OBS主推流，无需单独操作每个平台</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
