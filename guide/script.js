@@ -657,11 +657,13 @@ function updateSolutionRecommendations() {
     const solution1 = document.getElementById('solution1');
     const solution2 = document.getElementById('solution2');
     const solution3 = document.getElementById('solution3');
+    const solution4 = document.getElementById('solution4');
 
     // 重置所有方案状态
     solution1.classList.remove('selected');
     solution2.classList.remove('selected');
     solution3.classList.remove('selected');
+    solution4.classList.remove('selected');
 
     // 重置徽章
     solution1.querySelector('.solution-badge').textContent = '推荐';
@@ -670,6 +672,8 @@ function updateSolutionRecommendations() {
     solution2.querySelector('.solution-badge').className = 'solution-badge alternative';
     solution3.querySelector('.solution-badge').textContent = '备选';
     solution3.querySelector('.solution-badge').className = 'solution-badge alternative';
+    solution4.querySelector('.solution-badge').textContent = '备选';
+    solution4.querySelector('.solution-badge').className = 'solution-badge alternative';
 
     // 如果没有选择平台，不执行自动选择
     if (selectedPlatforms.length === 0) {
@@ -677,14 +681,27 @@ function updateSolutionRecommendations() {
         return;
     }
 
-    // 检查平台RTMP支持情况
+    // 检查平台RTMP支持情况和手机直播支持
     const allSupportRTMP = selectedPlatforms.every(p => platforms[p].rtmpSupport);
     const hasLimitedPlatform = selectedPlatforms.some(p => !platforms[p].rtmpSupport);
     const rtmpSupportedPlatforms = selectedPlatforms.filter(p => platforms[p].rtmpSupport);
     const rtmpLimitedPlatforms = selectedPlatforms.filter(p => !platforms[p].rtmpSupport);
+    const allSupportMobile = selectedPlatforms.every(p => platforms[p].supportTypes.includes('mobile'));
 
     // 方案选择逻辑
-    if (allSupportRTMP && selectedPlatforms.length > 0) {
+    if (allSupportMobile && selectedPlatforms.length > 0) {
+        // 情况0：所有平台都支持手机直播 → 推荐方案四（全手机直播）
+        selectedSolution = 4;
+        solution4.classList.add('selected');
+        solution4.querySelector('.solution-badge').textContent = '✨ 最简单';
+        solution4.querySelector('.solution-badge').className = 'solution-badge recommended';
+
+        // 添加推荐说明
+        addRecommendationReason(
+            '📱 系统推荐：方案四（全手机直播）',
+            `您选择的 ${selectedPlatforms.map(p => platforms[p].name).join('、')} 都支持手机直播，且手机直播通常无粉丝门槛！使用手机APP直接开播最简单快捷，无需任何技术配置。`
+        );
+    } else if (allSupportRTMP && selectedPlatforms.length > 0) {
         // 情况1：所有平台都支持RTMP → 推荐方案一
         selectedSolution = 1;
         solution1.classList.add('selected');
@@ -764,7 +781,9 @@ document.querySelectorAll('.solution-card').forEach(card => {
         // 更新选中的方案
         if (this.id === 'solution1') selectedSolution = 1;
         else if (this.id === 'solution2') selectedSolution = 2;
-        else selectedSolution = 3;
+        else if (this.id === 'solution3') selectedSolution = 3;
+        else if (this.id === 'solution4') selectedSolution = 4;
+        else selectedSolution = 1; // 默认方案一
 
         // 更新推荐说明
         updateManualSelectionMessage();
@@ -776,7 +795,8 @@ function updateManualSelectionMessage() {
     const solutionNames = {
         1: '方案一（OBS + Multi RTMP）',
         2: '方案二（混合方案）',
-        3: '方案三（虚拟摄像头）'
+        3: '方案三（虚拟摄像头）',
+        4: '方案四（全手机直播）'
     };
 
     let reasonBox = document.getElementById('recommendationReason');
@@ -803,7 +823,8 @@ function confirmSolution() {
     const solutionNames = {
         1: 'OBS + Multi RTMP 插件',
         2: '混合方案（Multi RTMP + 虚拟摄像头）',
-        3: '虚拟摄像头方案'
+        3: '虚拟摄像头方案',
+        4: '全手机直播方案'
     };
 
     // 根据方案类型决定下一步
@@ -814,6 +835,14 @@ function confirmSolution() {
         if (confirm(message)) {
             goToStep(4);
             generateOBSConfiguration();
+        }
+    } else if (selectedSolution === 4) {
+        // 手机直播方案不需要任何配置，直接跳到最后一步
+        const message = `系统已为您推荐：${solutionNames[selectedSolution]}\n\n手机直播方案无需OBS配置，\n将直接进入开播步骤指导！`;
+
+        if (confirm(message)) {
+            goToStep(5);
+            generateFinalSteps();
         }
     } else {
         // 其他方案需要获取推流地址
@@ -1468,7 +1497,7 @@ function generateFinalSteps() {
                 </div>
             </div>
         `;
-    } else {
+    } else if (selectedSolution === 3) {
         content = `
             <div class="platform-guide">
                 <div class="platform-guide-header">
@@ -1533,9 +1562,177 @@ function generateFinalSteps() {
                 </div>
             </div>
         `;
+    } else if (selectedSolution === 4) {
+        // 方案四：全手机直播方案
+        const mobileGuides = {
+            taobao: `
+                <div class="guide-step">
+                    <div class="guide-step-number">1</div>
+                    <div class="guide-step-content">
+                        <h4>🛒 淘宝直播（手机端）</h4>
+                        <ol>
+                            <li>打开【淘宝主播APP】（或淘宝APP → 【淘宝直播】）</li>
+                            <li>点击【开始直播】按钮</li>
+                            <li>填写直播信息（标题、封面、商品等）</li>
+                            <li>选择直播模式：竖屏直播或横屏直播</li>
+                            <li>点击【开始直播】即可开播</li>
+                        </ol>
+                        <div class="tip-box">
+                            <span class="tip-icon">💡</span>
+                            <strong>提示：</strong>淘宝手机直播无需粉丝门槛，适合新手主播快速开播
+                        </div>
+                    </div>
+                </div>
+            `,
+            douyin: `
+                <div class="guide-step">
+                    <div class="guide-step-number">2</div>
+                    <div class="guide-step-content">
+                        <h4>🎵 抖音直播（手机端）</h4>
+                        <ol>
+                            <li>打开【抖音APP】</li>
+                            <li>点击底部【+】号或【直播】按钮</li>
+                            <li>选择【开始直播】</li>
+                            <li>添加直播标题、封面、位置信息</li>
+                            <li>选择美颜滤镜和特效（可选）</li>
+                            <li>点击【开始直播】即可开播</li>
+                        </ol>
+                        <div class="tip-box">
+                            <span class="tip-icon">💡</span>
+                            <strong>提示：</strong>抖音手机直播无需1000粉丝门槛，0粉丝即可开播
+                        </div>
+                    </div>
+                </div>
+            `,
+            xiaohongshu: `
+                <div class="guide-step">
+                    <div class="guide-step-number">3</div>
+                    <div class="guide-step-content">
+                        <h4>📕 小红书直播（手机端）</h4>
+                        <ol>
+                            <li>打开【小红书APP】</li>
+                            <li>点击顶部【我】→ 左侧菜单 → 【创作中心】</li>
+                            <li>选择【直播】或【开播】</li>
+                            <li>填写直播信息（标题、封面、话题等）</li>
+                            <li>选择直播类型：带货直播或聊天直播</li>
+                            <li>点击【开始直播】即可开播</li>
+                        </ol>
+                        <div class="tip-box">
+                            <span class="tip-icon">💡</span>
+                            <strong>提示：</strong>小红书手机直播无需1000粉丝门槛，但建议完成实名认证
+                        </div>
+                    </div>
+                </div>
+            `,
+            shipinhao: `
+                <div class="guide-step">
+                    <div class="guide-step-number">4</div>
+                    <div class="guide-step-content">
+                        <h4>💬 视频号直播（手机端）</h4>
+                        <ol>
+                            <li>打开【微信APP】</li>
+                            <li>进入【发现】→ 【视频号】</li>
+                            <li>点击右上角【我的视频号】或【发起直播】</li>
+                            <li>选择【直播】</li>
+                            <li>填写直播标题和封面</li>
+                            <li>选择直播形式：摄像头直播或屏幕分享</li>
+                            <li>点击【开始直播】即可开播</li>
+                        </ol>
+                        <div class="tip-box">
+                            <span class="tip-icon">💡</span>
+                            <strong>提示：</strong>视频号手机直播无需100粉丝门槛，0粉丝即可开播
+                        </div>
+                    </div>
+                </div>
+            `
+        };
+
+        content = `
+            <div class="platform-guide">
+                <div class="platform-guide-header">
+                    <div class="platform-guide-icon">📱</div>
+                    <div class="platform-guide-title">
+                        <h3>全手机直播方案</h3>
+                        <p>使用各平台手机APP直接开播，无需电脑和OBS</p>
+                    </div>
+                </div>
+
+                <div class="info-box" style="margin-bottom: 20px;">
+                    <span class="info-icon">🎯</span>
+                    <strong>方案说明：</strong>
+                    <p>本方案使用各平台手机APP直接开播，无需配置OBS，最简单快捷。您需要在每部手机上安装对应的平台APP，并依次开启直播。</p>
+                </div>
+
+                ${selectedPlatforms.map((p, index) => mobileGuides[p] || '').join('')}
+
+                <div class="guide-step">
+                    <div class="guide-step-number">${selectedPlatforms.length + 1}</div>
+                    <div class="guide-step-content">
+                        <h4>🎉 全部平台开播成功！</h4>
+                        <div class="success-box">
+                            🎉 恭喜！您已成功开启多平台手机同步直播！
+                        </div>
+                        <p>⚠️ 重要提醒：</p>
+                        <ul>
+                            <li><strong>手机直播建议使用手机支架固定</strong>，保持画面稳定</li>
+                            <li>确保手机充电或连接电源，避免直播中途没电</li>
+                            <li>保持良好的网络环境（建议WiFi或5G网络）</li>
+                            <li>可以请助理帮忙监控其他平台的聊天互动</li>
+                            <li>定期检查各平台直播状态，避免直播意外中断</li>
+                        </ul>
+                        <div class="tip-box" style="margin-top: 15px;">
+                            <span class="tip-icon">💡</span>
+                            <strong>进阶建议：</strong>
+                            <ul style="margin-left: 20px; margin-top: 10px;">
+                                <li>可以考虑使用多机位架同时固定多部手机</li>
+                                <li>使用外接麦克风提升音质</li>
+                                <li>准备补光灯确保画面明亮清晰</li>
+                                <li>可以准备多部手机交替使用，避免电量耗尽</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
     }
 
     container.innerHTML = content;
+
+    // 更新完成检查清单
+    updateCompletionChecklist();
+}
+
+// 更新完成检查清单（根据不同方案显示不同检查项）
+function updateCompletionChecklist() {
+    const checklist = document.querySelector('.completion-checklist');
+    if (!checklist) return;
+
+    let checklistItems = [];
+
+    if (selectedSolution === 4) {
+        // 手机直播方案的检查清单
+        checklistItems = [
+            '已测试网络连接（WiFi或5G网络稳定）',
+            '已确认手机电量充足或已连接充电器',
+            '已准备各平台手机APP并登录账号',
+            '已准备好手机支架和补光设备',
+            '各平台直播间信息已填写完毕'
+        ];
+    } else {
+        // OBS相关方案的检查清单
+        checklistItems = [
+            '已测试网络连接（上行带宽充足）',
+            '已测试摄像头和麦克风正常',
+            selectedSolution === 3 ? '已确认OBS虚拟摄像头已启动' : '已获取所有平台推流地址',
+            '已在OBS中设置好直播场景',
+            '各平台直播间已创建并等待推流'
+        ];
+    }
+
+    checklist.innerHTML = `
+        <h3>🎉 直播前最后检查</h3>
+        ${checklistItems.map(item => `<label><input type="checkbox"> ${item}</label>`).join('')}
+    `;
 }
 
 // 获取支持RTMP的平台列表
@@ -1577,7 +1774,10 @@ function goToStep(step) {
         const stepNumber = index + 1;
 
         // 如果是虚拟摄像头方案，跳过第三步
+        // 如果是手机直播方案，跳过第三步和第四步
         if (selectedSolution === 3 && stepNumber === 3) {
+            item.classList.add('skipped');
+        } else if (selectedSolution === 4 && (stepNumber === 3 || stepNumber === 4)) {
             item.classList.add('skipped');
         } else if (stepNumber < step) {
             item.classList.add('completed');
