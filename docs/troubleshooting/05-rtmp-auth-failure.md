@@ -1,3 +1,17 @@
+---
+symptoms:
+  - 鉴权失败
+  - 推流立即断开
+  - Authentication failed
+error_codes:
+  - HTTP 401
+  - HTTP 403
+  - Authentication failed
+platforms:
+  - Bilibili
+  - 抖音
+---
+
 # 场景 05：RTMP 鉴权失败
 
 ## 现象描述

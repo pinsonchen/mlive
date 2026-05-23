@@ -1,3 +1,15 @@
+---
+symptoms:
+  - 连接被拒绝
+  - 无法连接到服务器
+  - Failed to connect to server
+error_codes:
+  - Connection refused
+platforms:
+  - Bilibili
+  - 抖音
+---
+
 # 场景 01：连接被拒绝
 
 ## 现象描述

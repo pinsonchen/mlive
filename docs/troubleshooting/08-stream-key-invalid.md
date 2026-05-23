@@ -1,3 +1,17 @@
+---
+symptoms:
+  - 推流密钥无效
+  - 推流码错误
+  - Stream Key Invalid
+error_codes:
+  - Stream Key Invalid
+platforms:
+  - Bilibili
+  - 抖音
+  - YouTube
+  - Twitch
+---
+
 # 场景 08：推流密钥无效
 
 ## 现象描述
