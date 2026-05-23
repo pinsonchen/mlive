@@ -1,3 +1,16 @@
+---
+symptoms:
+  - 多平台部分推流失败
+  - 部分平台无信号
+  - 部分平台断连
+error_codes: []
+platforms:
+  - Bilibili
+  - 抖音
+  - YouTube
+  - Twitch
+---
+
 # 场景 06：多平台部分推流失败
 
 ## 现象描述

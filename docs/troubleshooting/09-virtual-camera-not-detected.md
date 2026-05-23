@@ -1,3 +1,15 @@
+---
+symptoms:
+  - 虚拟摄像头未被识别
+  - OBS Virtual Camera找不到
+  - 摄像头列表无OBS选项
+error_codes: []
+platforms:
+  - Windows
+  - macOS
+  - Linux
+---
+
 # 场景 09：虚拟摄像头未被识别
 
 ## 现象描述

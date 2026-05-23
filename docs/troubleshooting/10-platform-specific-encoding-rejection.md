@@ -1,3 +1,19 @@
+---
+symptoms:
+  - 编码格式不兼容
+  - 格式不支持
+  - 编码错误
+  - 推流后自动断流
+error_codes:
+  - "4101"
+  - Generic stream ingestion failed
+platforms:
+  - Bilibili
+  - 抖音
+  - YouTube
+  - Twitch
+---
+
 # 场景 10：平台编码格式不兼容
 
 ## 现象描述
