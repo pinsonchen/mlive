@@ -1,0 +1,63 @@
+version: 1
+mode: daemon
+interval_seconds: 300
+state_dir: .vivify
+log_dir: .vivify/logs
+
+project:
+  name: "多平台同步开播操作指南"
+  description: "一套完整的多平台同步直播解决方案，帮助您在一台电脑上同时向淘宝、视频号、小红书、抖音等多个平台进行直播。"
+  type: "static-site"
+  language: "HTML/JavaScript"
+  framework: ""
+  deploy_url: "https://tools.pinsonbot.com/mlive/"
+  deploy_method: "ssh"
+  health_endpoint: ""
+  test_command: ""
+  build_command: ""
+  dev_command: ""
+
+deploy:
+  enabled: true
+  method: "ssh"
+  ssh_host: "tools.pinsonbot.com"
+  ssh_user: "root"
+  ssh_path: "/var/www/tools.pinsonbot.com/mlive"
+  ssh_mode: "rsync"
+  source_dir: "guide"
+  post_deploy_wait_seconds: 15
+  verify_after_deploy: true
+
+pr:
+  base_branch: main
+  label: vivify
+  auto_merge: false
+
+probes:
+  enabled:
+    - doc_staleness
+    - github_issue_backlog
+    - stale_branches
+    - secrets_scan
+    - repo_size
+    - site_health
+
+fixers:
+  enabled:
+    - doc_link_check
+    - stale_branch_prune
+
+agent:
+  type: qodercli
+  qodercli:
+    binary_path: qodercli
+    model: ultimate
+    max_turns_fix: 30
+    max_turns_develop: 100
+    max_turns_evaluate: 20
+    max_turns_verify: 20
+    max_turns_decompose: 30
+    timeout_fix_seconds: 1800
+    timeout_develop_seconds: 3600
+    extra_args: ["--yolo", "-q"]
+    max_concurrent_processes: 10
