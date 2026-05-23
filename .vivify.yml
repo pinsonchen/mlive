@@ -14,7 +14,7 @@ project:
   deploy_method: "ssh"
   health_endpoint: "https://tools.pinsonbot.com/mlive/"
   test_command: ""
-  build_command: ""
+  build_command: "npm install --silent && node scripts/build.js"
   dev_command: ""
 
 deploy:
@@ -24,7 +24,7 @@ deploy:
   ssh_user: "root"
   ssh_path: "/var/www/tools.pinsonbot.com/mlive"
   ssh_mode: "rsync"
-  source_dir: "guide"
+  source_dir: "dist"
   post_deploy_wait_seconds: 15
   verify_after_deploy: true
 

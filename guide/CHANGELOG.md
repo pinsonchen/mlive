@@ -1,5 +1,30 @@
 # 多平台开播指南网站 - 更新日志
 
+## v1.4.0 (2026-05-23)
+
+### 首屏性能优化
+
+#### 构建流水线
+- **新增 `scripts/build.js`**：Node.js 构建脚本，输出优化后的 `dist/` 目录
+- **关键 CSS 内联**：将首屏所需的 CSS（reset、变量、header、步骤指示器、平台卡片）内联到 HTML `<style>` 标签
+- **CSS/JS 压缩**：使用 clean-css (level 2) 和 terser 压缩所有静态资源
+- **预压缩**：为所有文件生成 `.gz`（gzip level 9）和 `.br`（brotli quality 11）版本
+- **Script defer 加载**：`<script>` 标签添加 `defer` 属性，不阻塞首屏渲染
+- **CSS 预加载**：非关键 CSS 使用 `<link rel="preload" as="style">` 异步加载
+
+#### 部署配置
+- **新增 `deploy/nginx.mlive.conf`**：Nginx 配置片段
+  - `gzip_static on` + `brotli_static on`：优先使用预压缩文件
+  - CSS/JS：`Cache-Control: public, max-age=31536000, immutable`
+  - HTML：`Cache-Control: no-cache`（始终验证新鲜度）
+- **更新 `.vivify.yml`**：`source_dir` 改为 `dist`，添加 `build_command`
+
+#### 性能指标（3G Slow 模拟）
+- 首次绘制所需传输大小：~5-8 KB（brotli 压缩后的 HTML 含内联 critical CSS）
+- 目标：首屏加载 ≤ 2 秒
+
+---
+
 ## v1.3.2 (2026-02-24)
 
 ### 推流地址格式修正
