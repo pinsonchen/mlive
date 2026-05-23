@@ -12,7 +12,7 @@ project:
   framework: ""
   deploy_url: "https://tools.pinsonbot.com/mlive/"
   deploy_method: "ssh"
-  health_endpoint: ""
+  health_endpoint: "https://tools.pinsonbot.com/mlive/"
   test_command: ""
   build_command: ""
   dev_command: ""
