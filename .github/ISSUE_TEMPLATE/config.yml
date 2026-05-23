@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 社区讨论 / Discussions
+    url: https://github.com/pinsonchen/mlive/discussions
+    about: 提问、分享经验、讨论平台政策，请前往 Discussions
+  - name: 📖 求助指引 / SUPPORT.md
+    url: https://github.com/pinsonchen/mlive/blob/main/SUPPORT.md
+    about: 提问前请先阅读 SUPPORT.md，了解如何收集日志和运行诊断脚本

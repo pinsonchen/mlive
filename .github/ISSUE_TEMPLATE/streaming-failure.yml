@@ -1,0 +1,90 @@
+name: 推流故障 / Streaming Failure
+description: 推流断流、无法连接平台、画面异常等推流相关故障
+labels: ["bug", "streaming"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **提交前请先运行诊断脚本**：`bash scripts/diagnose.sh --output=report.json`，并将生成的 `report.json` 附在下方。
+        详细求助指引请参阅 [SUPPORT.md](../blob/main/SUPPORT.md)。
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: 故障平台
+      description: 哪个平台出现了推流故障？
+      multiple: true
+      options:
+        - 淘宝直播
+        - 视频号直播
+        - 小红书直播
+        - 抖音直播
+        - 全部平台
+        - 其他
+    validations:
+      required: true
+
+  - type: input
+    id: obs_version
+    attributes:
+      label: OBS 版本 / ffmpeg 版本
+      description: "OBS Studio 版本（帮助→关于）或 ffmpeg 版本（`ffmpeg -version`）"
+      placeholder: "例：OBS Studio 30.2.2 / ffmpeg 6.1"
+    validations:
+      required: true
+
+  - type: input
+    id: rtmp_url_pattern
+    attributes:
+      label: RTMP 地址格式（隐去密钥）
+      description: 推流地址格式，请隐去 stream key，只保留域名和路径结构
+      placeholder: "例：rtmp://xxx.alivecdn.com/live/****"
+    validations:
+      required: false
+
+  - type: textarea
+    id: diagnose_output
+    attributes:
+      label: 诊断脚本输出
+      description: |
+        请运行 `bash scripts/diagnose.sh --output=report.json` 并粘贴终端输出，或上传生成的 `report.json`。
+      placeholder: "粘贴诊断脚本的终端输出..."
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: obs_log
+    attributes:
+      label: OBS 日志
+      description: |
+        OBS 日志路径：
+        - macOS: `~/Library/Application Support/obs-studio/logs/`
+        - Windows: `%APPDATA%\obs-studio\logs\`
+        - Linux: `~/.config/obs-studio/logs/`
+
+        请粘贴最近一次推流时的日志（帮助→日志文件→当前日志）。
+      placeholder: "粘贴 OBS 日志内容（或将日志文件拖入此处）..."
+      render: text
+    validations:
+      required: false
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 故障描述
+      description: 详细描述故障现象、复现步骤及发生时间
+      placeholder: |
+        1. 在 OBS 点击「开始推流」...
+        2. 约 X 秒后出现...
+        3. 错误提示为...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期行为
+      placeholder: "正常情况下应该..."
+    validations:
+      required: false
