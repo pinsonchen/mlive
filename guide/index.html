@@ -553,6 +553,46 @@
                     </div>
                 </details>
             </div>
+
+            <!-- 一键诊断工具 -->
+            <div class="faq-category" id="diagnose" style="margin-top: 40px;">
+                <h3 style="color: var(--primary-color); margin-bottom: 20px;">🔧 一键诊断工具</h3>
+                <div style="background: linear-gradient(135deg, #1e40af11, #7c3aed11); border: 1px solid var(--primary-color); border-radius: 12px; padding: 24px;">
+                    <p style="font-size: 1.05rem; margin-bottom: 16px;">
+                        推流失败或画质异常？运行 <strong>diagnose.sh</strong> 脚本，自动检测 <strong>8 项</strong>常见故障并给出建议链接，平均排查步骤从 &gt;5 步降至 ≤3 步。
+                    </p>
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.9rem;">
+                        <thead>
+                            <tr style="background: var(--bg-primary);">
+                                <th style="padding: 8px 12px; border: 1px solid var(--border-color); text-align: left;">检测项</th>
+                                <th style="padding: 8px 12px; border: 1px solid var(--border-color); text-align: left;">说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td style="padding: 8px 12px; border: 1px solid var(--border-color);">CHECK-01</td><td style="padding: 8px 12px; border: 1px solid var(--border-color);">RTMP 端口 1935 连通性</td></tr>
+                            <tr><td style="padding: 8px 12px; border: 1px solid var(--border-color);">CHECK-02</td><td style="padding: 8px 12px; border: 1px solid var(--border-color);">推流地址格式校验</td></tr>
+                            <tr><td style="padding: 8px 12px; border: 1px solid var(--border-color);">CHECK-03</td><td style="padding: 8px 12px; border: 1px solid var(--border-color);">上行带宽估算（是否满足多平台需求）</td></tr>
+                            <tr><td style="padding: 8px 12px; border: 1px solid var(--border-color);">CHECK-04</td><td style="padding: 8px 12px; border: 1px solid var(--border-color);">OBS 配置文件（码率/编码/插件）</td></tr>
+                            <tr><td style="padding: 8px 12px; border: 1px solid var(--border-color);">CHECK-05</td><td style="padding: 8px 12px; border: 1px solid var(--border-color);">系统 CPU / 内存资源</td></tr>
+                            <tr><td style="padding: 8px 12px; border: 1px solid var(--border-color);">CHECK-06</td><td style="padding: 8px 12px; border: 1px solid var(--border-color);">各平台服务器网络延迟</td></tr>
+                            <tr><td style="padding: 8px 12px; border: 1px solid var(--border-color);">CHECK-07</td><td style="padding: 8px 12px; border: 1px solid var(--border-color);">防火墙 / 出站端口封锁检测</td></tr>
+                            <tr><td style="padding: 8px 12px; border: 1px solid var(--border-color);">CHECK-08</td><td style="padding: 8px 12px; border: 1px solid var(--border-color);">平台域名 DNS 解析</td></tr>
+                        </tbody>
+                    </table>
+                    <div style="background: #1e1e1e; border-radius: 8px; padding: 16px; font-family: monospace; font-size: 0.88rem; color: #e2e8f0; margin-bottom: 16px;">
+                        <div style="color: #6b7280; margin-bottom: 6px;"># 克隆仓库后运行</div>
+                        <div><span style="color: #86efac;">bash</span> scripts/diagnose.sh</div>
+                        <div style="margin-top: 8px; color: #6b7280;"># 输出 JSON 格式（适合自动化）</div>
+                        <div><span style="color: #86efac;">bash</span> scripts/diagnose.sh --json</div>
+                        <div style="margin-top: 8px; color: #6b7280;"># 校验推流地址格式</div>
+                        <div><span style="color: #fbbf24;">RTMP_URL_XIAOHONGSHU</span>=<span style="color: #f9a8d4;">"rtmp://push.xiaohongshu.com/live/key"</span> <span style="color: #86efac;">bash</span> scripts/diagnose.sh</div>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                        支持 macOS / Linux；Windows 用户请在 Git Bash 或 WSL 中运行。
+                        脚本源码：<a href="https://github.com/pinsonchen/mlive/blob/main/scripts/diagnose.sh" target="_blank" style="color: var(--primary-color);">scripts/diagnose.sh</a>
+                    </p>
+                </div>
+            </div>
         </section>
 
         <!-- 插件安装模态框 -->

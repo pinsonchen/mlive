@@ -51,6 +51,60 @@ python -m http.server 8000
 # 访问 http://localhost:8000
 ```
 
+## 🔧 一键诊断工具
+
+遇到推流问题？运行诊断脚本快速定位故障，脚本覆盖 **8 项**检测并直接给出 FAQ 建议链接：
+
+| 检测项 | 内容 |
+|--------|------|
+| CHECK-01 | RTMP 端口 1935 连通性（各平台推流服务器） |
+| CHECK-02 | 推流地址格式校验（正则匹配各平台规范） |
+| CHECK-03 | 本地上行带宽估算（判断是否满足多平台推流需求） |
+| CHECK-04 | OBS 配置文件解析（码率/编码模式/插件检查） |
+| CHECK-05 | 系统 CPU/RAM 资源检查 |
+| CHECK-06 | 平台服务器网络延迟（ping 测试） |
+| CHECK-07 | 本地防火墙/出站端口封锁检测 |
+| CHECK-08 | 各平台域名 DNS 解析检查 |
+
+### 用法
+
+```bash
+# 基本运行（交互式彩色报告）
+bash scripts/diagnose.sh
+
+# 输出 JSON 格式报告
+bash scripts/diagnose.sh --json
+
+# 同时保存 JSON 报告到文件
+bash scripts/diagnose.sh --output=report.json
+
+# 校验推流地址格式（设置环境变量后运行）
+RTMP_URL_TAOBAO="rtmp://xxx.alivecdn.com/live/your-key" \
+RTMP_URL_XIAOHONGSHU="rtmp://push.xiaohongshu.com/live/your-key" \
+bash scripts/diagnose.sh
+```
+
+### 示例输出
+
+```
+  [✔ PASS] RTMP端口1935全部可达
+           所有平台推流服务器端口1935均可连接
+
+  [✔ PASS] 带宽充足（约 52.3 Mbps）
+           当前带宽约 52.3 Mbps，满足多平台同步推流需求
+
+  [⚠ WARN] OBS配置存在潜在问题
+           • 配置文件「默认」码率为 4000kbps，超过淘宝直播上限(2500kbps)
+           参考：https://tools.pinsonbot.com/mlive/#faq-obs-config
+
+============================================================
+  总检测项：8   通过：7   警告：1   失败：0
+  完整FAQ：https://tools.pinsonbot.com/mlive/#faq
+============================================================
+```
+
+> **系统要求**：bash 4+、curl（带宽测试）、nc 或 /dev/tcp（端口检测）、ping（延迟测试）。macOS / Linux 均支持；Windows 请在 Git Bash 或 WSL 中运行。
+
 ## 📊 平台支持（2026年2月最新政策）
 
 | 平台 | 手机直播 | OBS推流 | 手机直播粉丝要求 | OBS推流粉丝要求 | 保证金 |
