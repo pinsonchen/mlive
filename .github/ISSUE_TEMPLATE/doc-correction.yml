@@ -1,0 +1,52 @@
+name: 文档勘误 / Documentation Correction
+description: 文档内容有误、步骤描述不准确、链接失效等文档质量问题
+labels: ["documentation", "correction"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢您帮助改进文档！请尽量提供具体页面位置和修改建议。
+
+  - type: input
+    id: page_url
+    attributes:
+      label: 问题页面 / 文件路径
+      description: 有误内容所在的文件路径或在线访问地址
+      placeholder: "例：多平台同步开播操作文档.md 第 3 节 / https://tools.pinsonbot.com/mlive/#section-3"
+    validations:
+      required: true
+
+  - type: textarea
+    id: current_content
+    attributes:
+      label: 当前错误内容
+      description: 粘贴或引用当前文档中有误的原文
+      placeholder: "当前文档写道：..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggested_fix
+    attributes:
+      label: 建议修改内容
+      description: 您认为正确的表述或建议的替换内容
+      placeholder: "应改为：..."
+    validations:
+      required: true
+
+  - type: input
+    id: reference_url
+    attributes:
+      label: 参考来源（可选）
+      description: 证明正确内容的官方链接或来源
+      placeholder: "https://..."
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: 补充说明
+      placeholder: "其他需要说明的信息..."
+    validations:
+      required: false

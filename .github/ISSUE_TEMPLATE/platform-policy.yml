@@ -1,0 +1,51 @@
+name: 平台政策变更 / Platform Policy Update
+description: 平台推流权限、粉丝门槛、保证金等政策发生变化，需要更新文档
+labels: ["platform-policy", "documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢您帮助我们跟踪平台政策变化！请提供官方来源链接，以便核实并更新文档。
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: 涉及平台
+      multiple: true
+      options:
+        - 淘宝直播
+        - 视频号直播
+        - 小红书直播
+        - 抖音直播
+        - 其他
+    validations:
+      required: true
+
+  - type: input
+    id: policy_url
+    attributes:
+      label: 官方政策链接
+      description: 平台官方公告或帮助中心页面链接
+      placeholder: "https://..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: observed_behavior
+    attributes:
+      label: 实际观察到的政策变化
+      description: 描述当前实际情况与文档记录的差异
+      placeholder: |
+        当前文档记录：xxx
+        实际平台现在要求：yyy
+        生效日期（如已知）：
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: 补充说明
+      placeholder: "截图、其他参考链接等..."
+    validations:
+      required: false

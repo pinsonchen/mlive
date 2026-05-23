@@ -212,6 +212,17 @@ mlive/
 | v1.0 | 2026-02-24 | 初始版本 |
 | v2.0 | 2026-02-24 | 重大更新：各平台最新要求、三种开播方式细化 |
 
+## 🆘 Support / 求助
+
+遇到推流故障或有疑问？请参阅 **[SUPPORT.md](SUPPORT.md)** 了解日志收集方法和诊断脚本用法，然后通过以下渠道求助：
+
+| 类型 | 入口 |
+|------|------|
+| 推流故障 | [Issue → 推流故障](https://github.com/pinsonchen/mlive/issues/new?template=streaming-failure.yml) |
+| 平台政策变更 | [Issue → 平台政策变更](https://github.com/pinsonchen/mlive/issues/new?template=platform-policy.yml) |
+| 文档勘误 | [Issue → 文档勘误](https://github.com/pinsonchen/mlive/issues/new?template=doc-correction.yml) |
+| 一般讨论 / 提问 | [GitHub Discussions](https://github.com/pinsonchen/mlive/discussions) |
+
 ## 🤝 贡献
 
 欢迎反馈问题和建议！
