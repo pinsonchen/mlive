@@ -1,0 +1,60 @@
+id: site_health
+description: "检测部署站点的可达性和响应时间（修复 builtin 探针中 Jinja 模板及 config 作用域问题）"
+enabled_by_default: false
+
+# 注意: builtin 的 vivify/probes/builtin/site_health.yml 同时存在两处缺陷:
+#   1. shell / when / emit 模板里漏掉了 Jinja 的 {{ ... }} 包裹, 渲染后是字面量字符串;
+#   2. YamlProbe.collect 只把 spec.config_overrides + ctx.probe_config 合并成 `config`,
+#      根本不会注入 `config.project.*`, 所以 `when: config.project.deploy_url` 会因
+#      UndefinedError 而被吞, raw_response 永远 undefined, 进而误报 "未配置 deploy_url".
+# 这里改为直接通过 config_overrides 提供 deploy_url, 并给所有模板加回 Jinja 括号.
+# 注意: 探针 spec 真正读取的是顶层 `config_overrides:`, 不是 `config:` (后者会被静默丢弃).
+config_overrides:
+  deploy_url: "https://tools.pinsonbot.com/mlive/"
+  timeout_seconds: 10
+  expected_status: 200
+  max_response_time: 5.0
+
+collect:
+  steps:
+    - shell: "curl -s -o /dev/null -w '%{http_code} %{time_total}' --max-time {{ config.timeout_seconds }} '{{ config.deploy_url }}'"
+      as: raw_response
+      timeout_seconds: 15
+      when: "config.deploy_url"
+    - shell: "echo '{{ raw_response }}' | awk '{print $1}'"
+      as: status_code
+      coerce: int
+      when: "raw_response is defined and raw_response"
+    - shell: "echo '{{ raw_response }}' | awk '{print $2}'"
+      as: response_time
+      coerce: float
+      when: "raw_response is defined and raw_response"
+
+analyze:
+  rules:
+    - when: "raw_response is not defined or not raw_response"
+      emit:
+        category: site_health
+        level: LOW
+        title: "站点健康检查跳过: 未配置 deploy_url"
+        description: "请在 .vivify/probes/site_health.yml 的 config.deploy_url 中配置部署地址。"
+    - when: "raw_response is defined and raw_response and status_code != config.expected_status"
+      emit:
+        category: site_health
+        level: CRITICAL
+        title: "站点不可达: {{ config.deploy_url }} (HTTP {{ status_code }})"
+        description: "部署站点返回 HTTP {{ status_code }}，期望 {{ config.expected_status }}。请检查部署状态。"
+        data:
+          url: "{{ config.deploy_url }}"
+          actual_status: "{{ status_code }}"
+          expected_status: "{{ config.expected_status }}"
+    - when: "raw_response is defined and raw_response and status_code == config.expected_status and response_time > config.max_response_time"
+      emit:
+        category: site_health
+        level: HIGH
+        title: "站点响应过慢: {{ config.deploy_url }} ({{ response_time }}s)"
+        description: "响应时间 {{ response_time }}s 超过阈值 {{ config.max_response_time }}s。"
+        data:
+          url: "{{ config.deploy_url }}"
+          response_time: "{{ response_time }}"
+          threshold: "{{ config.max_response_time }}"
