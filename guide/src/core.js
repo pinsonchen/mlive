@@ -348,3 +348,105 @@ document.addEventListener('keydown', function(e) {
         window.closeModal();
     }
 });
+
+// Roving tabindex keyboard navigation
+function setupRovingTabindex(container, selector) {
+    const items = container.querySelectorAll(selector);
+    if (items.length === 0) return;
+
+    container.addEventListener('keydown', function(e) {
+        const currentItems = container.querySelectorAll(selector);
+        const currentIndex = Array.from(currentItems).indexOf(document.activeElement);
+        if (currentIndex === -1) return;
+
+        let nextIndex = -1;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            nextIndex = (currentIndex + 1) % currentItems.length;
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            nextIndex = (currentIndex - 1 + currentItems.length) % currentItems.length;
+        }
+
+        if (nextIndex !== -1) {
+            currentItems.forEach(item => item.setAttribute('tabindex', '-1'));
+            currentItems[nextIndex].setAttribute('tabindex', '0');
+            currentItems[nextIndex].focus();
+        }
+    });
+}
+
+const platformGrid = document.querySelector('.platform-grid');
+if (platformGrid) {
+    const cards = platformGrid.querySelectorAll('.platform-card');
+    cards.forEach((card, i) => {
+        card.setAttribute('tabindex', i === 0 ? '0' : '-1');
+    });
+    setupRovingTabindex(platformGrid, '.platform-card');
+}
+
+const solutionCards = document.querySelector('.solution-cards');
+if (solutionCards) {
+    setupRovingTabindex(solutionCards, '.solution-card');
+}
+
+// Enter/Space to select solution cards
+document.querySelectorAll('.solution-card').forEach(card => {
+    card.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.click();
+        }
+    });
+});
+
+// Focus trap for modal
+let previouslyFocusedElement = null;
+
+const originalShowPluginModal = window.showPluginModal;
+window.showPluginModal = function() {
+    previouslyFocusedElement = document.activeElement;
+    originalShowPluginModal();
+    const modal = document.getElementById('pluginModal');
+    requestAnimationFrame(() => {
+        const focusable = getFocusableElements(modal);
+        if (focusable.length > 0) focusable[0].focus();
+    });
+};
+
+const originalCloseModal = window.closeModal;
+window.closeModal = function() {
+    originalCloseModal();
+    if (previouslyFocusedElement) {
+        previouslyFocusedElement.focus();
+        previouslyFocusedElement = null;
+    }
+};
+
+function getFocusableElements(container) {
+    return Array.from(container.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    ));
+}
+
+document.getElementById('pluginModal')?.addEventListener('keydown', function(e) {
+    if (e.key !== 'Tab') return;
+    const modal = document.querySelector('#pluginModal .modal-content');
+    const focusable = getFocusableElements(modal);
+    if (focusable.length === 0) return;
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (e.shiftKey) {
+        if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+        }
+    } else {
+        if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+        }
+    }
+});

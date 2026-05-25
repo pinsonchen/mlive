@@ -1087,6 +1087,21 @@ body {
     text-decoration: underline;
 }
 
+/* Keyboard focus indicators */
+.platform-card:focus-visible,
+.solution-card:focus-visible,
+.step-item:focus-visible,
+.btn:focus-visible,
+.close-btn:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 5px rgba(99, 102, 241, 0.2);
+}
+
+.solution-card:focus-visible {
+    border-color: var(--primary-color);
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
     .header h1 {

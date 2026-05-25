@@ -41,6 +41,8 @@
     .status-badge.official{background:#d1fae5;color:#065f46}
     .status-badge.limited{background:#fef3c7;color:#92400e}
     @media(max-width:768px){.header h1{font-size:1.8rem}.steps-indicator{flex-wrap:wrap;gap:10px}.step-item:not(:last-child)::after{display:none}.step-number{width:40px;height:40px;font-size:1rem}.platform-grid{grid-template-columns:1fr}.step-section{padding:20px}}
+    .platform-card:focus-visible,.solution-card:focus-visible,.step-item:focus-visible,.btn:focus-visible,.close-btn:focus-visible{outline:3px solid var(--primary-color);outline-offset:2px;box-shadow:0 0 0 5px rgba(99,102,241,0.2)}
+    .solution-card:focus-visible{border-color:var(--primary-color)}
     </style>
     <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="styles.css"></noscript>
@@ -54,7 +56,7 @@
         </header>
 
         <!-- 步骤指示器 -->
-        <div class="steps-indicator">
+        <div class="steps-indicator" role="navigation" aria-label="操作步骤">
             <div class="step-item active" data-step="1">
                 <div class="step-number">1</div>
                 <div class="step-label">选择平台</div>
@@ -88,7 +90,7 @@
             <h2>第一步：选择要同步开播的平台</h2>
             <p class="step-desc">请勾选您需要同步开播的平台（可多选）：</p>
 
-            <div class="platform-grid">
+            <div class="platform-grid" role="group" aria-label="平台选择">
                 <label class="platform-card">
                     <input type="checkbox" name="platform" value="taobao" data-requirement="deposit">
                     <div class="platform-icon taobao">🛒</div>
@@ -154,8 +156,8 @@
             <h2>第二步：系统为您推荐的开播方案</h2>
             <p class="step-desc">根据您选择的平台，系统已自动为您推荐最适合的开播方案。您也可以手动选择其他方案。</p>
 
-            <div class="solution-cards">
-                <div class="solution-card" id="solution1">
+            <div class="solution-cards" role="group" aria-label="方案选择">
+                <div class="solution-card" id="solution1" tabindex="0" role="option">
                     <div class="solution-header">
                         <span class="solution-badge alternative">推荐</span>
                         <h3>方案一：<span class="tooltip" tabindex="0">OBS<span class="tooltip-icon">?</span><span class="tooltip-content">Open Broadcaster Software，免费开源的专业直播推流软件，支持多场景切换、特效叠加等功能。</span></span> + <span class="tooltip" tabindex="0">Multi RTMP 插件<span class="tooltip-icon">?</span><span class="tooltip-content">OBS的多路推流插件，可将同一路直播信号同时推送到多个平台，无需重复编码。</span></span></h3>
@@ -186,7 +188,7 @@
                     </div>
                 </div>
 
-                <div class="solution-card" id="solution2">
+                <div class="solution-card" id="solution2" tabindex="-1" role="option">
                     <div class="solution-header">
                         <span class="solution-badge alternative">备选</span>
                         <h3>方案二：混合方案（<span class="tooltip" tabindex="0">Multi RTMP<span class="tooltip-icon">?</span><span class="tooltip-content">多路RTMP推流插件，可将OBS直播流同时推送到多个支持RTMP的平台。</span></span> + <span class="tooltip" tabindex="0">虚拟摄像头<span class="tooltip-icon">?</span><span class="tooltip-content">OBS的虚拟摄像头功能，将OBS画面虚拟成一个摄像头设备，供其他软件（如直播伴侣）调用。</span></span>）</h3>
@@ -217,7 +219,7 @@
                     </div>
                 </div>
 
-                <div class="solution-card" id="solution3">
+                <div class="solution-card" id="solution3" tabindex="-1" role="option">
                     <div class="solution-header">
                         <span class="solution-badge alternative">备选</span>
                         <h3>方案三：<span class="tooltip" tabindex="0">虚拟摄像头<span class="tooltip-icon">?</span><span class="tooltip-content">OBS的虚拟摄像头功能，把OBS画面模拟成系统摄像头，各平台官方软件可直接使用。</span></span>方案</h3>
@@ -249,7 +251,7 @@
                     </div>
                 </div>
 
-                <div class="solution-card" id="solution4">
+                <div class="solution-card" id="solution4" tabindex="-1" role="option">
                     <div class="solution-header">
                         <span class="solution-badge alternative">备选</span>
                         <h3>方案四：全手机直播方案</h3>
@@ -644,10 +646,10 @@
         </section>
 
         <!-- 插件安装模态框 -->
-        <div id="pluginModal" class="modal" style="display: none;">
+        <div id="pluginModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="pluginModalTitle" style="display: none;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2>📦 安装 OBS Multi RTMP 插件（最新版）</h2>
+                    <h2 id="pluginModalTitle">📦 安装 OBS Multi RTMP 插件（最新版）</h2>
                     <button class="close-btn" onclick="closeModal()">×</button>
                 </div>
                 <div class="modal-body">
