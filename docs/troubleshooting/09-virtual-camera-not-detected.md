@@ -20,6 +20,9 @@ platforms:
 
 若以上 3 步未解决，再阅读下方完整判定流程。
 
+<details>
+<summary>🔍 完整诊断流程（Advanced Diagnosis）</summary>
+
 ## 现象描述
 
 启用 OBS 虚拟摄像头后，目标应用（如 Zoom、腾讯会议、钉钉、浏览器）的摄像头列表中找不到"OBS Virtual Camera"选项，或选择后显示黑屏。
@@ -102,3 +105,5 @@ sudo modprobe v4l2loopback
 1. 在目标应用摄像头列表中选择"OBS Virtual Camera"，画面应显示 OBS 当前场景内容。
 2. 用 Windows 相机应用或 macOS Photo Booth 测试：打开后选择 OBS 虚拟摄像头，确认显示 OBS 画面。
 3. 在 Zoom 测试会议中确认视频预览正常。
+
+</details>
