@@ -348,8 +348,12 @@
             </div>
         </section>
 
-        <!-- FAQ常见问题 -->
+        <!-- FAQ常见问题 (lazy-loaded via IntersectionObserver) -->
         <section class="step-section" id="faq" style="margin-top: 40px; padding: 40px; background: var(--bg-secondary); border-radius: 20px;">
+            <div id="faq-sentinel"></div>
+        </section>
+
+        <template id="faq-template">
             <h2 style="margin-bottom: 30px;">❓ 常见问题解答</h2>
 
             <div class="faq-category">
@@ -650,7 +654,7 @@
                     </p>
                 </div>
             </div>
-        </section>
+        </template>
 
         <!-- 插件安装模态框 -->
         <div id="pluginModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="pluginModalTitle" style="display: none;">
@@ -880,6 +884,36 @@
         多平台同步开播操作指南 v2.1
     </footer>
 
+    <script>
+    (function() {
+        function hydrateFaq() {
+            var faq = document.getElementById('faq');
+            var tpl = document.getElementById('faq-template');
+            if (!tpl || faq.dataset.hydrated) return;
+            faq.dataset.hydrated = '1';
+            faq.appendChild(tpl.content.cloneNode(true));
+            var sentinel = document.getElementById('faq-sentinel');
+            if (sentinel) sentinel.remove();
+        }
+
+        var hash = window.location.hash;
+        if (hash === '#faq' || hash === '#diagnose') {
+            document.addEventListener('DOMContentLoaded', hydrateFaq);
+        } else {
+            document.addEventListener('DOMContentLoaded', function() {
+                var sentinel = document.getElementById('faq-sentinel');
+                if (!sentinel) return;
+                var observer = new IntersectionObserver(function(entries) {
+                    if (entries[0].isIntersecting) {
+                        hydrateFaq();
+                        observer.disconnect();
+                    }
+                }, { rootMargin: '200px' });
+                observer.observe(sentinel);
+            });
+        }
+    })();
+    </script>
     <script type="module" src="src/core.js"></script>
 </body>
 </html>
