@@ -1,6 +1,6 @@
 id: site_health
 description: "检测部署站点的可达性和响应时间（修复 builtin 探针中 Jinja 模板及 config 作用域问题）"
-enabled_by_default: false
+enabled_by_default: true
 
 # 注意: builtin 的 vivify/probes/builtin/site_health.yml 同时存在两处缺陷:
 #   1. shell / when / emit 模板里漏掉了 Jinja 的 {{ ... }} 包裹, 渲染后是字面量字符串;
