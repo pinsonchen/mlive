@@ -155,7 +155,7 @@ function generateIndex() {
   }
 
   let md = '# FAQ 与故障手册检索索引\n\n';
-  md += '> 本文件由 `scripts/gen-index.js` 自动生成，请勿手动编辑。\n\n';
+  md += '> 本文件由 `scripts/gen-index.cjs` 自动生成，请勿手动编辑。\n\n';
 
   md += '## 按症状索引\n\n';
   md += '| 症状 / 现象 | 相关文档 |\n';
