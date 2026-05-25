@@ -1,6 +1,6 @@
-import { platforms } from '../data/platforms.js';
+import { platforms, getPlatform } from '../data/platforms/index.js';
 
-export function generatePlatformGuides(selectedPlatforms, selectedSolution) {
+export async function generatePlatformGuides(selectedPlatforms, selectedSolution) {
     const container = document.getElementById('platformGuides');
     container.innerHTML = '';
 
@@ -77,9 +77,13 @@ export function generatePlatformGuides(selectedPlatforms, selectedSolution) {
     if (step3Desc) step3Desc.textContent = '按照以下步骤获取您选中平台的推流地址：';
     if (step3Button) step3Button.textContent = '已获取所有推流地址 →';
 
-    selectedPlatforms.forEach(platform => {
-        container.innerHTML += platforms[platform].guide;
-    });
+    container.innerHTML = `<div class="guide-loading" style="text-align:center;padding:40px;color:var(--text-secondary);">
+        <div style="font-size:2rem;margin-bottom:12px;">⏳</div>
+        <p>正在加载平台指南…</p>
+    </div>`;
+
+    const configs = await Promise.all(selectedPlatforms.map(id => getPlatform(id)));
+    container.innerHTML = configs.map(cfg => cfg.guide).join('');
 }
 
 function getVirtualCameraPreparation(platform) {
