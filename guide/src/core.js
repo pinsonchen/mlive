@@ -1,4 +1,4 @@
-import { platforms } from './data/platforms.js';
+import { platforms } from './data/platforms/index.js';
 
 let selectedPlatforms = [];
 let selectedSolution = 1;
