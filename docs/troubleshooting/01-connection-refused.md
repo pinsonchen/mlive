@@ -20,6 +20,9 @@ platforms:
 
 若以上 3 步未解决，再阅读下方完整判定流程。
 
+<details>
+<summary>🔍 完整诊断流程（Advanced Diagnosis）</summary>
+
 ## 现象描述
 
 OBS 点击"开始推流"后立即报错，日志或状态栏出现以下信息之一：
@@ -90,3 +93,5 @@ nc -zv live-push.bilivideo.com 443
 1. 执行 `nc -zv <新节点> 1935`，返回 `succeeded` 表示端口可达。
 2. 在 OBS 中点击"开始推流"，状态栏显示绿色圆点且码率稳定（如 4000 kbps）。
 3. 用手机浏览器访问直播间，确认画面正常播放。
+
+</details>

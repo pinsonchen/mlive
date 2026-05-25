@@ -21,6 +21,9 @@ platforms:
 
 若以上 3 步未解决，再阅读下方完整判定流程。
 
+<details>
+<summary>🔍 完整诊断流程（Advanced Diagnosis）</summary>
+
 ## 现象描述
 
 使用多路推流工具（OBS 多输出插件、restream.io、nginx-rtmp 等）同时向多个平台推流时，部分平台收到信号，另一些平台显示无信号或断连。
@@ -111,3 +114,5 @@ nginx -c /path/to/nginx.conf
 1. 在每个平台直播后台确认"直播状态"均显示"直播中"。
 2. 用不同设备分别打开各平台直播间，确认画面正常。
 3. 保持 5 分钟，确认所有平台无断流。
+
+</details>

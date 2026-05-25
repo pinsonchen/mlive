@@ -22,6 +22,9 @@ platforms:
 
 若以上 3 步未解决，再阅读下方完整判定流程。
 
+<details>
+<summary>🔍 完整诊断流程（Advanced Diagnosis）</summary>
+
 ## 现象描述
 
 推流连接建立后立即断开，OBS 日志或状态栏显示：
@@ -91,3 +94,5 @@ curl -I "rtmp://live-push.bilivideo.com/live-bvc/?streamname=live_xxx&key=yyy"
 1. 更新密钥后点击"开始推流"，OBS 状态栏绿灯亮起且保持稳定。
 2. 登录平台直播后台，确认"直播状态"显示"直播中"。
 3. 保持推流 60 秒，确认不会自动断开。
+
+</details>

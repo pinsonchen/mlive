@@ -24,6 +24,9 @@ platforms:
 
 若以上 3 步未解决，再阅读下方完整判定流程。
 
+<details>
+<summary>🔍 完整诊断流程（Advanced Diagnosis）</summary>
+
 ## 现象描述
 
 推流连接成功，但平台随即自动断开，或直播间显示"格式不支持"、"编码错误"，部分平台给出错误代码（如抖音的 `4101`、YouTube 的 `Generic stream ingestion failed`）。
@@ -117,3 +120,5 @@ OBS → 设置 → 输出 → 关键帧间隔（秒）：2
 # 在终端快速搜索日志中的错误（macOS）
 grep -i "error\|reject\|disconnect" ~/Library/Application\ Support/obs-studio/logs/$(ls -t ~/Library/Application\ Support/obs-studio/logs/ | head -1)
 ```
+
+</details>

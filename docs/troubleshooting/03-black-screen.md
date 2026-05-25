@@ -18,6 +18,9 @@ platforms:
 
 若以上 3 步未解决，再阅读下方完整判定流程。
 
+<details>
+<summary>🔍 完整诊断流程（Advanced Diagnosis）</summary>
+
 ## 现象描述
 
 推流已连接（OBS 状态栏绿灯），但观众收到的画面全黑，或平台直播间显示黑屏。OBS 本地预览可能正常也可能同样黑屏。
@@ -79,3 +82,5 @@ winget upgrade NVIDIA.GeForceExperience
 1. 在 OBS 中对当前推流截图：`工具 → 截图`，检查截图是否有画面内容。
 2. 平台观察端刷新直播间页面，画面应正常显示。
 3. 检查 OBS 日志（`帮助 → 日志文件 → 当前日志`）无 GPU/编码器错误。
+
+</details>
