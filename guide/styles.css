@@ -144,6 +144,42 @@ body {
     background: var(--success-color);
 }
 
+/* 进度条 */
+.progress-bar-container {
+    height: 6px;
+    background: var(--border-color);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: -20px 0 8px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 3px;
+    transition: width 0.5s ease;
+}
+
+.time-estimate {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-align: right;
+    margin-bottom: 20px;
+    min-height: 1.2em;
+}
+
+/* 已完成步骤可点击 */
+.step-item.completed {
+    cursor: pointer;
+}
+
+.step-item.completed:hover .step-number {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
 /* 步骤区域 */
 .step-section {
     background: var(--bg-primary);
