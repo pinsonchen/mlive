@@ -1196,6 +1196,35 @@ body {
     border-color: var(--primary-color);
 }
 
+/* Resume banner */
+.resume-banner {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+    border: 2px solid var(--success-color);
+    border-radius: 15px;
+    padding: 20px 25px;
+    margin-bottom: 30px;
+    animation: slideDown 0.5s ease;
+}
+
+.resume-banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.resume-banner-text {
+    font-size: 1.05rem;
+    color: var(--text-primary);
+}
+
+.resume-banner-actions {
+    display: flex;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
     .header h1 {

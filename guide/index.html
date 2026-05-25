@@ -85,6 +85,17 @@
         </div>
         <span class="time-estimate"></span>
 
+        <!-- Resume banner (shown when saved state exists) -->
+        <div id="resumeBanner" class="resume-banner" hidden>
+            <div class="resume-banner-content">
+                <span class="resume-banner-text">您上次进行到了第 <strong class="resume-step-label">1</strong> 步，是否继续？</span>
+                <div class="resume-banner-actions">
+                    <button class="btn btn-primary resume-continue">继续上次进度</button>
+                    <button class="btn btn-secondary resume-start-over">重新开始</button>
+                </div>
+            </div>
+        </div>
+
         <!-- 步骤1: 平台选择 -->
         <section class="step-section" id="step1">
             <h2>第一步：选择要同步开播的平台</h2>
