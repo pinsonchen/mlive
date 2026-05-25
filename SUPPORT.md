@@ -49,7 +49,7 @@ ffmpeg -loglevel verbose -re -i input.mp4 \
 
 提问前请先检索现有文档：
 
-- **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** — 10 个典型直播故障的决策树式排查流程
+- **[推流故障排查手册](docs/troubleshooting/index.md)** — 14 个典型直播故障的决策树式排查流程
 - **[docs/](docs/)** — 详细操作文档和 FAQ 索引
 - **[在线指南](https://tools.pinsonbot.com/mlive/)** — 交互式故障排查
 
