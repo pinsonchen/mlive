@@ -177,7 +177,7 @@ mlive/
 ├── guide/                         # 交互式指南
 │   ├── index.html                 # 主页面
 │   ├── styles.css                 # 样式文件
-│   ├── script.js                  # 交互逻辑
+│   ├── src/                       # 模块化 JS（ES module，自动 defer）
 │   ├── README.md                  # 指南说明
 │   ├── CHANGELOG.md               # 更新日志
 │   └── 更新说明文档/              # 平台更新详情

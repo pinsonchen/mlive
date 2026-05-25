@@ -14,10 +14,15 @@
 
 ```
 guide/
-├── index.html      # 主页面
-├── styles.css      # 样式文件
-├── script.js       # 交互逻辑
-└── README.md       # 说明文档
+├── index.html          # 主页面
+├── styles.css          # 样式文件
+├── src/
+│   ├── core.js         # 主入口（ES module，自动 defer）
+│   ├── data/
+│   │   └── platforms.js  # 平台配置数据
+│   └── steps/
+│       └── index.js    # 步骤生成逻辑
+└── README.md           # 说明文档
 ```
 
 ## 使用方法
