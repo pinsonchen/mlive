@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "vite guide",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lighthouse": "vite guide --port 9222 & sleep 2 && lighthouse http://localhost:9222 --only-categories=accessibility --output=json --output-path=./lighthouse-report.json --chrome-flags='--headless=new' && kill %1"
   },
   "devDependencies": {
+    "lighthouse": "^13.3.0",
     "vite": "^6.0.0",
     "vite-plugin-pwa": "^1.3.0"
   }

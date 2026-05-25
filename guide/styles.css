@@ -210,7 +210,7 @@ body {
 }
 
 .step-item.active .step-label {
-    color: var(--primary-color);
+    color: var(--primary-dark);
     font-weight: 600;
 }
 
