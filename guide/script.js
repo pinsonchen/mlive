@@ -1999,3 +1999,107 @@ document.addEventListener('keydown', function(e) {
         closeModal();
     }
 });
+
+// Roving tabindex keyboard navigation
+function setupRovingTabindex(container, selector) {
+    var items = container.querySelectorAll(selector);
+    if (items.length === 0) return;
+
+    container.addEventListener('keydown', function(e) {
+        var currentItems = container.querySelectorAll(selector);
+        var currentIndex = Array.from(currentItems).indexOf(document.activeElement);
+        if (currentIndex === -1) return;
+
+        var nextIndex = -1;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            nextIndex = (currentIndex + 1) % currentItems.length;
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            nextIndex = (currentIndex - 1 + currentItems.length) % currentItems.length;
+        }
+
+        if (nextIndex !== -1) {
+            currentItems.forEach(function(item) { item.setAttribute('tabindex', '-1'); });
+            currentItems[nextIndex].setAttribute('tabindex', '0');
+            currentItems[nextIndex].focus();
+        }
+    });
+}
+
+(function() {
+    var platformGrid = document.querySelector('.platform-grid');
+    if (platformGrid) {
+        var cards = platformGrid.querySelectorAll('.platform-card');
+        cards.forEach(function(card, i) {
+            card.setAttribute('tabindex', i === 0 ? '0' : '-1');
+        });
+        setupRovingTabindex(platformGrid, '.platform-card');
+    }
+
+    var solutionCardsContainer = document.querySelector('.solution-cards');
+    if (solutionCardsContainer) {
+        setupRovingTabindex(solutionCardsContainer, '.solution-card');
+    }
+})();
+
+// Enter/Space to select solution cards
+document.querySelectorAll('.solution-card').forEach(function(card) {
+    card.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.click();
+        }
+    });
+});
+
+// Focus trap for modal
+var previouslyFocusedElement = null;
+
+var _originalShowPluginModal = window.showPluginModal || showPluginModal;
+window.showPluginModal = function() {
+    previouslyFocusedElement = document.activeElement;
+    _originalShowPluginModal();
+    var modal = document.getElementById('pluginModal');
+    requestAnimationFrame(function() {
+        var focusable = getModalFocusableElements(modal);
+        if (focusable.length > 0) focusable[0].focus();
+    });
+};
+
+var _originalCloseModal = window.closeModal || closeModal;
+window.closeModal = function() {
+    _originalCloseModal();
+    if (previouslyFocusedElement) {
+        previouslyFocusedElement.focus();
+        previouslyFocusedElement = null;
+    }
+};
+
+function getModalFocusableElements(container) {
+    return Array.from(container.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    ));
+}
+
+document.getElementById('pluginModal')?.addEventListener('keydown', function(e) {
+    if (e.key !== 'Tab') return;
+    var modal = document.querySelector('#pluginModal .modal-content');
+    var focusable = getModalFocusableElements(modal);
+    if (focusable.length === 0) return;
+
+    var first = focusable[0];
+    var last = focusable[focusable.length - 1];
+
+    if (e.shiftKey) {
+        if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+        }
+    } else {
+        if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+        }
+    }
+});
