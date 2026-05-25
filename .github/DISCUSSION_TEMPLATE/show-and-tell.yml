@@ -1,0 +1,39 @@
+title: "[Show & Tell] "
+labels: ["show-and-tell"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        欢迎分享你的多平台直播方案！附上截图或配置片段能让分享更直观。
+        Share your multi-platform streaming setup! Screenshots or config snippets make it easier to follow.
+
+  - type: textarea
+    id: setup_description
+    attributes:
+      label: 方案描述 / Setup Description
+      description: 介绍你的直播方案，包括使用的平台、工具和配置思路
+      placeholder: |
+        我使用 ... 实现了 ...
+        I used ... to achieve ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: 截图或录屏 / Screenshots
+      description: 拖拽上传截图、GIF 或视频，展示你的效果
+      placeholder: "拖拽图片到此处 / Drag images here..."
+    validations:
+      required: false
+
+  - type: textarea
+    id: tips
+    attributes:
+      label: 使用技巧 / Tips & Tricks
+      description: 分享在搭建过程中踩过的坑或实用技巧
+      placeholder: |
+        - 注意 ...
+        - 建议 ...
+    validations:
+      required: false
