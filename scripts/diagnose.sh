@@ -177,7 +177,7 @@ check_bandwidth() {
                 "当前带宽约 ${bw_mbps} Mbps，满足多平台同步推流（≥20Mbps）需求。" "bandwidth"
         elif awk "BEGIN {exit ($bw_mbps >= 10) ? 0 : 1}" 2>/dev/null; then
             record_result "CHECK-03" "WARN" "带宽一般（约 ${bw_mbps} Mbps）" \
-                "当前带宽约 ${bw_mbps} Mbps，建议限制同时推流平台数量（≤2个），或降低码率至2500kbps以下。" "bandwidth"
+                "当前带宽约 ${bw_mbps} Mbps，建议限制同时推流平台数量（≤2个），或降低码率至3000kbps以下。" "bandwidth"
         else
             record_result "CHECK-03" "FAIL" "带宽不足（约 ${bw_mbps} Mbps）" \
                 "当前带宽约 ${bw_mbps} Mbps，不建议进行多平台推流。建议使用有线网络或升级带宽。" "bandwidth"
@@ -229,8 +229,8 @@ check_obs_config() {
             local profile_name
             profile_name=$(basename "$(dirname "$ini_file")")
 
-            if [[ -n "$bitrate" ]] && [[ "$bitrate" -gt 2500 ]] 2>/dev/null; then
-                issues+=("配置文件「${profile_name}」码率为 ${bitrate}kbps，超过淘宝直播上限(2500kbps)")
+            if [[ -n "$bitrate" ]] && [[ "$bitrate" -gt 3000 ]] 2>/dev/null; then
+                issues+=("配置文件「${profile_name}」码率为 ${bitrate}kbps，超过淘宝直播上限(3000kbps)")
             fi
             if [[ -n "$vbr" ]] && [[ "$vbr" == "VBR" ]]; then
                 issues+=("配置文件「${profile_name}」使用VBR模式，推流平台要求CBR")

@@ -8,8 +8,12 @@ error_codes:
   - "4101"
   - Generic stream ingestion failed
 platforms:
-  - Bilibili
+  - 淘宝直播
   - 抖音
+  - 小红书
+  - 视频号
+  - 支付宝
+  - Bilibili
   - YouTube
   - Twitch
 ---
@@ -78,12 +82,16 @@ OBS → 设置 → 输出 → 音频编码器：AAC
 
 ### 动作 C：调整至平台允许的分辨率/帧率
 
-各平台推流参数上限：
+各平台推流参数上限（2026年5月更新）：
 
 | 平台 | 最大分辨率 | 最大帧率 | 最大视频码率 |
 |------|----------|---------|------------|
-| Bilibili | 1920×1080 | 60 fps | 10 Mbps |
+| 淘宝直播 | 1920×1080 | 30 fps | 3 Mbps |
 | 抖音 | 1920×1080 | 30 fps | 8 Mbps |
+| 小红书 | 1920×1080 | 30 fps | 4 Mbps |
+| 视频号 | 1920×1080 | 30 fps | 6 Mbps |
+| 支付宝 | 1920×1080 | 30 fps | 4 Mbps |
+| Bilibili | 1920×1080 | 60 fps | 10 Mbps |
 | YouTube | 3840×2160 | 60 fps | 51 Mbps |
 | Twitch | 1920×1080 | 60 fps | 6 Mbps |
 
@@ -93,6 +101,10 @@ OBS → 设置 → 视频
   帧率：30（通用）或 60（仅支持 60fps 的平台）
 
 OBS → 设置 → 输出 → 视频码率：
+  淘宝直播推荐 ≤ 3000 kbps
+  小红书推荐 ≤ 4000 kbps
+  视频号推荐 ≤ 6000 kbps
+  支付宝推荐 ≤ 4000 kbps
   抖音推荐 ≤ 6000 kbps
   Twitch 推荐 ≤ 6000 kbps
   Bilibili 推荐 ≤ 8000 kbps

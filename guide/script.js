@@ -138,10 +138,10 @@ const platforms = {
                                         <li>竖屏直播：1080×1920</li>
                                     </ul>
                                 </li>
-                                <li><strong>视频码率：</strong>最高不超过<strong>2500kbps</strong> ❗
+                                <li><strong>视频码率：</strong>最高不超过<strong>3000kbps</strong> ❗
                                     <ul>
-                                        <li>推荐设置：2000-2500kbps</li>
-                                        <li>超过2500kbps可能导致推流失败或被平台限流</li>
+                                        <li>推荐设置：2500-3000kbps</li>
+                                        <li>超过3000kbps可能导致推流失败或被平台限流</li>
                                     </ul>
                                 </li>
                                 <li><strong>帧率（FPS）：</strong>25或30，最高不超过30fps</li>
@@ -153,7 +153,7 @@ const platforms = {
                                 <span class="warning-icon">⚠️</span>
                                 <strong>重要提醒：</strong>
                                 <ul>
-                                    <li>码率不要超过2500kbps！之前的5000kbps设置已经不适用</li>
+                                    <li>码率不要超过3000kbps！之前的5000kbps设置已经不适用</li>
                                     <li>建议使用CBR（恒定码率）模式</li>
                                     <li>使用H.264编码器</li>
                                 </ul>
@@ -1167,7 +1167,7 @@ function generateOBSConfiguration() {
                                     <li>音频码率：160 Kbps</li>
                                     <li>编码器：硬件编码 (NVENC H.264) 或 x264</li>
                                     <li>码率控制：CBR</li>
-                                    <li>码率：4500 Kbps（⚠️ 淘宝限制2500kbps）</li>
+                                    <li>码率：4500 Kbps（⚠️ 淘宝限制3000kbps）</li>
                                     <li>关键帧间隔：2秒</li>
                                 </ul>
                             </li>

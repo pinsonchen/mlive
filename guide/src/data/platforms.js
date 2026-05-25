@@ -4,7 +4,14 @@ export const platforms = {
         icon: '🛒',
         color: '#ff5000',
         rtmpSupport: true,
-        supportTypes: ['push', 'mobile'],  // 支持OBS推流和手机直播
+        lastUpdated: '2026-05-25',
+        restrictions: {
+            deposit: '个人主播2000-5000元，企业店铺5000-10000元（按类目浮动）',
+            fanThreshold: 1000,
+            bitrateKbps: 3000,
+            notes: '2026年5月起OBS推流码率上限调整至3000kbps；需支付宝高级实名认证；200粉丝为基础开播门槛，1000粉丝可使用OBS推流；直播时长单场最长8小时'
+        },
+        supportTypes: ['push', 'mobile'],
         requirements: {
             deposit: true,
             fans: 1000,  // 2026年2月更新：需要1000+粉丝才能使用OBS推流（达人）
@@ -132,10 +139,10 @@ export const platforms = {
                                         <li>竖屏直播：1080×1920</li>
                                     </ul>
                                 </li>
-                                <li><strong>视频码率：</strong>最高不超过<strong>2500kbps</strong> ❗
+                                <li><strong>视频码率：</strong>最高不超过<strong>3000kbps</strong> ❗
                                     <ul>
-                                        <li>推荐设置：2000-2500kbps</li>
-                                        <li>超过2500kbps可能导致推流失败或被平台限流</li>
+                                        <li>推荐设置：2500-3000kbps</li>
+                                        <li>超过3000kbps可能导致推流失败或被平台限流</li>
                                     </ul>
                                 </li>
                                 <li><strong>帧率（FPS）：</strong>25或30，最高不超过30fps</li>
@@ -147,7 +154,7 @@ export const platforms = {
                                 <span class="warning-icon">⚠️</span>
                                 <strong>重要提醒：</strong>
                                 <ul>
-                                    <li>码率不要超过2500kbps！之前的5000kbps设置已经不适用</li>
+                                    <li>码率不要超过3000kbps！之前的5000kbps设置已经不适用</li>
                                     <li>建议使用CBR（恒定码率）模式</li>
                                     <li>使用H.264编码器</li>
                                 </ul>
@@ -184,8 +191,15 @@ export const platforms = {
         name: '抖音直播',
         icon: '🎵',
         color: '#000000',
-        rtmpSupport: false,  // 2023年起已取消OBS推流功能
-        supportTypes: ['mobile', 'pc_assistant'],  // 仅支持手机和直播伴侣
+        rtmpSupport: false,
+        lastUpdated: '2026-05-25',
+        restrictions: {
+            deposit: '500元保证金（电商带货）',
+            fanThreshold: 200,
+            bitrateKbps: 8000,
+            notes: '2025年4月起直播带货门槛降至200有效粉丝；视频带货需500粉丝；图文带货需1000粉丝；OBS直接推流已于2023年取消，需使用直播伴侣+虚拟摄像头方案；企业认证600元/年可降低门槛'
+        },
+        supportTypes: ['mobile', 'pc_assistant'],
         requirements: {
             deposit: true,  // 需要缴纳500元保证金
             fans: 200,  // 2025年12月新规：200有效粉丝
@@ -300,7 +314,14 @@ export const platforms = {
         icon: '📕',
         color: '#ff2442',
         rtmpSupport: true,
-        supportTypes: ['push', 'mobile'],  // 支持推流和手机直播
+        lastUpdated: '2026-05-25',
+        restrictions: {
+            deposit: '直播无保证金；带货需缴纳1000-10000元保证金（按类目）',
+            fanThreshold: 1000,
+            bitrateKbps: 4000,
+            notes: 'OBS推流需1000粉丝+注册满6个月+近3个月原创笔记≥10篇+单篇阅读量≥2000；0粉可通过笔记带货（无需直播）；企业账号完成认证可直接开通OBS权限'
+        },
+        supportTypes: ['push', 'mobile'],
         requirements: {
             deposit: false,
             fans: 1000,  // OBS推流：1000粉丝（部分资料500粉丝，以App内显示为准）
@@ -419,7 +440,14 @@ export const platforms = {
         icon: '💬',
         color: '#07c160',
         rtmpSupport: true,
-        supportTypes: ['push', 'pc_wechat', 'mobile'],  // 支持三种直播方式
+        lastUpdated: '2026-05-25',
+        restrictions: {
+            deposit: '电商带货需缴纳保证金（个人2000元，企业5000元）',
+            fanThreshold: 1000,
+            bitrateKbps: 6000,
+            notes: 'OBS推流需1000粉丝且完成认证+人脸识别；PC微信直播仅需200粉丝或注册满7天或企业认证（三选一）；手机直播无粉丝门槛；企业认证需营业执照+对公账户验证'
+        },
+        supportTypes: ['push', 'pc_wechat', 'mobile'],
         requirements: {
             deposit: false,
             fans: 1000,  // OBS推流：需要1000粉丝
@@ -714,6 +742,132 @@ export const platforms = {
                             <div class="tip-box">
                                 <span class="tip-icon">💡</span>
                                 <strong>提示：</strong>结束后可以在视频号助手中查看直播数据统计，包括观看人数、互动情况等。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+    zhifubao: {
+        name: '支付宝直播',
+        icon: '💰',
+        color: '#1677ff',
+        rtmpSupport: true,
+        lastUpdated: '2026-05-25',
+        restrictions: {
+            deposit: '商家直播1000-5000元（按类目浮动）；MCN机构10000元',
+            fanThreshold: 0,
+            bitrateKbps: 4000,
+            notes: '需企业支付宝账号或个体工商户认证；芝麻信用分≥650（个人主播）；需签署《支付宝直播服务协议》；带货需绑定支付宝商家中心并完成商户入驻；特殊类目（医疗、金融）需额外资质审核'
+        },
+        supportTypes: ['push', 'mobile'],
+        requirements: {
+            deposit: true,
+            fans: 0,
+            mobile: 0,
+            push: 0
+        },
+        liveMethods: {
+            mobile: {
+                name: '手机直播',
+                fansRequired: 0,
+                description: '需完成商户入驻+实名认证，无粉丝门槛'
+            },
+            push: {
+                name: 'OBS推流直播',
+                fansRequired: 0,
+                description: '需完成商户入驻+企业认证或个体工商户认证，无粉丝门槛'
+            }
+        },
+        guide: `
+            <div class="platform-guide">
+                <div class="platform-guide-header">
+                    <div class="platform-guide-icon">💰</div>
+                    <div class="platform-guide-title">
+                        <h3>支付宝直播推流地址获取（2026最新）</h3>
+                        <p>通过支付宝商家中心或生活号后台获取推流地址</p>
+                    </div>
+                </div>
+                <div class="guide-steps">
+                    <div class="guide-step">
+                        <div class="guide-step-number">1</div>
+                        <div class="guide-step-content">
+                            <h4>准备工作</h4>
+                            <p><strong>确保满足以下条件：</strong></p>
+                            <ul>
+                                <li>✅ 企业支付宝账号或个体工商户支付宝账号</li>
+                                <li>✅ 已完成支付宝商户入驻（商家中心审核通过）</li>
+                                <li>✅ <strong>芝麻信用分≥650</strong>（个人主播）</li>
+                                <li>✅ 已签署《支付宝直播服务协议》</li>
+                                <li>✅ 已缴纳保证金（商家1000-5000元，MCN机构10000元）</li>
+                                <li>✅ 营业执照在有效期内</li>
+                            </ul>
+                            <div class="warning-box">
+                                <span class="warning-icon">⚠️</span>
+                                <strong>重要：</strong>支付宝直播以商家和服务为核心，个人娱乐主播暂不开放，需有明确的商业经营资质！
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-step">
+                        <div class="guide-step-number">2</div>
+                        <div class="guide-step-content">
+                            <h4>进入支付宝直播后台</h4>
+                            <p><strong>方法一：通过支付宝商家中心（推荐）</strong></p>
+                            <ol>
+                                <li>登录支付宝商家中心：<a href="https://b.alipay.com" target="_blank">https://b.alipay.com</a></li>
+                                <li>进入【营销工具】→【直播管理】</li>
+                                <li>点击【创建直播】</li>
+                            </ol>
+                            <p><strong>方法二：通过支付宝生活号</strong></p>
+                            <ol>
+                                <li>登录支付宝生活号后台</li>
+                                <li>进入【内容管理】→【直播】</li>
+                                <li>点击【发起直播】</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="guide-step">
+                        <div class="guide-step-number">3</div>
+                        <div class="guide-step-content">
+                            <h4>创建直播并获取推流地址</h4>
+                            <ol>
+                                <li>填写直播信息（标题、封面、分类、商品）</li>
+                                <li>选择直播方式为【推流直播】</li>
+                                <li>系统生成推流地址和串流密钥</li>
+                            </ol>
+                            <div class="code-box">
+                                RTMP服务器：rtmp://live-push.alipay.com/live/<br>
+                                串流密钥：[系统生成的密钥]（单场有效）
+                            </div>
+                            <div class="tip-box">
+                                <span class="tip-icon">💡</span>
+                                <strong>推流参数建议：</strong>
+                                <ul>
+                                    <li><strong>视频码率：</strong>2000-4000 kbps</li>
+                                    <li><strong>分辨率：</strong>1920×1080（横屏）或 1080×1920（竖屏）</li>
+                                    <li><strong>帧率：</strong>30 fps</li>
+                                    <li><strong>编码器：</strong>H.264</li>
+                                    <li><strong>关键帧间隔：</strong>2秒</li>
+                                    <li><strong>音频：</strong>AAC 128kbps / 44.1kHz</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-step">
+                        <div class="guide-step-number">4</div>
+                        <div class="guide-step-content">
+                            <h4>特殊类目资质要求</h4>
+                            <ul>
+                                <li><strong>食品类：</strong>需食品经营许可证</li>
+                                <li><strong>医疗健康：</strong>需医疗器械经营许可证或药品经营许可证</li>
+                                <li><strong>金融理财：</strong>需金融业务资质（基金代销牌照等）</li>
+                                <li><strong>教育培训：</strong>需办学许可证（学科类）</li>
+                                <li><strong>本地生活：</strong>需对应行业经营许可</li>
+                            </ul>
+                            <div class="warning-box">
+                                <span class="warning-icon">⚠️</span>
+                                <strong>注意：</strong>支付宝对直播内容审核严格，禁止虚假宣传、诱导消费等行为，违规将扣除保证金并暂停直播权限。
                             </div>
                         </div>
                     </div>

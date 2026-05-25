@@ -128,7 +128,7 @@ export function generateOBSConfiguration(selectedPlatforms, selectedSolution) {
                                     <li>音频码率：160 Kbps</li>
                                     <li>编码器：硬件编码 (NVENC H.264) 或 x264</li>
                                     <li>码率控制：CBR</li>
-                                    <li>码率：4500 Kbps（⚠️ 淘宝限制2500kbps）</li>
+                                    <li>码率：4500 Kbps（⚠️ 淘宝限制3000kbps）</li>
                                     <li>关键帧间隔：2秒</li>
                                 </ul>
                             </li>
