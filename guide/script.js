@@ -847,12 +847,12 @@ function updateSolutionRecommendations() {
     const solution2 = document.getElementById('solution2');
     const solution3 = document.getElementById('solution3');
     const solution4 = document.getElementById('solution4');
+    const allCards = [solution1, solution2, solution3, solution4];
 
-    // 重置所有方案状态
-    solution1.classList.remove('selected');
-    solution2.classList.remove('selected');
-    solution3.classList.remove('selected');
-    solution4.classList.remove('selected');
+    allCards.forEach(card => {
+        card.classList.remove('selected', 'best-match');
+        card.removeAttribute('data-best-match');
+    });
 
     // 重置徽章
     solution1.querySelector('.solution-badge').textContent = '推荐';
@@ -863,6 +863,9 @@ function updateSolutionRecommendations() {
     solution3.querySelector('.solution-badge').className = 'solution-badge alternative';
     solution4.querySelector('.solution-badge').textContent = '备选';
     solution4.querySelector('.solution-badge').className = 'solution-badge alternative';
+
+    const confirmUI = document.getElementById('inlineConfirmUI');
+    if (confirmUI) confirmUI.classList.remove('visible');
 
     // 如果没有选择平台，不执行自动选择
     if (selectedPlatforms.length === 0) {
@@ -876,27 +879,19 @@ function updateSolutionRecommendations() {
     const rtmpSupportedPlatforms = selectedPlatforms.filter(p => platforms[p].rtmpSupport);
     const rtmpLimitedPlatforms = selectedPlatforms.filter(p => !platforms[p].rtmpSupport);
 
+    let recommendedCard = null;
+
     // 方案选择逻辑（方案四不作为默认推荐）
     if (allSupportRTMP && selectedPlatforms.length > 0) {
-        // 情况1：所有平台都支持RTMP → 推荐方案一
         selectedSolution = 1;
-        solution1.classList.add('selected');
-        solution1.querySelector('.solution-badge').textContent = '✨ 强烈推荐';
-        solution1.querySelector('.solution-badge').className = 'solution-badge recommended';
-
-        // 添加推荐说明
+        recommendedCard = solution1;
         addRecommendationReason(
             '✨ 系统推荐：方案一（OBS + Multi RTMP）',
             `您选择的 ${selectedPlatforms.map(p => platforms[p].name).join('、')} 都支持RTMP推流，使用方案一可以获得最佳画质和最低的资源占用！`
         );
     } else if (hasLimitedPlatform && rtmpSupportedPlatforms.length > 0) {
-        // 情况2：部分平台支持RTMP，部分不支持 → 推荐方案二（混合方案）
         selectedSolution = 2;
-        solution2.classList.add('selected');
-        solution2.querySelector('.solution-badge').textContent = '✨ 强烈推荐';
-        solution2.querySelector('.solution-badge').className = 'solution-badge recommended';
-
-        // 添加推荐说明
+        recommendedCard = solution2;
         const supportedNames = rtmpSupportedPlatforms.map(p => platforms[p].name).join('、');
         const limitedNames = rtmpLimitedPlatforms.map(p => platforms[p].name).join('、');
         addRecommendationReason(
@@ -904,13 +899,8 @@ function updateSolutionRecommendations() {
             `${supportedNames} 支持RTMP推流，但 ${limitedNames} 不支持或受限。混合方案可以让您同时享受RTMP的高画质和虚拟摄像头的兼容性！`
         );
     } else {
-        // 情况3：所有平台都不支持RTMP或只有单个平台 → 推荐方案三（虚拟摄像头）
         selectedSolution = 3;
-        solution3.classList.add('selected');
-        solution3.querySelector('.solution-badge').textContent = '✨ 强烈推荐';
-        solution3.querySelector('.solution-badge').className = 'solution-badge recommended';
-
-        // 添加推荐说明
+        recommendedCard = solution3;
         if (selectedPlatforms.length === 1) {
             addRecommendationReason(
                 '✨ 系统推荐：方案三（虚拟摄像头）',
@@ -922,6 +912,23 @@ function updateSolutionRecommendations() {
                 `您选择的平台都不支持或限制了RTMP推流。虚拟摄像头方案完全使用官方软件，最安全可靠，不用担心封号风险！`
             );
         }
+    }
+
+    recommendedCard.classList.add('selected', 'best-match');
+    recommendedCard.setAttribute('data-best-match', 'true');
+    recommendedCard.querySelector('.solution-badge').textContent = 'Best for your setup';
+    recommendedCard.querySelector('.solution-badge').className = 'solution-badge best-match';
+
+    if (confirmUI) {
+        const solutionNames = {
+            1: 'OBS + Multi RTMP 插件',
+            2: '混合方案（Multi RTMP + 虚拟摄像头）',
+            3: '虚拟摄像头方案',
+            4: '全手机直播方案'
+        };
+        const desc = confirmUI.querySelector('.confirm-desc');
+        if (desc) desc.textContent = `系统已为您推荐：${solutionNames[selectedSolution]}`;
+        confirmUI.classList.add('visible');
     }
 }
 
@@ -995,40 +1002,20 @@ function confirmSolution() {
         return;
     }
 
-    // 显示确认信息
-    const solutionNames = {
-        1: 'OBS + Multi RTMP 插件',
-        2: '混合方案（Multi RTMP + 虚拟摄像头）',
-        3: '虚拟摄像头方案',
-        4: '全手机直播方案'
-    };
-
-    // 根据方案类型决定下一步
     if (selectedSolution === 3) {
-        // 虚拟摄像头方案不需要获取RTMP推流地址，直接跳到OBS配置
-        const message = `系统已为您推荐：${solutionNames[selectedSolution]}\n\n虚拟摄像头方案不需要获取RTMP推流地址，\n将直接进入OBS虚拟摄像头配置步骤。`;
-
-        if (confirm(message)) {
-            goToStep(4);
-            generateOBSConfiguration();
-        }
+        goToStep(4);
+        generateOBSConfiguration();
     } else if (selectedSolution === 4) {
-        // 手机直播方案不需要任何配置，直接跳到最后一步
-        const message = `系统已为您推荐：${solutionNames[selectedSolution]}\n\n手机直播方案无需OBS配置，\n将直接进入开播步骤指导！`;
-
-        if (confirm(message)) {
-            goToStep(5);
-            generateFinalSteps();
-        }
+        goToStep(5);
+        generateFinalSteps();
     } else {
-        // 其他方案需要获取推流地址
-        const message = `系统已为您推荐：${solutionNames[selectedSolution]}\n\n点击"确定"继续获取各平台推流地址。`;
-
-        if (confirm(message)) {
-            goToStep(3);
-            generatePlatformGuides();
-        }
+        goToStep(3);
+        generatePlatformGuides();
     }
+}
+
+function acceptRecommendation() {
+    confirmSolution();
 }
 
 // 生成平台指南
