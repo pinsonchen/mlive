@@ -443,6 +443,100 @@ body {
     background: var(--warning-color);
 }
 
+.solution-badge.best-match {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+}
+
+.solution-card.best-match {
+    border-color: var(--success-color);
+    border-width: 3px;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(5, 150, 105, 0.05) 100%);
+}
+
+.solution-card.best-match::before {
+    content: '\2713  Best for your setup';
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    z-index: 10;
+}
+
+.inline-confirm-ui {
+    display: none;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(5, 150, 105, 0.08) 100%);
+    border: 2px solid var(--success-color);
+    border-radius: 15px;
+    padding: 20px 25px;
+    margin-top: 20px;
+    text-align: center;
+    animation: slideDown 0.4s ease;
+}
+
+.inline-confirm-ui.visible {
+    display: block;
+}
+
+.inline-confirm-ui .confirm-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--success-color);
+    margin-bottom: 12px;
+}
+
+.inline-confirm-ui .confirm-desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.btn-accept {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    padding: 14px 32px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-accept:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+}
+
+.choose-manually-link {
+    display: block;
+    margin-top: 12px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-decoration: underline;
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+}
+
+.choose-manually-link:hover {
+    color: var(--primary-color);
+}
+
 .solution-badge.safe {
     background: var(--success-color);
 }

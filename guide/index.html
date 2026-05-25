@@ -285,6 +285,13 @@
                 </div>
             </div>
 
+            <div id="inlineConfirmUI" class="inline-confirm-ui">
+                <div class="confirm-title">系统已为您智能匹配最佳方案</div>
+                <div class="confirm-desc"></div>
+                <button class="btn-accept" onclick="acceptRecommendation()">Accept Recommendation →</button>
+                <button class="choose-manually-link" onclick="document.getElementById('inlineConfirmUI').classList.remove('visible')">Choose manually</button>
+            </div>
+
             <div class="action-buttons">
                 <button class="btn btn-secondary" onclick="goToStep(1)">← 上一步</button>
                 <button class="btn btn-primary" onclick="confirmSolution()">使用推荐方案继续 →</button>
