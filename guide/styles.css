@@ -20,6 +20,92 @@
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-color: #818cf8;
+        --primary-dark: #a5b4fc;
+        --secondary-color: #a78bfa;
+        --success-color: #34d399;
+        --warning-color: #fbbf24;
+        --danger-color: #f87171;
+        --text-primary: #f9fafb;
+        --text-secondary: #9ca3af;
+        --bg-primary: #1f2937;
+        --bg-secondary: #111827;
+        --border-color: #374151;
+        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+    }
+
+    body {
+        background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+    }
+
+    .modal-content {
+        background: var(--bg-primary);
+    }
+
+    .guide-step {
+        background: var(--bg-secondary);
+    }
+
+    .solution-requirements {
+        background: var(--bg-secondary);
+    }
+
+    .code-box {
+        background: #111827;
+    }
+
+    .tip-box {
+        background: #1e3a5f;
+        border-left-color: #60a5fa;
+    }
+
+    .warning-box,
+    .warning-item,
+    .tip,
+    .troubleshooting {
+        background: #422006;
+    }
+
+    .info-box {
+        background: #1e3a5f;
+        border-left-color: #60a5fa;
+    }
+
+    .completion-checklist {
+        background: #064e3b;
+    }
+
+    .version-info {
+        background: #064e3b;
+    }
+
+    .success-box {
+        background: #064e3b;
+        color: #a7f3d0;
+    }
+
+    .version-table table {
+        background: var(--bg-secondary);
+    }
+
+    .version-table tr.recommended {
+        background: #064e3b;
+    }
+
+    .status-badge.official {
+        background: #064e3b;
+        color: #6ee7b7;
+    }
+
+    .status-badge.limited {
+        background: #422006;
+        color: #fcd34d;
+    }
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -1225,6 +1311,66 @@ body {
     flex-shrink: 0;
 }
 
+/* Touch target minimum size (WCAG 2.5.5 - 44x44px) */
+.close-btn {
+    min-width: 44px;
+    min-height: 44px;
+}
+
+.tooltip-icon {
+    min-width: 44px;
+    min-height: 44px;
+}
+
+.download-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.completion-checklist input[type="checkbox"] {
+    min-width: 44px;
+    min-height: 44px;
+}
+
+.recommendation-tags .tag {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.status-badge {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.choose-manually-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Safe area inset support for notched devices */
+body {
+    padding: 20px;
+    padding-top: max(20px, env(safe-area-inset-top));
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+}
+
+.modal {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+}
+
+.modal-header {
+    padding-top: max(25px, env(safe-area-inset-top));
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
     .header h1 {
@@ -1241,8 +1387,8 @@ body {
     }
 
     .step-number {
-        width: 40px;
-        height: 40px;
+        width: 44px;
+        height: 44px;
         font-size: 1rem;
     }
 
@@ -1264,7 +1410,18 @@ body {
     }
 
     .modal-content {
-        margin: 10px;
+        margin: 0;
+        border-radius: 0;
+        max-height: 100vh;
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+    }
+
+    .modal {
+        padding: 0;
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
     }
 
     .plugin-step {
@@ -1277,15 +1434,19 @@ body {
     }
 
     .tooltip-icon {
-        width: 15px;
-        height: 15px;
-        font-size: 9px;
+        min-width: 44px;
+        min-height: 44px;
+        font-size: 12px;
     }
 }
 
 @media (max-width: 480px) {
     body {
         padding: 10px;
+        padding-top: max(10px, env(safe-area-inset-top));
+        padding-bottom: max(10px, env(safe-area-inset-bottom));
+        padding-left: max(10px, env(safe-area-inset-left));
+        padding-right: max(10px, env(safe-area-inset-right));
     }
 
     .header {
@@ -1298,5 +1459,37 @@ body {
 
     .subtitle {
         font-size: 1rem;
+    }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .step-section {
+        animation: none;
+    }
+
+    .recommendation-reason {
+        animation: none;
+    }
+
+    .resume-banner {
+        animation: none;
+    }
+
+    .inline-confirm-ui {
+        animation: none;
+    }
+
+    .solution-badge.best-match {
+        animation: none;
     }
 }
