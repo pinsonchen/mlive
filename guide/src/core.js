@@ -4,6 +4,31 @@ let selectedPlatforms = [];
 let selectedSolution = 1;
 let currentStep = 1;
 
+const TOTAL_STEPS = 5;
+const STEP_DURATIONS = [2, 3, 5, 8, 2];
+
+function updateProgressBar(step) {
+    const percentage = ((step - 1) / (TOTAL_STEPS - 1)) * 100;
+    const fill = document.querySelector('.progress-bar-fill');
+    const estimate = document.querySelector('.time-estimate');
+    if (fill) fill.style.width = percentage + '%';
+    if (estimate) {
+        const remaining = STEP_DURATIONS.slice(step - 1).reduce((a, b) => a + b, 0);
+        estimate.textContent = remaining > 0 ? `~${remaining} 分钟剩余` : '';
+    }
+}
+
+document.querySelectorAll('.step-item').forEach(item => {
+    item.addEventListener('click', () => {
+        if (item.classList.contains('completed')) {
+            const step = parseInt(item.dataset.step, 10);
+            goToStep(step);
+        }
+    });
+});
+
+updateProgressBar(1);
+
 let stepModules = null;
 async function getStepModules() {
     if (!stepModules) {
@@ -288,6 +313,7 @@ async function goToStep(step) {
         }
     }
 
+    updateProgressBar(step);
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
