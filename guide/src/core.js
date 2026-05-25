@@ -6,6 +6,80 @@ let currentStep = 1;
 
 const TOTAL_STEPS = 5;
 const STEP_DURATIONS = [2, 3, 5, 8, 2];
+const STORAGE_KEY = 'mlive-wizard-state';
+const STORAGE_VERSION = 1;
+
+function saveState() {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+            selectedPlatforms,
+            selectedSolution,
+            currentStep,
+            version: STORAGE_VERSION
+        }));
+    } catch (e) { /* quota exceeded or private mode */ }
+}
+
+function clearState() {
+    try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+    const banner = document.getElementById('resumeBanner');
+    if (banner) banner.hidden = true;
+}
+
+function restoreState() {
+    let data;
+    try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        data = JSON.parse(raw);
+    } catch (e) { return; }
+
+    if (!data || data.version !== STORAGE_VERSION) {
+        clearState();
+        return;
+    }
+
+    if (!data.selectedPlatforms?.length && data.currentStep <= 1) return;
+
+    const banner = document.getElementById('resumeBanner');
+    if (!banner) return;
+
+    const stepLabel = banner.querySelector('.resume-step-label');
+    if (stepLabel) stepLabel.textContent = data.currentStep;
+
+    banner.hidden = false;
+
+    banner.querySelector('.resume-continue')?.addEventListener('click', () => {
+        applyRestoredState(data);
+        banner.hidden = true;
+    }, { once: true });
+
+    banner.querySelector('.resume-start-over')?.addEventListener('click', () => {
+        clearState();
+    }, { once: true });
+}
+
+function applyRestoredState(data) {
+    if (data.selectedPlatforms?.length) {
+        document.querySelectorAll('input[name="platform"]').forEach(cb => {
+            cb.checked = data.selectedPlatforms.includes(cb.value);
+        });
+        updatePlatformSelection();
+    }
+
+    if (data.selectedSolution) {
+        selectedSolution = data.selectedSolution;
+        document.querySelectorAll('.solution-card').forEach(c => c.classList.remove('selected'));
+        const card = document.getElementById(`solution${selectedSolution}`);
+        if (card) card.classList.add('selected');
+    }
+
+    if (data.currentStep > 1) {
+        goToStep(data.currentStep);
+    }
+}
+
+window.clearWizardState = clearState;
 
 function updateProgressBar(step) {
     const percentage = ((step - 1) / (TOTAL_STEPS - 1)) * 100;
@@ -48,6 +122,7 @@ function updatePlatformSelection() {
     updateSelectedPlatformsDisplay();
     updateWarnings();
     updateSolutionRecommendations();
+    saveState();
 }
 
 function updateSelectedPlatformsDisplay() {
@@ -227,6 +302,7 @@ document.querySelectorAll('.solution-card').forEach(card => {
         else selectedSolution = 1;
 
         updateManualSelectionMessage();
+        saveState();
     });
 });
 
@@ -303,6 +379,7 @@ async function goToStep(step) {
     });
 
     currentStep = step;
+    saveState();
 
     if (step === 3 || step === 4 || step === 5) {
         const modules = await getStepModules();
@@ -452,3 +529,5 @@ document.getElementById('pluginModal')?.addEventListener('keydown', function(e) 
         }
     }
 });
+
+restoreState();
