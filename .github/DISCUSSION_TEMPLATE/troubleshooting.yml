@@ -1,0 +1,67 @@
+title: "[Troubleshooting] "
+labels: ["troubleshooting"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        此模板用于排查非 Bug 类的配置或使用问题。如果确认是 Bug，请使用 [Issue 模板](https://github.com/pinsonchen/mlive/issues/new/choose)。
+        Use this template for non-bug configuration or usage issues. If you're sure it's a bug, please use an [Issue template](https://github.com/pinsonchen/mlive/issues/new/choose).
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: 相关平台 / Platform
+      description: 问题涉及哪个平台？
+      multiple: true
+      options:
+        - 淘宝直播
+        - 视频号直播
+        - 小红书直播
+        - 抖音直播
+        - 全部平台
+        - 其他 / Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: symptom
+    attributes:
+      label: 问题现象 / Symptom
+      description: 详细描述你遇到的现象
+      placeholder: |
+        1. 执行了 ...
+        2. 出现了 ...
+        3. 期望行为是 ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps_tried
+    attributes:
+      label: 已尝试的排查步骤 / Troubleshooting Steps Tried
+      description: 你已经尝试了哪些排查方法？
+      placeholder: |
+        1. 检查了配置文件 ...
+        2. 运行了 diagnose.sh ...
+        3. 查看了日志 ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日志或错误输出 / Logs or Error Output
+      description: 相关日志、终端输出或截图
+      placeholder: "粘贴日志 / Paste logs here..."
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 环境信息 / Environment
+      description: 操作系统、OBS/ffmpeg 版本、网络环境等
+      placeholder: "例：macOS 14.5 / OBS 30.2 / ffmpeg 6.1 / 家庭宽带"
+    validations:
+      required: true
