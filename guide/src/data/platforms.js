@@ -41,13 +41,13 @@ export const platforms = {
                             <ul>
                                 <li>✅ 支付宝高级实名认证</li>
                                 <li>✅ 年满18周岁</li>
-                                <li>✅ <strong>账号粉丝达到200人以上</strong>（2026年新增要求）</li>
-                                <li>✅ 已缴纳保证金（个人2000-3000元，企业5000元）</li>
+                                <li>✅ <strong>账号粉丝达到1000人以上</strong>（达人账号）或优质内容分≥20</li>
+                                <li>✅ 已缴纳保证金（个人5000元，企业可免缴）</li>
                                 <li>✅ 账号通过淘宝直播审核</li>
                             </ul>
                             <div class="warning-box">
                                 <span class="warning-icon">⚠️</span>
-                                <strong>重要：</strong>200粉丝是使用OBS推流的硬性门槛，不足200粉丝无法使用推流功能！
+                                <strong>重要：</strong>1000粉丝是达人账号使用OBS推流的硬性门槛，不足1000粉丝无法使用推流功能！
                             </div>
                         </div>
                     </div>
