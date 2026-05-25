@@ -126,8 +126,8 @@ export function generateOBSConfiguration(selectedPlatforms, selectedSolution) {
                             <li>配置推流参数：
                                 <ul>
                                     <li>音频码率：160 Kbps</li>
-                                    <li>编码器：硬件编码 (NVENC H.264) 或 x264</li>
-                                    <li>码率控制：CBR</li>
+                                    <li>编码器：硬件编码 (<span class="tooltip" tabindex="0">NVENC H.264<span class="tooltip-icon">?</span><span class="tooltip-content">NVIDIA显卡的硬件视频编码器，比软件编码（x264）更快、占用CPU更少，画质相当。无NVIDIA显卡可选x264。</span></span>) 或 x264</li>
+                                    <li>码率控制：<span class="tooltip" tabindex="0">CBR<span class="tooltip-icon">?</span><span class="tooltip-content">恒定码率（Constant Bit Rate），保持推流码率稳定，适合直播推流，可避免网络波动导致画质忽好忽坏。</span></span></li>
                                     <li>码率：4500 Kbps（⚠️ 淘宝限制2500kbps）</li>
                                     <li>关键帧间隔：2秒</li>
                                 </ul>
@@ -249,7 +249,7 @@ export function generateOBSConfiguration(selectedPlatforms, selectedSolution) {
                 <div class="guide-step">
                     <div class="guide-step-number">2</div>
                     <div class="guide-step-content">
-                        <h4>第二步：启用 OBS 虚拟摄像头</h4>
+                        <h4>第二步：启用 OBS <span class="tooltip" tabindex="0">虚拟摄像头<span class="tooltip-icon">?</span><span class="tooltip-content">OBS内置功能，将直播画面虚拟成系统摄像头，平台直播伴侣可像真实摄像头一样调用它。</span></span></h4>
                         <ol>
                             <li>在 OBS 中制作好直播场景</li>
                             <li>点击菜单【工具】→ 【虚拟摄像头】→ 【启动】</li>
@@ -271,7 +271,7 @@ export function generateOBSConfiguration(selectedPlatforms, selectedSolution) {
                             ${getRtmpLimitedPlatforms(selectedPlatforms)}
                         </ul>
                         <ol>
-                            <li>下载并安装对应平台的官方直播伴侣</li>
+                            <li>下载并安装对应平台的官方<span class="tooltip" tabindex="0">直播伴侣<span class="tooltip-icon">?</span><span class="tooltip-content">各平台官方提供的PC直播软件，安全合规，支持将OBS虚拟摄像头作为画面来源。</span></span></li>
                             <li>在直播伴侣的摄像头设置中选择【OBS Virtual Camera】</li>
                             <li>点击【开始直播】</li>
                         </ol>
@@ -402,8 +402,8 @@ function generatePlatformStreamSettings(selectedPlatforms) {
                 <ul style="margin-left: 20px;">
                     <li>名称：${platforms[platform].name}</li>
                     <li>服务：自定义</li>
-                    <li>服务器：[从${platforms[platform].name}获取的RTMP地址]</li>
-                    <li>串流密钥：[从${platforms[platform].name}获取的密钥]</li>
+                    <li>服务器：[从${platforms[platform].name}获取的<span class="tooltip" tabindex="0">RTMP地址<span class="tooltip-icon">?</span><span class="tooltip-content">推流服务器地址，格式如 rtmp://live.example.com/live/，填入OBS推流设置的"服务器"栏。</span></span>]</li>
+                    <li><span class="tooltip" tabindex="0">串流密钥<span class="tooltip-icon">?</span><span class="tooltip-content">推流密钥（Stream Key），与推流地址配合标识您的直播间，请勿分享给他人，有效期有限。</span></span>：[从${platforms[platform].name}获取的密钥]</li>
                 </ul>
             </div>
         `;

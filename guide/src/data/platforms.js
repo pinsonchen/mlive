@@ -103,7 +103,7 @@ export const platforms = {
                                 <li><strong>等待约10秒</strong>，让系统生成推流码</li>
                                 <li><strong>关键步骤：点击【暂停直播】</strong></li>
                                 <li>此时直播显示"暂停中"状态</li>
-                                <li>现在可以看到并复制推流地址和串流密钥</li>
+                                <li>现在可以看到并复制<span class="tooltip" tabindex="0">推流地址<span class="tooltip-icon">?</span><span class="tooltip-content">推流服务器地址（RTMP URL），将其填入OBS推流设置的"服务器"栏。</span></span>和<span class="tooltip" tabindex="0">串流密钥<span class="tooltip-icon">?</span><span class="tooltip-content">推流密钥（Stream Key），与推流地址一起标识您的直播间，有效期30分钟，请勿外泄。</span></span></li>
                             </ol>
                             <div class="tip-box" style="background: #fef3c7; border-left-color: #f59e0b;">
                                 <span class="tip-icon">💡</span>
@@ -111,7 +111,7 @@ export const platforms = {
                                 <p>淘宝直播要求使用OBS等第三方工具推流时，必须先在淘宝中控台点击"暂停直播"。这样推流码才能被OBS识别和使用。如果直接使用"正在直播"状态的推流码，OBS可能无法连接。</p>
                             </div>
                             <div class="code-box">
-                                RTMP服务器：rtmp://xxx.alivecdn.com/live/<br>
+                                <span class="tooltip" tabindex="0">RTMP服务器<span class="tooltip-icon">?</span><span class="tooltip-content">推流目标地址，填入OBS【设置】→【推流】→【服务器】栏。</span></span>：rtmp://xxx.alivecdn.com/live/<br>
                                 串流密钥：xxxx-xxxx-xxxx（30分钟有效）
                             </div>
                             <div class="warning-box">
@@ -148,7 +148,7 @@ export const platforms = {
                                 <strong>重要提醒：</strong>
                                 <ul>
                                     <li>码率不要超过2500kbps！之前的5000kbps设置已经不适用</li>
-                                    <li>建议使用CBR（恒定码率）模式</li>
+                                    <li>建议使用<span class="tooltip" tabindex="0">CBR<span class="tooltip-icon">?</span><span class="tooltip-content">恒定码率（Constant Bit Rate），推流时保持稳定码率，适合直播防止画质抖动。</span></span>（恒定码率）模式</li>
                                     <li>使用H.264编码器</li>
                                 </ul>
                             </div>
@@ -234,7 +234,7 @@ export const platforms = {
                     <div class="guide-step">
                         <div class="guide-step-number">1</div>
                         <div class="guide-step-content">
-                            <h4>推荐方案：虚拟摄像头 + 抖音直播伴侣</h4>
+                            <h4>推荐方案：<span class="tooltip" tabindex="0">虚拟摄像头<span class="tooltip-icon">?</span><span class="tooltip-content">OBS内置功能，将直播画面虚拟成系统摄像头，抖音直播伴侣可将其作为画面来源使用。</span></span> + 抖音<span class="tooltip" tabindex="0">直播伴侣<span class="tooltip-icon">?</span><span class="tooltip-content">抖音官方提供的PC直播软件，与OBS虚拟摄像头配合是抖音唯一安全的OBS直播方式。</span></span></h4>
                             <p><strong>这是唯一安全可靠的官方方案！</strong></p>
                             <ol>
                                 <li>在OBS中制作好您的直播画面</li>
@@ -381,7 +381,7 @@ export const platforms = {
                                 <li>选择 <strong>【直播】</strong></li>
                                 <li>选择 <strong>【电脑】</strong></li>
                                 <li>输入电脑上显示的6位验证码</li>
-                                <li>点击 <strong>【串流密钥】</strong> 或 <strong>【获取推流码】</strong></li>
+                                <li>点击 <strong><span class="tooltip" tabindex="0">【串流密钥】<span class="tooltip-icon">?</span><span class="tooltip-content">推流密钥（Stream Key），与RTMP服务器地址配合，在OBS推流设置中填写"串流密钥"栏。</span></span></strong> 或 <strong>【获取推流码】</strong></li>
                             </ol>
                             <div class="warning-box">
                                 <span class="warning-icon">⚠️</span>
@@ -396,7 +396,7 @@ export const platforms = {
                             <h4>记录推流信息</h4>
                             <p>系统将显示以下信息，请复制保存：</p>
                             <div class="code-box">
-                                RTMP服务器：rtmp://push.xiaohongshu.com/live/<br>
+                                <span class="tooltip" tabindex="0">RTMP服务器<span class="tooltip-icon">?</span><span class="tooltip-content">推流目标地址，填入OBS【设置】→【推流】→【服务器】栏，单次直播有效。</span></span>：rtmp://push.xiaohongshu.com/live/<br>
                                 串流密钥：[显示的密钥]
                             </div>
                             <div class="tip-box">
@@ -538,7 +538,7 @@ export const platforms = {
                                         <strong>推流服务器（RTMP）：</strong><br>
                                         rtmp://[节点ID].livepush.myqcloud.com/[应用ID]/<br>
                                         <span style="font-size: 0.85rem; color: #6b7280;">（实际示例：rtmp://111583.livepush.myqcloud.com/trtc_1400439699/）</span><br><br>
-                                        <strong>串流密钥（Stream Key）：</strong><br>
+                                        <strong><span class="tooltip" tabindex="0">串流密钥（Stream Key）<span class="tooltip-icon">?</span><span class="tooltip-content">推流密钥，与推流服务器配合唯一标识您的直播间，视频号每次开播均会更新，请重新获取。</span></span>：</strong><br>
                                         [您的专属密钥，通常包含房间ID和认证参数]
                                     </div>
                                 </li>

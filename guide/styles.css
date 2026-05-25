@@ -996,6 +996,97 @@ body {
     line-height: 1.6;
 }
 
+/* 术语提示工具 (Tooltip) */
+.tooltip {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    cursor: default;
+}
+
+.tooltip-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    font-style: normal;
+    line-height: 1;
+    cursor: help;
+    flex-shrink: 0;
+    vertical-align: middle;
+    margin-left: 2px;
+    user-select: none;
+}
+
+.tooltip-content {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2937;
+    color: #f9fafb;
+    font-size: 0.82rem;
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 10px 14px;
+    border-radius: 8px;
+    width: max-content;
+    max-width: 280px;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s ease, visibility 0.15s ease;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    white-space: normal;
+    text-align: left;
+}
+
+/* arrow */
+.tooltip-content::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #1f2937;
+}
+
+/* keep tooltip inside right edge */
+.tooltip-content.tooltip-left {
+    left: auto;
+    right: 0;
+    transform: none;
+}
+.tooltip-content.tooltip-left::after {
+    left: auto;
+    right: 12px;
+    transform: none;
+}
+
+.tooltip:hover .tooltip-content,
+.tooltip:focus-within .tooltip-content {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.tooltip-link {
+    display: inline-block;
+    margin-top: 6px;
+    color: #93c5fd;
+    font-size: 0.78rem;
+    text-decoration: underline;
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
     .header h1 {
@@ -1040,6 +1131,17 @@ body {
 
     .plugin-step {
         flex-direction: column;
+    }
+
+    .tooltip-content {
+        max-width: 220px;
+        font-size: 0.78rem;
+    }
+
+    .tooltip-icon {
+        width: 15px;
+        height: 15px;
+        font-size: 9px;
     }
 }
 
