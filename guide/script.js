@@ -9,6 +9,7 @@ const platforms = {
         name: '淘宝直播',
         icon: '🛒',
         color: '#ff5000',
+        lastVerified: '2026-05-15',
         rtmpSupport: true,
         supportTypes: ['push', 'mobile'],  // 支持OBS推流和手机直播
         requirements: {
@@ -190,6 +191,7 @@ const platforms = {
         name: '抖音直播',
         icon: '🎵',
         color: '#000000',
+        lastVerified: '2026-05-10',
         rtmpSupport: false,  // 2023年起已取消OBS推流功能
         supportTypes: ['mobile', 'pc_assistant'],  // 仅支持手机和直播伴侣
         requirements: {
@@ -305,6 +307,7 @@ const platforms = {
         name: '小红书直播',
         icon: '📕',
         color: '#ff2442',
+        lastVerified: '2026-04-20',
         rtmpSupport: true,
         supportTypes: ['push', 'mobile'],  // 支持推流和手机直播
         requirements: {
@@ -424,6 +427,7 @@ const platforms = {
         name: '视频号直播',
         icon: '💬',
         color: '#07c160',
+        lastVerified: '2026-05-20',
         rtmpSupport: true,
         supportTypes: ['push', 'pc_wechat', 'mobile'],  // 支持三种直播方式
         requirements: {
@@ -1998,4 +2002,34 @@ document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         closeModal();
     }
+});
+
+// 政策新鲜度徽章
+function getFreshnessClass(days) {
+    if (days <= 14) return 'fresh';
+    if (days <= 30) return 'stale';
+    return 'outdated';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.platform-card').forEach(function(card) {
+        const input = card.querySelector('input[name="platform"]');
+        if (!input) return;
+        const platformKey = input.value;
+        const platform = platforms[platformKey];
+        if (!platform || !platform.lastVerified) return;
+
+        const lastDate = new Date(platform.lastVerified);
+        const now = new Date();
+        const days = Math.floor((now - lastDate) / (1000 * 60 * 60 * 24));
+        const cls = getFreshnessClass(days);
+
+        const badge = document.createElement('span');
+        badge.className = 'freshness-badge freshness-' + cls;
+        badge.setAttribute('data-days', days);
+        badge.textContent = '最后验证: ' + days + '天前';
+
+        const info = card.querySelector('.platform-info');
+        if (info) info.appendChild(badge);
+    });
 });
