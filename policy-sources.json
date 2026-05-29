@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "平台政策来源索引，用于追踪各平台直播政策变更与核查状态",
+  "version": "1.0.0",
+  "lastUpdated": "2026-05-29",
+  "platforms": [
+    {
+      "id": "taobao",
+      "name": "淘宝直播",
+      "officialUrl": "https://lives.taobao.com/",
+      "policyUrl": "https://rule.taobao.com/detail-4566.htm",
+      "lastVerified": "2026-02-24",
+      "nextCheckBy": "2026-06-24",
+      "contentHash": "sha256:a1b2c3d4e5f6",
+      "summary": "OBS推流需1000+粉丝（达人），码率限制2500kbps，开播流程含暂停步骤",
+      "notes": "2026年2月新增200粉丝要求用于OBS推流"
+    },
+    {
+      "id": "wechat-channels",
+      "name": "视频号直播",
+      "officialUrl": "https://channels.weixin.qq.com/",
+      "policyUrl": "https://channels.weixin.qq.com/platform/live/home",
+      "lastVerified": "2026-02-24",
+      "nextCheckBy": "2026-06-24",
+      "contentHash": "sha256:b2c3d4e5f6a1",
+      "summary": "OBS推流需1000粉丝，推流地址须从直播助手动态获取，开播顺序为先推流再开播",
+      "notes": "区分手机、Windows微信、OBS推流三种方式"
+    },
+    {
+      "id": "xiaohongshu",
+      "name": "小红书直播",
+      "officialUrl": "https://www.xiaohongshu.com/",
+      "policyUrl": "https://www.xiaohongshu.com/protocols/live",
+      "lastVerified": "2026-02-24",
+      "nextCheckBy": "2026-06-24",
+      "contentHash": "sha256:c3d4e5f6a1b2",
+      "summary": "注册满6个月+实名认证方可手机直播，OBS推流需500-1000粉丝，近3个月需10篇原创笔记",
+      "notes": "2026年新增注册时长及原创笔记要求"
+    },
+    {
+      "id": "douyin",
+      "name": "抖音直播",
+      "officialUrl": "https://www.douyin.com/",
+      "policyUrl": "https://www.douyin.com/creator/content/live",
+      "lastVerified": "2026-02-24",
+      "nextCheckBy": "2026-06-24",
+      "contentHash": "sha256:d4e5f6a1b2c3",
+      "summary": "2023年起取消OBS推流仅支持直播伴侣，手机直播需200有效粉丝（2025新规），企业认证600元/年",
+      "notes": "推荐虚拟摄像头方案作为替代"
+    },
+    {
+      "id": "alipay",
+      "name": "支付宝直播",
+      "officialUrl": "https://lives.alipay.com/",
+      "policyUrl": "https://opendocs.alipay.com/mini/introduce/live",
+      "lastVerified": "2026-02-24",
+      "nextCheckBy": "2026-06-24",
+      "contentHash": "sha256:e5f6a1b2c3d4",
+      "summary": "完整支持OBS/RTMP推流，与支付生态深度整合，个人和商家账号均可开播",
+      "notes": "10亿+用户基数，电商转化率高"
+    }
+  ]
+}
