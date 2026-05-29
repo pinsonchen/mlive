@@ -10,6 +10,26 @@
 
 - **[多平台同步开播操作文档.md](多平台同步开播操作文档.md)** - 完整的操作文档（v2.0）
 - **[guide/](guide/)** - 交互式操作指南网站
+- **[docs/faq/](docs/faq/index.html)** - FAQ 常见问题知识库（可搜索）
+
+## ❓ FAQ 常见问题
+
+遇到推流失败、黑屏、断流等问题？查看我们的 FAQ 知识库快速定位解决方案：
+
+> **🔍 在线 FAQ**：https://tools.pinsonbot.com/mlive/docs/faq/
+
+FAQ 涵盖以下分类（共 23 条）：
+- 推流配置 - 推流地址、连接失败、推流流程
+- 网络 - 带宽不足、断流、延迟
+- OBS - 虚拟摄像头、插件安装、编码设置
+- 鉴权 - 各平台开通条件、权限问题
+- 码率 - 码率设置、画质优化
+- 平台政策 - 平台规则、保证金、封禁处理
+
+支持关键词实时搜索和分类筛选，也可通过 `grep` 在本地 markdown 文件中搜索：
+```bash
+grep -ri "推流失败" docs/faq/
+```
 
 ## 🎯 功能特点
 
@@ -127,6 +147,16 @@ mlive/
 │   ├── README.md                  # 指南说明
 │   ├── CHANGELOG.md               # 更新日志
 │   └── 更新说明文档/              # 平台更新详情
+├── docs/faq/                      # FAQ 常见问题知识库
+│   ├── index.html                 # 可搜索的 FAQ 页面
+│   ├── faq-data.json              # FAQ 数据
+│   ├── streaming-config.md        # 推流配置类问题
+│   ├── network.md                 # 网络类问题
+│   ├── obs.md                     # OBS 相关问题
+│   ├── auth.md                    # 鉴权与权限问题
+│   ├── bitrate.md                 # 码率相关问题
+│   ├── platform-policy.md         # 平台政策问题
+│   └── README.md                  # 贡献指南
 └── README.md                      # 本文件
 ```
 
