@@ -1,0 +1,150 @@
+# 复元·Vivify 配置 - mlive 跨平台直播指南
+# 项目类型：静态网站 + 文档库
+version: 1
+mode: daemon
+interval_seconds: 3600
+
+# 状态与日志
+state_dir: .vivify
+log_dir: .vivify/logs
+
+# PR 模式配置
+pr:
+  base_branch: main
+  branch_prefix: vivify/
+  auto_merge: false
+  labels: ["vivify", "auto"]
+  draft_default: false
+
+# Agent 配置
+agent:
+  type: qodercli
+  qodercli:
+    binary_path: qodercli
+    model: ultimate
+    max_turns_fix: 20
+    max_turns_develop: 60
+    timeout_fix_seconds: 1200
+    timeout_develop_seconds: 2400
+    reasoning_effort: medium
+    extra_args: ["--yolo", "-q"]
+
+# 存储
+storage:
+  type: sqlite
+  sqlite:
+    path: .vivify/state.db
+
+# GitHub 集成
+github:
+  enabled: true
+  repo: ""
+  token_env: GH_TOKEN
+  mirror_issues: true
+
+# 探针配置
+probes:
+  enabled:
+    - doc_staleness
+    - dead_code
+    - repo_size
+    - stale_branches
+  user_probes_dir: .vivify/probes
+  per_probe_timeout_seconds: 120
+
+# 修复器配置
+fixers:
+  enabled:
+    - doc_link_check
+    - stale_branch_prune
+    - format_autofix
+  user_fixers_dir: .vivify/fixers
+
+# 目标管理
+goals:
+  path: GOALS.md
+  decompose_interval_hours: 24
+  decompose_on_change: true
+  max_features_per_decompose: 2
+
+# 升级策略
+escalation:
+  max_same_issue_rounds: 3
+  upgrade_threshold: 3
+  low_cooldown_seconds: 21600
+  medium_cooldown_seconds: 3600
+
+# KPI 监控
+kpi_monitor:
+  enabled: true
+  check_interval_hours: 24
+  degrade_ratio: 0.8
+  baseline_window_days: 30
+
+# Harness 验证体系（PEV 循环）
+harness:
+  enabled: true
+  run_tests_after_fix: false
+  run_lint_after_fix: false
+  doom_loop_window: 10
+  doom_loop_threshold: 3
+  risk_scoring_enabled: true
+  high_risk_requires_tests: false
+  guides_dir: .vivify/guides
+  inject_guides_to_prompt: true
+
+# 令牌预算
+budget:
+  daily_limit: 50
+  per_cycle_limit: 5
+  pr_frequency_threshold: 8
+  backlog_threshold: 15
+  cooldown_multiplier: 2.0
+
+# 技能胶囊
+capsules:
+  enabled: true
+  capsules_dir: .vivify/capsules
+  promote_threshold: 3
+  archive_threshold: 5
+  min_effectiveness: 0.7
+
+# 知识图谱 GC
+knowledge_gc:
+  enabled: true
+  max_nodes: 200
+  max_modules: 20
+  stale_days: 30
+  gc_interval_hours: 48
+
+# 表观遗传
+epigenetics:
+  enabled: true
+  plasticity_window: 30
+  imprint_threshold: 3
+  min_miss_streak: 10
+
+# 奖励信号
+reward:
+  enabled: true
+
+# 验证配置
+verification:
+  data_driven_enabled: false
+
+# 能力外化
+externalization:
+  enabled: true
+  check_interval_rounds: 10
+  output_dir: .vivify/externalized
+
+# 项目元数据
+project:
+  type: static-site
+  language: javascript
+  framework: vanilla
+  deploy_url: https://tools.pinsonbot.com/mlive/
+
+# 自增长约束
+self_growth:
+  enabled: false
