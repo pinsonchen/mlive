@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ 常见问题 - 多平台同步开播</title>
+    <link rel="stylesheet" href="faq.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <nav class="nav-bar">
+                <a href="../guide/index.html" class="nav-link">操作指南</a>
+                <a href="index.html" class="nav-link active">FAQ 常见问题</a>
+            </nav>
+            <h1>常见问题解答 (FAQ)</h1>
+            <p class="subtitle">多平台同步直播故障排查与自助指南</p>
+        </header>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="搜索问题（如：推流失败、黑屏、码率、权限...）" autocomplete="off">
+            <span class="search-icon">🔍</span>
+            <div id="searchCount" class="search-count"></div>
+        </div>
+
+        <div class="category-filter">
+            <button class="filter-btn active" data-category="all">全部</button>
+            <button class="filter-btn" data-category="streaming-config">推流配置</button>
+            <button class="filter-btn" data-category="network">网络</button>
+            <button class="filter-btn" data-category="obs">OBS</button>
+            <button class="filter-btn" data-category="auth">鉴权</button>
+            <button class="filter-btn" data-category="bitrate">码率</button>
+            <button class="filter-btn" data-category="platform-policy">平台政策</button>
+        </div>
+
+        <div id="faqList" class="faq-list"></div>
+
+        <div id="noResults" class="no-results" style="display: none;">
+            <p>未找到匹配的问题，请尝试其他关键词。</p>
+        </div>
+
+        <footer class="footer">
+            <p>如有更多问题，欢迎 <a href="https://github.com/pinsonchen/mlive/issues" target="_blank">提交 Issue</a></p>
+            <p><a href="../README.md">返回项目首页</a></p>
+        </footer>
+    </div>
+
+    <script src="faq.js"></script>
+</body>
+</html>

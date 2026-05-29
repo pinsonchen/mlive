@@ -1,0 +1,209 @@
+[
+  {
+    "id": "FAQ-001",
+    "category": "streaming-config",
+    "categoryName": "推流配置",
+    "question": "OBS推流后平台显示"未开播"",
+    "symptoms": "OBS状态栏显示正在推流且帧数正常，但平台直播间仍显示未开播状态",
+    "cause": "推流地址或密钥填写错误、平台端未点击开始直播、淘宝未执行暂停步骤、推流地址过期",
+    "solution": "检查推流地址和密钥无多余空格；确认平台已创建直播间并开始；淘宝需先暂停再推流；视频号每次重新获取地址"
+  },
+  {
+    "id": "FAQ-002",
+    "category": "streaming-config",
+    "categoryName": "推流配置",
+    "question": "Multi RTMP插件添加推流目标后无法连接",
+    "symptoms": "插件中显示红色连接失败，错误提示无法连接到服务器，主推流正常但Multi RTMP失败",
+    "cause": "RTMP地址格式不正确、推流密钥未单独填入密钥字段、防火墙阻止连接、平台服务器暂时不可用",
+    "solution": "确认RTMP地址以rtmp://开头；地址和密钥分别填入对应字段；检查防火墙设置允许OBS网络访问；等待几分钟重试"
+  },
+  {
+    "id": "FAQ-003",
+    "category": "streaming-config",
+    "categoryName": "推流配置",
+    "question": "推流画面卡顿或掉帧",
+    "symptoms": "OBS右下角显示丢帧或帧数波动，观众反馈画面卡顿模糊，CPU使用率过高",
+    "cause": "码率设置过高超出上行带宽、CPU负载过大、同时推多平台带宽不足、网络不稳定",
+    "solution": "降低码率至2500kbps以下；切换硬件编码器（NVENC/AMF）；降低分辨率到720p；使用有线网络；关闭后台程序"
+  },
+  {
+    "id": "FAQ-004",
+    "category": "streaming-config",
+    "categoryName": "推流配置",
+    "question": "淘宝直播推流时必须先"暂停"是怎么回事",
+    "symptoms": "直接使用推流码推流时OBS提示连接失败，或推流成功但淘宝后台不显示画面",
+    "cause": "淘宝直播的推流机制要求在暂停状态下才能接受外部OBS推流",
+    "solution": "在中控台创建直播间→点击开始直播→等待10秒→点击暂停直播→复制推流地址到OBS→开始推流→回到淘宝继续直播"
+  },
+  {
+    "id": "FAQ-005",
+    "category": "network",
+    "categoryName": "网络",
+    "question": "推流频繁断开重连",
+    "symptoms": "OBS状态栏反复显示重连中，观众反馈画面黑屏后恢复，丢帧率持续上升",
+    "cause": "网络上行带宽不足或不稳定、WiFi信号不佳、路由器性能不足、ISP对RTMP流量限速",
+    "solution": "使用有线网络直连路由器；确保上行带宽≥码率×平台数×1.5；重启路由器；降低推流码率；联系ISP确认无限速"
+  },
+  {
+    "id": "FAQ-006",
+    "category": "network",
+    "categoryName": "网络",
+    "question": "多平台同步推流时部分平台断流",
+    "symptoms": "主推流正常但部分Multi RTMP目标断开，某平台频繁断流而其他稳定",
+    "cause": "总上行带宽不足、某平台服务器响应慢导致缓冲区溢出、各平台码率上限不同",
+    "solution": "计算总带宽需求确保1.5倍余量；针对断流平台单独降低码率；调整重连间隔设置；错开各平台开播时间"
+  },
+  {
+    "id": "FAQ-007",
+    "category": "network",
+    "categoryName": "网络",
+    "question": "如何测试上行带宽是否满足推流需求",
+    "symptoms": "不确定网络能否支撑多平台同步直播，直播时断断续续",
+    "cause": "用户通常只关注下载速度，忽略了直播最关键的上行带宽",
+    "solution": "使用speedtest.net测试上传速度；单平台需码率×1.5带宽；双平台需码率×2×1.5；带宽不足可降码率或减少平台数"
+  },
+  {
+    "id": "FAQ-008",
+    "category": "network",
+    "categoryName": "网络",
+    "question": "直播延迟过高（观众反馈画面滞后）",
+    "symptoms": "观众看到画面比实际慢10秒以上，弹幕互动有明显时差",
+    "cause": "各平台CDN转码和分发有固有延迟、码率过高增加传输延迟、关键帧间隔过大",
+    "solution": "各平台固有延迟3-10秒属正常；设置关键帧间隔为2秒；使用低延迟编码预设；适当降低码率"
+  },
+  {
+    "id": "FAQ-009",
+    "category": "obs",
+    "categoryName": "OBS",
+    "question": "OBS虚拟摄像头黑屏",
+    "symptoms": "直播伴侣选择OBS Virtual Camera后画面全黑，OBS预览正常但虚拟摄像头输出无画面",
+    "cause": "虚拟摄像头未正确启动、场景中未添加视频来源、macOS权限未授予、OBS版本过旧",
+    "solution": "确认已启动虚拟摄像头；确保场景有视频来源；macOS需授予摄像头权限；重启OBS；更新至最新版本"
+  },
+  {
+    "id": "FAQ-010",
+    "category": "obs",
+    "categoryName": "OBS",
+    "question": "Multi RTMP插件安装后找不到",
+    "symptoms": "OBS工具菜单中没有Multi RTMP选项，侧面板未出现多路推流面板",
+    "cause": "插件版本与OBS版本不兼容、文件放置错误目录、未重启OBS、下载了错误系统版本",
+    "solution": "确认OBS版本并选择对应插件（32.x用v0.7.3.1）；完全关闭OBS；重新安装插件（推荐exe安装程序）；重启OBS"
+  },
+  {
+    "id": "FAQ-011",
+    "category": "obs",
+    "categoryName": "OBS",
+    "question": "OBS录制/推流时CPU占用过高",
+    "symptoms": "CPU使用率持续90%以上，OBS提示编码过载，电脑风扇狂转",
+    "cause": "使用软件编码器x264且预设过慢、分辨率或帧率过高、未利用显卡硬件编码",
+    "solution": "切换硬件编码器（NVENC/AMF/QSV）；x264预设改为veryfast；降低分辨率到720p；降低帧率到30fps"
+  },
+  {
+    "id": "FAQ-012",
+    "category": "obs",
+    "categoryName": "OBS",
+    "question": "OBS场景和来源丢失",
+    "symptoms": "打开OBS后发现之前配置的场景和来源全部消失，场景列表为空",
+    "cause": "配置文件被删除或损坏、便携版目录被移动、切换了配置集",
+    "solution": "检查是否切换了配置集；检查场景集是否有之前保存的；备份路径在%APPDATA%\\obs-studio\\basic\\scenes\\；定期导出场景集"
+  },
+  {
+    "id": "FAQ-013",
+    "category": "auth",
+    "categoryName": "鉴权",
+    "question": "淘宝直播OBS推流权限无法开通",
+    "symptoms": "中控台没有推流地址选项，提示暂无权限使用此功能",
+    "cause": "粉丝数未达门槛、未完成入驻认证、账号类型不符、保证金未缴纳",
+    "solution": "达人需1000+粉丝或5条优质内容；完成淘宝直播入驻；缴纳保证金（个人5000元）；条件不满足可用手机直播方案"
+  },
+  {
+    "id": "FAQ-014",
+    "category": "auth",
+    "categoryName": "鉴权",
+    "question": "视频号推流地址获取失败",
+    "symptoms": "视频号助手页面没有推流地址选项，获取的地址复制到OBS后无法连接",
+    "cause": "粉丝未达1000人、未通过实名认证、推流地址已过期、浏览器缓存异常",
+    "solution": "确认1000+粉丝+实名认证；每次开播重新获取地址（不能复用）；粉丝不足可先用PC微信直播（200粉丝即可）"
+  },
+  {
+    "id": "FAQ-015",
+    "category": "auth",
+    "categoryName": "鉴权",
+    "question": "小红书直播权限和条件不明确",
+    "symptoms": "APP中找不到开播入口，提示暂不满足开播条件",
+    "cause": "小红书直播门槛经常调整，不同账号类型可能有不同要求",
+    "solution": "手机直播需注册满6月+实名+近3月≥10篇原创；OBS推流需500-1000粉丝；以APP内实际显示为准；路径：我→菜单→创作中心"
+  },
+  {
+    "id": "FAQ-016",
+    "category": "auth",
+    "categoryName": "鉴权",
+    "question": "抖音直播权限与"有效粉丝"问题",
+    "symptoms": "粉丝数显示超过200但仍无法开播，提示有效粉丝不足",
+    "cause": "抖音2025年实施有效粉丝新标准，刷粉和互关不计入有效粉丝",
+    "solution": "有效粉丝需真实互动粉丝（互关、刷粉不算）；在创作者服务中心查看有效粉丝数；通过优质内容积累有效粉丝"
+  },
+  {
+    "id": "FAQ-017",
+    "category": "bitrate",
+    "categoryName": "码率",
+    "question": "多平台推流码率应该怎么设置",
+    "symptoms": "设置过高导致卡顿，设置过低画质模糊，不同平台要求不同不知如何兼顾",
+    "cause": "各平台对码率上限有不同限制，需取最低值保证所有平台正常",
+    "solution": "多平台同推建议2000-2500kbps；淘宝最高2500、小红书3000-4000、视频号2000-3000；配合720p 30fps；音频128kbps"
+  },
+  {
+    "id": "FAQ-018",
+    "category": "bitrate",
+    "categoryName": "码率",
+    "question": "码率设置正确但画质仍然模糊",
+    "symptoms": "画面整体模糊尤其运动场景，文字细节看不清，推流画面比预览差",
+    "cause": "画布和输出分辨率不匹配、编码器预设不当、缩放滤镜低质量、平台二次转码",
+    "solution": "画布设为显示器分辨率；输出720p或1080p；缩放滤镜选Lanczos；NVENC选质量预设；减少画面运动量"
+  },
+  {
+    "id": "FAQ-019",
+    "category": "bitrate",
+    "categoryName": "码率",
+    "question": "淘宝直播码率超过2500kbps会怎样",
+    "symptoms": "推流可能被平台强制降码率、画面异常卡顿、可能被警告或断流",
+    "cause": "淘宝直播2026年更新后严格限制推流码率上限为2500kbps",
+    "solution": "将码率调整到2500kbps或以下；Multi RTMP可为淘宝单独设低码率；配合720p可获得不错画质；画质要求高用手机直播"
+  },
+  {
+    "id": "FAQ-020",
+    "category": "platform-policy",
+    "categoryName": "平台政策",
+    "question": "抖音还能用OBS直接推流吗",
+    "symptoms": "找不到抖音RTMP推流地址入口，网上教程已过时，使用第三方工具被警告",
+    "cause": "抖音于2023年起正式取消OBS直接推流功能，所有第三方推流工具均为违规",
+    "solution": "抖音已不支持OBS直推；合规方案：OBS虚拟摄像头→抖音直播伴侣；切勿使用第三方推流工具，有封号风险"
+  },
+  {
+    "id": "FAQ-021",
+    "category": "platform-policy",
+    "categoryName": "平台政策",
+    "question": "各平台直播保证金政策汇总",
+    "symptoms": "被要求缴纳保证金但不确定是否必须，各平台金额不明确",
+    "cause": "各平台保证金政策不同且会定期调整",
+    "solution": "淘宝个人5000元（企业免）；抖音带货500元；抖音企业认证600元/年；小红书和视频号无保证金；保证金通常停播后可退还"
+  },
+  {
+    "id": "FAQ-022",
+    "category": "platform-policy",
+    "categoryName": "平台政策",
+    "question": "平台直播封禁或限流怎么处理",
+    "symptoms": "直播间被中断、收到违规通知、观众数异常下降、无法创建新直播间",
+    "cause": "使用非官方推流工具、内容违规、画面质量过低、推流不稳定触发风控",
+    "solution": "查看违规原因；始终使用官方认可推流方式；保持推流稳定；在创作者中心申诉（1-3个工作日）；遵守平台规范"
+  },
+  {
+    "id": "FAQ-023",
+    "category": "platform-policy",
+    "categoryName": "平台政策",
+    "question": "视频号PC直播和OBS推流有什么区别",
+    "symptoms": "不知道该用PC微信直播还是OBS推流，粉丝数在200-1000之间",
+    "cause": "视频号提供多种直播方式，不同方式门槛和功能不同",
+    "solution": "手机直播无门槛；PC微信直播需200粉丝或注册7天；OBS推流需1000粉丝；200-1000粉丝建议用PC微信直播；1000+用OBS"
+  }
+]
