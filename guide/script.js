@@ -1999,3 +1999,71 @@ document.addEventListener('keydown', function(e) {
         closeModal();
     }
 });
+
+// ========== 错误码查找表 ==========
+let errorCodesData = [];
+let activeFilter = 'all';
+
+(function initErrorCodes() {
+    fetch('data/error-codes.json')
+        .then(res => res.json())
+        .then(data => {
+            errorCodesData = data;
+            renderErrorCodes(data);
+        })
+        .catch(() => {});
+})();
+
+function renderErrorCodes(codes) {
+    const container = document.getElementById('errorCodesTable');
+    const emptyMsg = document.getElementById('errorCodesEmpty');
+    if (!container) return;
+
+    if (codes.length === 0) {
+        container.innerHTML = '';
+        emptyMsg.style.display = 'block';
+        return;
+    }
+    emptyMsg.style.display = 'none';
+
+    container.innerHTML = codes.map(item => `
+        <div class="error-code-row" id="${item.anchor}">
+            <div class="error-code-header">
+                <span class="error-code-badge">${item.code}</span>
+                <span class="error-code-platform">${item.platform}</span>
+            </div>
+            <div class="error-code-symptom">${item.symptom}</div>
+            <div class="error-code-fixes">
+                <strong>快速修复：</strong>
+                <ol>
+                    ${item.quickFix.map(fix => `<li>${fix}</li>`).join('')}
+                </ol>
+            </div>
+        </div>
+    `).join('');
+}
+
+function filterErrorCodes() {
+    const query = (document.getElementById('errorCodeSearch').value || '').toLowerCase();
+    const filtered = errorCodesData.filter(item => {
+        const matchesPlatform = activeFilter === 'all' || item.platform.includes(activeFilter);
+        const matchesQuery = !query ||
+            item.code.toLowerCase().includes(query) ||
+            item.platform.toLowerCase().includes(query) ||
+            item.symptom.toLowerCase().includes(query) ||
+            item.quickFix.some(f => f.toLowerCase().includes(query));
+        return matchesPlatform && matchesQuery;
+    });
+    renderErrorCodes(filtered);
+}
+
+document.getElementById('errorCodeSearch')?.addEventListener('input', filterErrorCodes);
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        activeFilter = this.dataset.filter;
+        filterErrorCodes();
+    });
+});

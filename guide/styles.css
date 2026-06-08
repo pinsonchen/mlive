@@ -960,6 +960,143 @@ body {
     line-height: 1.6;
 }
 
+/* 错误码查找表 */
+.error-codes-search {
+    margin-bottom: 25px;
+}
+
+.error-codes-search input {
+    width: 100%;
+    padding: 14px 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+    background: var(--bg-primary);
+}
+
+.error-codes-search input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.error-codes-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.filter-btn {
+    padding: 6px 14px;
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    background: var(--bg-primary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--text-secondary);
+}
+
+.filter-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.filter-btn.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.error-codes-table {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.error-code-row {
+    background: var(--bg-primary);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.2s ease;
+}
+
+.error-code-row:hover {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow);
+}
+
+.error-code-row:target {
+    border-color: var(--warning-color);
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+}
+
+.error-code-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.error-code-badge {
+    background: linear-gradient(135deg, var(--danger-color) 0%, #dc2626 100%);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+}
+
+.error-code-platform {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.error-code-symptom {
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.error-code-fixes {
+    background: #f0fdf4;
+    border-radius: 8px;
+    padding: 12px 16px;
+}
+
+.error-code-fixes strong {
+    color: #065f46;
+    font-size: 0.9rem;
+}
+
+.error-code-fixes ol {
+    margin: 8px 0 0 20px;
+}
+
+.error-code-fixes li {
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+}
+
+.error-codes-empty {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 40px 20px;
+    font-size: 1rem;
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
     .header h1 {
