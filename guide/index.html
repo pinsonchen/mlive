@@ -391,6 +391,55 @@
                         <p><strong>建议：</strong>以小红书APP内实际显示的要求为准。平台政策可能随时调整，且不同账号质量可能影响实际门槛。</p>
                     </div>
                 </details>
+
+                <details class="faq-item" style="margin-bottom: 15px; border: 1px solid var(--border-color); border-radius: 10px; overflow: hidden;">
+                    <summary style="padding: 15px 20px; cursor: pointer; background: var(--bg-primary); font-weight: 600;">
+                        <strong>Q：推流密钥复制后粘贴到OBS连接失败怎么办？</strong>
+                    </summary>
+                    <div style="padding: 20px; background: var(--bg-secondary);">
+                        <p><strong>A：</strong>这是最常见的推流失败原因之一——复制推流密钥时不小心带入了多余的空格或换行符。</p>
+                        <p><strong>解决方法：</strong></p>
+                        <ul>
+                            <li>粘贴后仔细检查推流密钥<strong>首尾是否有空格</strong></li>
+                            <li>不要双击选择文本（容易选中前后空格），使用 Ctrl+A 全选或手动拖选</li>
+                            <li>粘贴到OBS后，将光标移到最前面和最后面确认无多余字符</li>
+                            <li>部分平台（如视频号）密钥较长，注意是否复制完整</li>
+                        </ul>
+                        <p><strong>提示：</strong>可以先粘贴到记事本中检查，确认无误后再复制到OBS。</p>
+                    </div>
+                </details>
+
+                <details class="faq-item" style="margin-bottom: 15px; border: 1px solid var(--border-color); border-radius: 10px; overflow: hidden;">
+                    <summary style="padding: 15px 20px; cursor: pointer; background: var(--bg-primary); font-weight: 600;">
+                        <strong>Q：OBS显示推流成功但平台显示"未开播"是什么原因？</strong>
+                    </summary>
+                    <div style="padding: 20px; background: var(--bg-secondary);">
+                        <p><strong>A：</strong>OBS底部状态栏显示绿色（推流正常）但平台未显示直播画面，常见原因有：</p>
+                        <ul>
+                            <li><strong>推流地址过期</strong>：部分平台的推流地址有时效限制（如视频号每次开播地址不同），需重新获取</li>
+                            <li><strong>未在平台端点击"开始直播"</strong>：有些平台需要先在后台/APP端确认开播</li>
+                            <li><strong>推流地址与密钥不匹配</strong>：检查是否把地址和密钥填反了</li>
+                            <li><strong>平台审核延迟</strong>：首次开播可能需要几分钟平台审核</li>
+                            <li><strong>网络防火墙拦截</strong>：公司/学校网络可能屏蔽RTMP端口（1935），尝试切换网络</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details class="faq-item" style="margin-bottom: 15px; border: 1px solid var(--border-color); border-radius: 10px; overflow: hidden;">
+                    <summary style="padding: 15px 20px; cursor: pointer; background: var(--bg-primary); font-weight: 600;">
+                        <strong>Q：直播封面或标题审核不通过有哪些常见原因？</strong>
+                    </summary>
+                    <div style="padding: 20px; background: var(--bg-secondary);">
+                        <p><strong>A：</strong>各平台对直播封面和标题都有严格审核，常见被拒原因包括：</p>
+                        <ul>
+                            <li><strong>封面图片</strong>：含二维码、联系方式、过度美颜/P图、低俗暴露、非本人照片</li>
+                            <li><strong>标题违规</strong>：使用"最""第一""绝对"等绝对化用语、含价格引导（如"1元秒杀"）、虚假宣传</li>
+                            <li><strong>品牌侵权</strong>：未经授权使用品牌Logo或名称</li>
+                            <li><strong>分辨率不符</strong>：封面图尺寸不满足平台要求（通常需要16:9或1:1）</li>
+                        </ul>
+                        <p><strong>建议：</strong>使用真实、清晰的个人照片作为封面，标题简洁描述直播内容即可，避免夸张营销话术。</p>
+                    </div>
+                </details>
             </div>
 
             <div class="faq-category" style="margin-top: 40px;">
@@ -490,6 +539,131 @@
                             <li><strong>检查权限</strong>：macOS用户需要在系统偏好设置中授予OBS屏幕录制权限</li>
                             <li><strong>更新OBS</strong>：使用最新版本的OBS Studio</li>
                         </ol>
+                    </div>
+                </details>
+
+                <details class="faq-item" style="margin-bottom: 15px; border: 1px solid var(--border-color); border-radius: 10px; overflow: hidden;">
+                    <summary style="padding: 15px 20px; cursor: pointer; background: var(--bg-primary); font-weight: 600;">
+                        <strong>Q：Multi RTMP插件推流中断后如何设置自动重连？</strong>
+                    </summary>
+                    <div style="padding: 20px; background: var(--bg-secondary);">
+                        <p><strong>A：</strong>Multi RTMP插件支持断线自动重连功能，设置方法：</p>
+                        <ol>
+                            <li>打开OBS → 菜单栏 → <strong>Docks</strong> → <strong>Multiple Output</strong></li>
+                            <li>在对应推流目标右侧点击<strong>齿轮图标</strong>（设置）</li>
+                            <li>勾选 <strong>"Reconnect"</strong> 选项</li>
+                            <li>设置重连延迟（建议 <strong>10秒</strong>）和最大重试次数（建议 <strong>20次</strong>）</li>
+                        </ol>
+                        <p><strong>注意事项：</strong></p>
+                        <ul>
+                            <li>如果频繁断连，优先检查网络带宽是否足够支撑多路推流</li>
+                            <li>部分平台在短时间内多次断连后可能暂时拒绝连接，需等待几分钟再试</li>
+                            <li>建议同时开启OBS自带的推流重连（设置 → 高级 → 自动重新连接）</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details class="faq-item" style="margin-bottom: 15px; border: 1px solid var(--border-color); border-radius: 10px; overflow: hidden;">
+                    <summary style="padding: 15px 20px; cursor: pointer; background: var(--bg-primary); font-weight: 600;">
+                        <strong>Q：多平台同步推流时出现音画不同步怎么解决？</strong>
+                    </summary>
+                    <div style="padding: 20px; background: var(--bg-secondary);">
+                        <p><strong>A：</strong>使用Multi RTMP同时推流多个平台时音画不同步，通常由以下原因导致：</p>
+                        <ul>
+                            <li><strong>编码性能不足</strong>：CPU/GPU无法同时处理多路编码，导致音频延迟</li>
+                            <li><strong>音频采样率不一致</strong>：OBS设置与系统音频设备采样率不匹配</li>
+                            <li><strong>网络带宽瓶颈</strong>：上行带宽不够导致推流缓冲堆积</li>
+                        </ul>
+                        <p><strong>解决方法：</strong></p>
+                        <ol>
+                            <li>在OBS <strong>设置 → 音频</strong> 中统一采样率为 <strong>44.1kHz</strong> 或 <strong>48kHz</strong></li>
+                            <li>降低视频码率或分辨率以减轻编码负担</li>
+                            <li>在 <strong>高级音频属性</strong>（编辑 → 高级音频属性）中调整同步偏移值</li>
+                            <li>如果使用蓝牙耳机/音箱，改用有线设备避免蓝牙延迟</li>
+                        </ol>
+                    </div>
+                </details>
+
+                <details class="faq-item" style="margin-bottom: 15px; border: 1px solid var(--border-color); border-radius: 10px; overflow: hidden;">
+                    <summary style="padding: 15px 20px; cursor: pointer; background: var(--bg-primary); font-weight: 600;">
+                        <strong>Q：OBS编码器选x264还是NVENC（硬件编码）？</strong>
+                    </summary>
+                    <div style="padding: 20px; background: var(--bg-secondary);">
+                        <p><strong>A：</strong>两种编码器各有优劣，选择取决于你的硬件和使用场景：</p>
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                            <thead>
+                                <tr style="background: var(--bg-primary);">
+                                    <th style="padding: 10px; border: 1px solid var(--border-color);">对比项</th>
+                                    <th style="padding: 10px; border: 1px solid var(--border-color);">x264（软件编码）</th>
+                                    <th style="padding: 10px; border: 1px solid var(--border-color);">NVENC（硬件编码）</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 10px; border: 1px solid var(--border-color);">画质</td>
+                                    <td style="padding: 10px; border: 1px solid var(--border-color);">同码率下画质更好</td>
+                                    <td style="padding: 10px; border: 1px solid var(--border-color);">略低于x264，但差距很小</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; border: 1px solid var(--border-color);">CPU占用</td>
+                                    <td style="padding: 10px; border: 1px solid var(--border-color);">高（尤其多路推流时）</td>
+                                    <td style="padding: 10px; border: 1px solid var(--border-color);">极低</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; border: 1px solid var(--border-color);">适用场景</td>
+                                    <td style="padding: 10px; border: 1px solid var(--border-color);">高画质单平台推流</td>
+                                    <td style="padding: 10px; border: 1px solid var(--border-color);">多平台同步推流、边播边玩游戏</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; border: 1px solid var(--border-color);">硬件要求</td>
+                                    <td style="padding: 10px; border: 1px solid var(--border-color);">强力CPU（i7/R7以上）</td>
+                                    <td style="padding: 10px; border: 1px solid var(--border-color);">NVIDIA GTX 1650+显卡</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="margin-top: 15px;"><strong>建议：</strong>使用Multi RTMP多平台推流时优先选择 <strong>NVENC</strong>，可显著降低CPU负载。Mac用户可选择 <strong>Apple VT H264硬件编码器</strong>。</p>
+                    </div>
+                </details>
+
+                <details class="faq-item" style="margin-bottom: 15px; border: 1px solid var(--border-color); border-radius: 10px; overflow: hidden;">
+                    <summary style="padding: 15px 20px; cursor: pointer; background: var(--bg-primary); font-weight: 600;">
+                        <strong>Q：macOS系统OBS无法捕获屏幕/窗口怎么办？</strong>
+                    </summary>
+                    <div style="padding: 20px; background: var(--bg-secondary);">
+                        <p><strong>A：</strong>macOS对屏幕录制权限管控严格，OBS显示黑屏或无法添加屏幕采集源时，需手动授权：</p>
+                        <ol>
+                            <li>打开 <strong>系统设置 → 隐私与安全性 → 屏幕录制</strong>（macOS Ventura及以上）</li>
+                            <li>找到 <strong>OBS</strong>，确认开关已开启</li>
+                            <li>如果列表中没有OBS，点击"+"手动添加OBS应用</li>
+                            <li>修改权限后<strong>必须完全退出并重启OBS</strong>（不只是关闭窗口）</li>
+                        </ol>
+                        <p><strong>其他注意事项：</strong></p>
+                        <ul>
+                            <li>macOS Sonoma 14+每次系统更新后可能需要重新授权</li>
+                            <li>如果使用"窗口采集"仍然黑屏，尝试改用"macOS屏幕采集"源</li>
+                            <li>部分应用（如Netflix、Disney+）有DRM保护，无法被OBS捕获</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details class="faq-item" style="margin-bottom: 15px; border: 1px solid var(--border-color); border-radius: 10px; overflow: hidden;">
+                    <summary style="padding: 15px 20px; cursor: pointer; background: var(--bg-primary); font-weight: 600;">
+                        <strong>Q：抖音直播伴侣与OBS虚拟摄像头冲突怎么解决？</strong>
+                    </summary>
+                    <div style="padding: 20px; background: var(--bg-secondary);">
+                        <p><strong>A：</strong>使用OBS虚拟摄像头配合抖音直播伴侣时出现冲突（画面卡住、黑屏、无法识别），解决步骤：</p>
+                        <ol>
+                            <li><strong>确认启动顺序</strong>：先启动OBS并开启虚拟摄像头，再打开直播伴侣</li>
+                            <li><strong>检查OBS虚拟摄像头输出格式</strong>：工具 → 虚拟摄像头 → 输出类型选择"场景"而非"源"</li>
+                            <li><strong>关闭其他占用摄像头的软件</strong>：微信视频、腾讯会议等会抢占虚拟摄像头</li>
+                            <li><strong>确认直播伴侣版本</strong>：使用最新版直播伴侣（旧版可能不兼容OBS 30+的虚拟摄像头）</li>
+                        </ol>
+                        <p><strong>如果仍然无法解决：</strong></p>
+                        <ul>
+                            <li>尝试安装第三方虚拟摄像头插件（如OBS-VirtualCam旧版独立插件）</li>
+                            <li>重启电脑后按顺序重新打开</li>
+                            <li>Windows用户检查是否有多个OBS版本残留导致驱动冲突</li>
+                        </ul>
                     </div>
                 </details>
             </div>
