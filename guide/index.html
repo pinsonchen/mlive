@@ -555,6 +555,31 @@
             </div>
         </section>
 
+        <!-- 错误码查找表 -->
+        <section class="step-section" id="error-codes" style="margin-top: 40px; padding: 40px; background: var(--bg-secondary); border-radius: 20px;">
+            <h2 style="margin-bottom: 10px;">🔍 错误码快速修复查找表</h2>
+            <p class="step-desc">遇到错误？输入错误码、平台名称或症状关键字，快速找到解决方案。</p>
+
+            <div class="error-codes-search">
+                <input type="text" id="errorCodeSearch" placeholder="搜索错误码、平台或症状关键字（如：RTMP -3、403、连接被拒绝）" />
+                <div class="error-codes-filters">
+                    <button class="filter-btn active" data-filter="all">全部</button>
+                    <button class="filter-btn" data-filter="通用">通用</button>
+                    <button class="filter-btn" data-filter="OBS">OBS</button>
+                    <button class="filter-btn" data-filter="淘宝直播">淘宝</button>
+                    <button class="filter-btn" data-filter="抖音直播">抖音</button>
+                    <button class="filter-btn" data-filter="视频号">视频号</button>
+                    <button class="filter-btn" data-filter="小红书">小红书</button>
+                </div>
+            </div>
+
+            <div id="errorCodesTable" class="error-codes-table">
+                <!-- Dynamically populated -->
+            </div>
+
+            <p id="errorCodesEmpty" class="error-codes-empty" style="display: none;">未找到匹配的错误码，请尝试其他关键字。</p>
+        </section>
+
         <!-- 插件安装模态框 -->
         <div id="pluginModal" class="modal" style="display: none;">
             <div class="modal-content">

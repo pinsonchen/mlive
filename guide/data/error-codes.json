@@ -1,0 +1,194 @@
+[
+  {
+    "code": "RTMP -1",
+    "platform": "通用",
+    "symptom": "连接超时，无法连接到服务器",
+    "quickFix": [
+      "检查推流地址是否正确，确认没有多余空格",
+      "检查网络连接和防火墙设置，确保1935端口未被封锁",
+      "尝试更换网络环境（如切换到手机热点测试）"
+    ],
+    "relatedScenarioId": null,
+    "anchor": "err-rtmp-1"
+  },
+  {
+    "code": "RTMP -2",
+    "platform": "通用",
+    "symptom": "握手失败，服务器拒绝RTMP握手",
+    "quickFix": [
+      "确认推流地址格式正确（rtmp://开头）",
+      "检查串流密钥是否过期，重新获取新的密钥",
+      "确认平台直播间已创建且处于等待推流状态"
+    ],
+    "relatedScenarioId": null,
+    "anchor": "err-rtmp-2"
+  },
+  {
+    "code": "RTMP -3",
+    "platform": "通用",
+    "symptom": "推流被服务器断开或拒绝",
+    "quickFix": [
+      "检查串流密钥是否正确且未过期（淘宝密钥30分钟有效）",
+      "确认码率未超过平台限制（淘宝≤2500kbps）",
+      "确认同一密钥没有被其他OBS实例使用"
+    ],
+    "relatedScenarioId": null,
+    "anchor": "err-rtmp-3"
+  },
+  {
+    "code": "HTTP 403",
+    "platform": "通用",
+    "symptom": "禁止访问，推流权限被拒绝",
+    "quickFix": [
+      "确认账号已获得推流权限（检查粉丝数是否满足门槛）",
+      "重新登录平台后台，刷新推流密钥",
+      "检查是否被平台限流或封禁，联系平台客服确认"
+    ],
+    "relatedScenarioId": null,
+    "anchor": "err-http-403"
+  },
+  {
+    "code": "HTTP 404",
+    "platform": "通用",
+    "symptom": "推流地址不存在或已失效",
+    "quickFix": [
+      "确认推流服务器地址完整无误（注意末尾斜杠）",
+      "重新获取推流地址（视频号每次开播地址都会变化）",
+      "检查直播间是否仍然存在且未被关闭"
+    ],
+    "relatedScenarioId": null,
+    "anchor": "err-http-404"
+  },
+  {
+    "code": "HTTP 502",
+    "platform": "通用",
+    "symptom": "Bad Gateway，平台服务器网关错误",
+    "quickFix": [
+      "等待2-3分钟后重试，通常是平台服务器临时故障",
+      "检查平台官方公告确认是否在维护中",
+      "如果持续出现，尝试更换推流服务器地址（部分平台提供备用节点）"
+    ],
+    "relatedScenarioId": null,
+    "anchor": "err-http-502"
+  },
+  {
+    "code": "HTTP 503",
+    "platform": "通用",
+    "symptom": "Service Unavailable，服务暂时不可用",
+    "quickFix": [
+      "平台服务器过载，等待5分钟后重试",
+      "避开高峰期开播（如电商大促期间）",
+      "检查平台官方状态页面确认服务状态"
+    ],
+    "relatedScenarioId": null,
+    "anchor": "err-http-503"
+  },
+  {
+    "code": "连接被拒绝",
+    "platform": "OBS",
+    "symptom": "Connection refused，OBS无法建立连接",
+    "quickFix": [
+      "确认推流地址中的端口号正确（默认RTMP端口为1935）",
+      "检查本地防火墙或杀毒软件是否拦截了OBS的网络请求",
+      "测试网络连通性：在浏览器中访问平台官网确认网络正常"
+    ],
+    "relatedScenarioId": null,
+    "anchor": "err-connection-refused"
+  },
+  {
+    "code": "找不到流密钥",
+    "platform": "OBS",
+    "symptom": "Stream key not found，串流密钥无效",
+    "quickFix": [
+      "重新从平台后台复制完整的串流密钥（注意不要有多余空格）",
+      "确认密钥未过期（淘宝30分钟、视频号单次直播有效）",
+      "确认直播间状态正确（淘宝需先暂停直播才能获取有效密钥）"
+    ],
+    "relatedScenarioId": null,
+    "anchor": "err-stream-key-not-found"
+  },
+  {
+    "code": "编码过载",
+    "platform": "OBS",
+    "symptom": "Encoding overloaded，CPU占用过高导致编码卡顿",
+    "quickFix": [
+      "降低输出分辨率（如从1080p降到720p）或降低帧率到25fps",
+      "在OBS设置中将编码器从x264切换为硬件编码（NVENC/AMF）",
+      "关闭后台不必要的程序，释放CPU资源"
+    ],
+    "relatedScenarioId": null,
+    "anchor": "err-encoding-overload"
+  },
+  {
+    "code": "推流断开",
+    "platform": "OBS",
+    "symptom": "Disconnected from server，推流中途断连",
+    "quickFix": [
+      "检查网络稳定性，建议使用有线网络替代WiFi",
+      "在OBS设置→高级中启用「自动重连」并设置重连延迟为5秒",
+      "降低码率以适应当前网络带宽（建议码率不超过上行带宽的70%）"
+    ],
+    "relatedScenarioId": null,
+    "anchor": "err-disconnected"
+  },
+  {
+    "code": "淘宝推流失败",
+    "platform": "淘宝直播",
+    "symptom": "淘宝直播OBS推流后无画面或连接失败",
+    "quickFix": [
+      "确认已在中控台点击「开始直播」等待10秒后再点「暂停直播」",
+      "确认码率≤2500kbps，帧率≤30fps，关键帧间隔2秒",
+      "确认推流码在30分钟有效期内使用"
+    ],
+    "relatedScenarioId": null,
+    "anchor": "err-taobao-push-fail"
+  },
+  {
+    "code": "抖音封号风险",
+    "platform": "抖音直播",
+    "symptom": "使用第三方工具推流导致账号警告或封禁",
+    "quickFix": [
+      "立即停止使用非官方OBS推流（抖音2023年已取消此功能）",
+      "改用官方方案：OBS虚拟摄像头 + 抖音直播伴侣",
+      "如已收到警告，暂停直播24小时后再用官方方案恢复"
+    ],
+    "relatedScenarioId": null,
+    "anchor": "err-douyin-ban-risk"
+  },
+  {
+    "code": "视频号地址过期",
+    "platform": "视频号",
+    "symptom": "提示推流地址已过期或无效",
+    "quickFix": [
+      "视频号推流地址每次开播都会变化，不可复用旧地址",
+      "返回视频号助手创建新直播间，获取新的推流地址和密钥",
+      "复制时确保包含完整的txSecret和txTime认证参数"
+    ],
+    "relatedScenarioId": null,
+    "anchor": "err-shipinhao-expired"
+  },
+  {
+    "code": "小红书验证码失败",
+    "platform": "小红书",
+    "symptom": "电脑端输入6位验证码后无法获取推流地址",
+    "quickFix": [
+      "确认手机APP和电脑端使用同一账号登录",
+      "刷新电脑端OBS页面重新获取新的6位验证码",
+      "确认手机端操作路径：我→菜单→创作中心→+→直播→电脑"
+    ],
+    "relatedScenarioId": null,
+    "anchor": "err-xiaohongshu-verify"
+  },
+  {
+    "code": "Multi RTMP无响应",
+    "platform": "OBS",
+    "symptom": "Multi RTMP插件安装后无法找到或不工作",
+    "quickFix": [
+      "确认插件版本与OBS版本兼容（OBS 32.x用v0.7.3.1）",
+      "完全关闭OBS后重新启动，检查「工具」菜单是否有Multi RTMP选项",
+      "尝试删除旧版插件后重新安装最新版本"
+    ],
+    "relatedScenarioId": null,
+    "anchor": "err-multi-rtmp-not-working"
+  }
+]
