@@ -158,6 +158,36 @@ mlive/
 | v1.0 | 2026-02-24 | 初始版本 |
 | v2.0 | 2026-02-24 | 重大更新：各平台最新要求、三种开播方式细化 |
 
+## Policy Source Maintenance
+
+本项目使用 `policy-sources.json` 文件追踪各平台官方政策的更新状态，确保文档内容的时效性和可追溯性。
+
+### 维护流程
+
+1. **人工核实后更新 `lastVerified`**：访问平台官方页面确认政策无变化后，将对应平台的 `lastVerified` 更新为当天日期，并将 `nextCheckBy` 设为 30 天后。
+
+2. **重新生成内容哈希**：当政策内容发生变更并同步到文档后，使用以下命令更新哈希值：
+   ```bash
+   echo -n "政策文本内容" | shasum -a 256
+   ```
+   将输出的哈希值填入对应平台的 `contentHashSha256` 字段。
+
+3. **建议核查周期**：每 30 天对各平台政策进行一次人工核查。当 `nextCheckBy` 日期临近或已过时，应优先安排核查。
+
+4. **CI 集成（未来）**：CI 流程将读取 `policy-sources.json`，当 `nextCheckBy` 超期时自动标记需要更新的平台，精确定位需刷新的文档段落。
+
+### 字段说明
+
+| 字段 | 说明 |
+|------|------|
+| `platformId` | 平台唯一标识符 |
+| `platformName` | 平台中文名称 |
+| `officialUrl` | 平台官方政策页面 URL |
+| `lastVerified` | 上次人工核实日期（YYYY-MM-DD） |
+| `contentHashSha256` | 政策关键内容的 SHA-256 哈希值 |
+| `nextCheckBy` | 下次建议核查日期（YYYY-MM-DD） |
+| `policyScope` | 该平台所追踪的政策范围描述 |
+
 ## 🤝 贡献
 
 欢迎反馈问题和建议！

@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "description": "平台政策来源索引，用于追踪各直播平台官方政策的更新状态",
+  "platforms": [
+    {
+      "platformId": "taobao",
+      "platformName": "淘宝直播",
+      "officialUrl": "https://live.taobao.com/",
+      "lastVerified": "2026-06-08",
+      "contentHashSha256": "placeholder-needs-generation",
+      "nextCheckBy": "2026-07-08",
+      "policyScope": "直播开通条件、粉丝门槛、OBS推流权限及保证金要求"
+    },
+    {
+      "platformId": "douyin",
+      "platformName": "抖音直播",
+      "officialUrl": "https://www.douyin.com/",
+      "lastVerified": "2026-06-08",
+      "contentHashSha256": "placeholder-needs-generation",
+      "nextCheckBy": "2026-07-08",
+      "policyScope": "直播权限、粉丝要求、直播伴侣使用规则及保证金政策"
+    },
+    {
+      "platformId": "xiaohongshu",
+      "platformName": "小红书直播",
+      "officialUrl": "https://www.xiaohongshu.com/",
+      "lastVerified": "2026-06-08",
+      "contentHashSha256": "placeholder-needs-generation",
+      "nextCheckBy": "2026-07-08",
+      "policyScope": "直播开通条件、注册时长要求、原创笔记数量及OBS推流门槛"
+    },
+    {
+      "platformId": "shipinhao",
+      "platformName": "视频号直播",
+      "officialUrl": "https://channels.weixin.qq.com/",
+      "lastVerified": "2026-06-08",
+      "contentHashSha256": "placeholder-needs-generation",
+      "nextCheckBy": "2026-07-08",
+      "policyScope": "直播开通方式、OBS推流粉丝门槛及推流地址获取流程"
+    },
+    {
+      "platformId": "alipay",
+      "platformName": "支付宝直播",
+      "officialUrl": "https://live.alipay.com/",
+      "lastVerified": "2026-06-08",
+      "contentHashSha256": "placeholder-needs-generation",
+      "nextCheckBy": "2026-07-08",
+      "policyScope": "支付宝直播开通条件、生活号要求及推流配置"
+    }
+  ]
+}
